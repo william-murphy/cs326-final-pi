@@ -5,6 +5,6 @@
 - Users can save recipes to profile and share it
 
 ## **Wireframes**
-![Alt text](/milestone1-images/login.png?raw=true)
+![Alt text](/milestone1-images/login.PNG?raw=true)
 
 ## **Breakdown**
