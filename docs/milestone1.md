@@ -5,6 +5,6 @@
 - Users can save recipes to profile and share it
 
 ## **Wireframes**
-![Alt text](/milestone1-images/login.PNG?raw=true)
+![Alt text](https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone1-images/login.PNG?raw=true)
 
 ## **Breakdown**
