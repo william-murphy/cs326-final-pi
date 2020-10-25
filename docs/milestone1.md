@@ -7,7 +7,7 @@
 ## **Wireframes**
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone1-images/login.PNG" width="700" height="621">
 When the user first goes on the website, it will take the user to the login page. Before interacting further, the user should login with their account or sign up for a new account.
-
+<space>
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone1-images/feed.PNG" width="700" height="621">
 This page is the application's feed page where the user can see the most recent recipes shared by users. They can interact with the recipe posts by liking it or sharing it.
 
