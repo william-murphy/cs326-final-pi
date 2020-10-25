@@ -21,3 +21,4 @@ This page allows the user to find people by username or find them by food compat
 This is the profile page where the user can edit their avatar as well as their bio. They can also see their saved recipes that they have saved from searching for recipes or from the feed page. There is also another tab where the user can see the recipes they created themselves.
 
 ## **Breakdown**
+- Ji: Worked on wireframes & HTML/CSS for login page, people page
