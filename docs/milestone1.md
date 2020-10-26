@@ -31,3 +31,4 @@ This is the profile page where the user can edit their avatar as well as their b
 ## **Breakdown**
 - Ji: Worked on wireframes & HTML/CSS for login page, people page
 - Dhruvi: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
+- Will: Worked on wireframes & HTML/CSS for profile page.
