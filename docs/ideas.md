@@ -1,6 +1,6 @@
 **Team Name:** pi
 
-**Application Name:**
+**Application Name:** S(pi)ghetti & Meatballs
 
 **Team Overview:**
 
