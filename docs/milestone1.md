@@ -4,7 +4,7 @@
 - Users can find other users by name or compatibility
 - Users can save recipes to profile and share it
 
-## **Wireframes**
+## **Wireframes & HTML/CSS**
 
 When the user first goes on the website, it will take the user to the login page. Before interacting further, the user should login with their account or sign up for a new account.
 
@@ -43,6 +43,6 @@ This is the profile page where the user can edit their avatar as well as their b
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone1-images/main-profile2.PNG" width="700" height="404">
 
 ## **Breakdown**
-- Ji: Worked on wireframes & HTML/CSS for login page, people page
+- Ji: Worked on wireframes & HTML/CSS for login/sign up and people pages.
 - Dhruvi: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
 - Will: Worked on wireframes & HTML/CSS for profile page.
