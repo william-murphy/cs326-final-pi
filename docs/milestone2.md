@@ -1,0 +1,16 @@
+## **APIs**
+ - /login
+ - /signup
+ - /feed
+ - /feed/update
+ - /feed/save
+ - /recipe
+ - /recipe/search
+ - /recipe/update
+ - /recipe/save
+ - /people
+ - /people/search
+ - /people/update
+ - /people/follow
+ - /profile
+ - /profile/edit
