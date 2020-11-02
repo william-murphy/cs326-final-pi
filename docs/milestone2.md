@@ -9,13 +9,11 @@
  - /feed/save : save/like recipe for profile
  
 **Recipe**
- - /recipe : load default page
  - /recipe/search : populate page with search results
  - /recipe/update : load more results
  - /recipe/save : save recipe to profile
 
 **People**
- - /people : load default page
  - /people/search : populate page with search results
  - /people/update : load more results
  - /people/follow : follow person
