@@ -23,7 +23,7 @@ createServer(async (req, res) => {
       res.end(JSON.stringify(
           //image data from database
       ));
-    }else if (parsed.pathname === '/feed/update') { //GET
+    }else if (parsed.pathname === '/feed/load') { //GET
       //get image data from database
       res.end(JSON.stringify(
           //image data from database
@@ -40,29 +40,32 @@ createServer(async (req, res) => {
       res.end(JSON.stringify(
           //recipe data from database
       ));
-    }else if (parsed.pathname === '/recipe/search') { //POST
-      let body = '';
-      req.on('data', data => body += data);
-      req.on('end', () => {
-          const data = JSON.parse(body);
-          //given data is just the search, the server returns recipe data
-      });
-    }else if (parsed.pathname === '/recipe/update') { //GET
-
+    }else if (parsed.pathname === '/recipe/search') { //GET
+      //get recipe data from database
+      res.end(JSON.stringify(
+        //recipe data from database
+    ));
+    }else if (parsed.pathname === '/recipe/load') { //GET
+        //load more recipe from database
+      res.end(JSON.stringify(
+        //image data from database
+    ));
     }else if (parsed.pathname === '/recipe/save') { //POST
 
-    }else if (parsed.pathname === '/people/search') { //POST
+    }else if (parsed.pathname === '/people/search') { //GET
 
-    }else if (parsed.pathname === '/people/update') { //GET
+    }else if (parsed.pathname === '/people/load') { //GET
 
     }else if (parsed.pathname === '/people/follow') { //POST
 
-    }else if (parsed.pathname === '/profile') { //POST
+    }else if (parsed.pathname === '/profile') { //GET
 
-    }else if (parsed.pathname === '/profile/edit') { //POST
+    }else if (parsed.pathname === '/profile/edit') { //PUT/POST?
 
-    }else if (parsed.pathname === '/profile/load-recipes') { //POST
+    }/*else if (parsed.pathname === '/profile/recipe') { //GET
 
+    }*/else if (parsed.pathname === '/profile/delete') { //POST
+        //unsave a recipe or delete one that user posted
     }else if (parsed.pathname === '/login/user') { //POST
 
     }/*else if (parsed.pathname === '/login/forgot-password') {
