@@ -19,7 +19,7 @@
  - /people/follow : follow person
  
 **Create**
- - /create : creates a new recipe and adds it to adds to recent recipes (shared to feed)
+ - /create : creates a new recipe and adds it to recent recipes (shared to feed)
 
 **Profile**
  - /profile : load default data (bio, saved recipes, my recipes)
