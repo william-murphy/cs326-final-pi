@@ -20,5 +20,6 @@
 
 **Profile**
  - /profile : load default data
- - /profile/edit : save edited bio to database
+ - /profile/edit : update user bio
  - /profile/load : load more saved recipes and my recipes
+ - /profile/delete : delete a recipe from profile
