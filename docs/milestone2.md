@@ -19,7 +19,6 @@
  - /people/follow : follow person
 
 **Profile**
- - /profile : load default data
+ - /profile : load default data (bio, saved recipes, my recipes)
  - /profile/edit : update user bio
- - /profile/load : load more saved recipes and my recipes
  - /profile/delete : delete a recipe from profile
