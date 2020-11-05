@@ -17,8 +17,12 @@
  - /people/search : populate page with search results
  - /people/load : load more results
  - /people/follow : follow person
+ 
+**Create**
+ - /create : creates a new recipe and adds it to adds to recent recipes (shared to feed)
 
 **Profile**
  - /profile : load default data (bio, saved recipes, my recipes)
  - /profile/edit : update user bio
  - /profile/delete : delete a recipe from profile
+ 
