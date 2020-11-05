@@ -5,19 +5,20 @@
  
  **Feed**
  - /feed : loads recent recipes shared
- - /feed/update : load more recipes
+ - /feed/load : load more recipes
  - /feed/save : save/like recipe for profile
  
 **Recipe**
  - /recipe/search : populate page with search results
- - /recipe/update : load more results
+ - /recipe/load : load more results
  - /recipe/save : save recipe to profile
 
 **People**
  - /people/search : populate page with search results
- - /people/update : load more results
+ - /people/load : load more results
  - /people/follow : follow person
 
 **Profile**
  - /profile : load default data
  - /profile/edit : save edited bio to database
+ - /profile/load : load more saved recipes and my recipes
