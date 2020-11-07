@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>S(pi)ghetti&Meatballs</title>
+
+    <script type="module" src="signup.js" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="login.css">
   </head>
@@ -22,22 +24,22 @@
         <div class="container w-50 mt-5">
             <div class="form-group">
                 <label>Name</label>
-                <input type="name" class="form-control">
+                <input id="name" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control">
+                <input id="email" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>Username</label>
-                <input type="username" class="form-control">
+                <input id="username" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control">
+                <input id="password" type="text" class="form-control">
             </div>
             <div class="mt-5 text-center">
-                <button type="submit" class="w-50 p-2 btn btn-danger">Sign up</button>
+                <button id="signup" type="submit" class="w-50 p-2 btn btn-danger">Sign up</button>
             </div>
         </div>
     </form>
