@@ -33,6 +33,9 @@ async function connectAndRun(task) {
 
 //three tables: Users [name, email, username, password], Recipes [username, recipe name], Saved [username, recipe name]
 
+
+//Feed
+
 async function getInitialFeed() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
 }
@@ -41,12 +44,24 @@ async function loadFeed() {
 
 }
 */
-async function saveRecipe(username, recipeName) {
+async function saveFromFeed(username, recipeName) {
     return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
 }
 
+//Recipe
+
+async function getSampleRecipes() {
+    
+}
+
+async function getIntialRecipes(input) {
+
+}
+
+//People
+
 async function getInitialPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE name = $1;", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1;", [input]));
 }
 /*
 async function loadPeople() {
@@ -54,9 +69,17 @@ async function loadPeople() {
 }
 */
 
+//Create
+
+async function saveRecipe(username, recipeName) {
+    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
+}
+
 async function createRecipe(username, recipeName) {
     return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2);", [username, recipeName]));
 }
+
+//Profile
 
 async function getProfile(username) {
     return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username]));
@@ -70,10 +93,12 @@ async function deleteProfileRecipe(username, recipeName) {
     return await connectAndRun(db => db.none("DELETE FROM Saved WHERE username = $1 AND recipeName = $2;", [username, recipeName]));
 }
 
+//Login/Sign up
+
 async function login(username, password) {
     return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1 AND password = $2;", [username, password]));
 }
 
-async function signup(name, email, username, password) {
-    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4);", [name, email, username, password]));
+async function signup(name, email, username, password, bio) { //bio empty when sign up
+    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5);", [name, email, username, password, bio]));
 }
