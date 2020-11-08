@@ -1,0 +1,17 @@
+body {
+    background-color: #F5F5DC;
+}
+
+.form-control:focus {
+    border-color: red;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+}
+
+.form-container {
+    margin: auto;
+    width: 35%;
+    border: 2px solid rgba(204, 204, 204, 0.5);
+    margin-top: 5%;
+    padding: 70px;
+    background-color: white;
+}

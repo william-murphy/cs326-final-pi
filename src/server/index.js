@@ -26,7 +26,7 @@ createServer(async (req, res) => {
         //getInitialRecipes
         const recipes = await database.getInitialRecipes(req.query.input);
         res.end(JSON.stringify(recipes));
-    
+
     /*} else if(parsed.pathname === '/recipe/load') { //GET*/
 
     } else if(parsed.pathname === '/recipe/save') { //POST
@@ -42,10 +42,10 @@ createServer(async (req, res) => {
 
     /*} else if(parsed.pathname === '/people/follow') { //POST*/
 
-    } else if(parsed.pathanme === '/create') { //POST
-        //createRecipe
-        await database.createRecipe(req.query.username, req.query.recipeName);
-        res.send("OK");
+    } else if(parsed.pathname === '/post/upload') { //POST
+	    //createRecipe
+         await database.createRecipe(req.query.user, req.query.title, req.query.desc);
+         res.send("OK");
 
     } else if(parsed.pathname === '/profile') { //GET
         //getProfile
