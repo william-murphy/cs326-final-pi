@@ -9,4 +9,19 @@ function signup() {
     //alert("attempting sign up");
 
     //send data to database, make new account
+
+    const response = await fetch('/signup/user', {
+        method: 'POST',
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            bio: ""
+        })
+    });
+
+    if(!response.ok) {
+        console.error("Could not create an account.");
+    }
 }
