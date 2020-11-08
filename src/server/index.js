@@ -24,7 +24,7 @@ createServer(async (req, res) => {
 
     } else if(parsed.pathname === '/recipe/search') { //GET
         //getInitialRecipes
-        const recipes = await database.getInitialFeed(req.query.input);
+        const recipes = await database.getInitialRecipes(req.query.input);
         res.end(JSON.stringify(recipes));
     
     /*} else if(parsed.pathname === '/recipe/load') { //GET*/
