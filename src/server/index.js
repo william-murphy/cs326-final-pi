@@ -1,149 +1,78 @@
 import {createServer} from 'http';
 import {parse} from 'url';
-import {join} from 'path';
-import {writeFile, readFileSync, existsSync} from 'fs';
-
-/*
-let database;
-if (existsSync("database.json")) {
-    database = JSON.parse(readFileSync("database.json"));
-} else {
-    database = {
-        wordScores: [],
-        gameScores: []
-    };
-}
-*/
+import * as database from "./database.js";
 
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
 
-    if (parsed.pathname === '/feed') { //GET
-      //get image data from database
-      res.end(JSON.stringify(
-          //image data from database
-      ));
-    }else if (parsed.pathname === '/feed/load') { //GET
-      //get image data from database
-      res.end(JSON.stringify(
-          //image data from database
-      ));
-    }else if (parsed.pathname === '/feed/save') { //POST
-      let body = '';
-      req.on('data', data => body += data);
-      req.on('end', () => {
-          const data = JSON.parse(body);
-          //enter data in database according to given data
-      });
-    }else if (parsed.pathname === '/recipe/') { //GET
-      //get recipe data from database
-      res.end(JSON.stringify(
-          //recipe data from database
-      ));
-    }else if (parsed.pathname === '/recipe/search') { //GET
-      //get recipe data from database
-      res.end(JSON.stringify(
-        //recipe data from database
-    ));
-    }else if (parsed.pathname === '/recipe/load') { //GET
-        //load more recipe from database
-      res.end(JSON.stringify(
-        //image data from database
-    ));
-    }else if (parsed.pathname === '/recipe/save') { //POST
+    if(parsed.pathname === '/feed') {//GET
+        //get image data from database
+        const feed = await database.getInitialFeed();
+        res.end(JSON.stringify(feed));
 
-    }else if (parsed.pathname === '/people/search') { //GET
+    /*} else if(parsed.pathname === '/feed/load') { //GET*/
+        //get image data from database
 
-    }else if (parsed.pathname === '/people/load') { //GET
+    } else if(parsed.pathname === '/feed/save') { //POST
+        await database.saveFromFeed(req.query.username, req.query.recipeName);
+        res.send("OK");
 
-    }else if (parsed.pathname === '/people/follow') { //POST
+    } else if(parsed.pathname === '/recipe') { //GET
+        //getSampleRecipes
+        const recipes = await database.getSampleRecipes();
+        res.end(JSON.stringify(recipes));
 
-    }else if (parsed.pathname === '/profile') { //GET
+    } else if(parsed.pathname === '/recipe/search') { //GET
+        //getInitialRecipes
+        const recipes = await database.getInitialFeed(req.query.input);
+        res.end(JSON.stringify(recipes));
+    
+    /*} else if(parsed.pathname === '/recipe/load') { //GET*/
 
-    }else if (parsed.pathname === '/profile/edit') { //PUT/POST?
+    } else if(parsed.pathname === '/recipe/save') { //POST
+        await database.saveRecipe(req.query.username, req.query.recipeName);
+        res.send("OK");
 
-    }/*else if (parsed.pathname === '/profile/recipe') { //GET
+    } else if(parsed.pathname === '/people/search') { //GET
+        //getInitialPeople
+        const people = await database.getInitialPeople(req.query.input);
+        res.end(JSON.stringify(people));
 
-    }*/else if (parsed.pathname === '/profile/delete') { //POST
-        //unsave a recipe or delete one that user posted
-    }else if (parsed.pathname === '/login/user') { //POST
+    /*} else if(parsed.pathname === '/people/load') { //GET*/
 
-    }/*else if (parsed.pathname === '/login/forgot-password') {
+    /*} else if(parsed.pathname === '/people/follow') { //POST*/
 
-    }*/else if (parsed.pathname === '/signup/user') { //POST
+    } else if(parsed.pathanme === '/create') { //POST
+        //createRecipe
+        await database.createRecipe(req.query.username, req.query.recipeName);
+        res.send("OK");
+
+    } else if(parsed.pathname === '/profile') { //GET
+        //getProfile
+        const profile = await database.getProfile(req.query.username);
+        res.end(JSON.stringify(profile));
+
+    } else if(parsed.pathname === '/profile/edit') { //PUT/POST?
+        //updateProfile
+        await database.updateProfile(req.query.username, req.query.bio);
+        res.send("OK");
+
+    } else if(parsed.pathname === '/profile/delete') { //DELETE/POST?
+        //deleteProfileRecipe
+        await database.deleteProfileRecipe(req.query.username, req.query.recipeName);
+        res.send("OK");
+
+    } else if(parsed.pathname === '/login/user') { //POST
+        //login
+        await database.login(req.query.username, req.query.password);
+        res.send("OK");
+
+    } else if(parsed.pathname === '/signup/user') { //POST
+        //signup
+        await database.signup(req.query.name, req.query.email, req.query.username, req.query.password, req.query.bio);
+        res.send("OK");
+    } else {
 
     }
 
-    /*
-    if (parsed.pathname === '/wordScore') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.wordScores.push({
-                name: data.name,
-                word: data.word,
-                score: data.score
-            });
-
-            writeFile("database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                } else res.end();
-            });
-        });
-    } else if (parsed.pathname === '/gameScore') {
-        let body = '';
-        req.on('data', data => body += data);
-        req.on('end', () => {
-            const data = JSON.parse(body);
-            database.gameScores.push({
-                name: data.name,
-                score: data.score
-            });
-
-            writeFile("database.json", JSON.stringify(database), err => {
-                if (err) {
-                    console.err(err);
-                } else res.end();
-            });
-        });
-    } else if (parsed.pathname === '/highestWordScores') {
-        res.end(JSON.stringify(
-            database.wordScores.sort((a, b) => b.score - a.score).filter((v, i) => i < 10)
-        ));
-    } else if (parsed.pathname === '/highestGameScores') {
-        res.end(JSON.stringify(
-            database.gameScores.sort((a, b) => b.score - a.score).filter((v, i) => i < 10)
-        ));
-    */
-    /*}*/ else {
-        // If the client did not request an API endpoint, we assume we need to fetch and serve a file.
-        // This is terrible security-wise, since we don't check the file requested is in the same directory.
-        // This will do for our purposes.
-        const filename = parsed.pathname === '/' ? "index.html" : parsed.pathname.replace('/', '');
-        const path = join("client/", filename);
-        console.log("trying to serve " + path + "...");
-        if (existsSync(path)) {
-            if (filename.endsWith("html")) {
-                res.writeHead(200, {"Content-Type" : "text/html"});
-            }else if (filename.endsWith("css")) {
-                res.writeHead(200, {"Content-Type" : "text/css"});
-            }else if (filename.endsWith("js")) {
-                res.writeHead(200, {"Content-Type" : "text/javascript"});
-            }else {
-              res.writeHead(200);
-            }
-
-            // TODO you need to check for other filetypes and write the correct MIME type in the header.
-            // Without these, the browser is sometime incapable of interpreting the file as it should
-            // (Notably for JS files)
-
-            res.write(readFileSync(path));
-            res.end();
-        } else {
-            res.writeHead(404);
-            res.end();
-        }
-    }
-}).listen(8080);
+}).listen(process.env.PORT || 8080);

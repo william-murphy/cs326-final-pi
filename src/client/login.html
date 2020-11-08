@@ -3,43 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <title>S(pi)ghetti&Meatballs</title>
-
-    <script type="module" src="signup.js" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="login.css">
   </head>
   <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-4 px-md-3 mb-3 bg-white border-bottom shadow-sm">
-      <img class="img-fluid" src="images/spag.jpeg" alt="Logo" width="50" height="50"/>
+      <img class="img-fluid" src="../images/spag.jpeg" alt="Logo" width="50" height="50"/>
       <h2 class="my-0 mr-md-auto px-4 font-weight-bold text-danger">S(pi)ghetti & Meatballs</h2>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-4 text-dark" href="feed.html">Feed</a>
-        <a class="p-4 text-dark" href="recipe.html">Recipes</a>
-        <a class="p-4 text-dark" href="people.html">People</a>
+        <a class="p-4 text-dark" href="../feed/index.html">Feed</a>
+        <a class="p-4 text-dark" href="../recipe/index.html">Recipes</a>
+        <a class="p-4 text-dark" href="../people/index.html">People</a>
+        <a class="p-4 text-dark" href="../post/index.html">Post</a>
       </nav>
       <a class="btn btn-outline-danger" href="login.html">Log In / Sign up</a>
     </div>
 
     <form>
-        <div class="container w-50 mt-5">
-            <div class="form-group">
-                <label>Name</label>
-                <input id="name" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Email address</label>
-                <input id="email" type="text" class="form-control">
-            </div>
+        <div class="form-container">
             <div class="form-group">
                 <label>Username</label>
-                <input id="username" type="text" class="form-control">
+                <input type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input id="password" type="text" class="form-control">
+                <input type="text" class="form-control">
             </div>
             <div class="mt-5 text-center">
-                <button id="signup" type="submit" class="w-50 p-2 btn btn-danger">Sign up</button>
+                <button type="submit" class="w-50 p-2 btn btn-danger">Login</button>
+                <a href="signup.html" class="mt-2 d-block text-danger">Sign up</a>
             </div>
         </div>
     </form>
