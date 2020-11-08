@@ -31,7 +31,7 @@ async function connectAndRun(task) {
     }
 }
 
-//three tables: Users [name, email, username, password], Recipes [username, recipe name], Saved [username, recipe name]
+//three tables: Users [name, email, username, password, bio], Recipes [username, recipeName], Saved [username, recipeName]
 
 
 //Feed
@@ -51,11 +51,11 @@ async function saveFromFeed(username, recipeName) {
 //Recipe
 
 async function getSampleRecipes() {
-    
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 2;"));
 }
 
-async function getIntialRecipes(input) {
-
+async function getInitialRecipes(input) {
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipeName = $1;", [input]));
 }
 
 //People
