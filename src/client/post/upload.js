@@ -21,6 +21,6 @@ document.getElementById("publish").addEventListener("click", async function() {
        return;
   }else {
 	  alert("Successfully uploaded new recipe!");
-
+	  //redirect to profile page
   }
 })
