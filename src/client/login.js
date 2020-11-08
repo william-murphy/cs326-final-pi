@@ -9,4 +9,15 @@ function login() {
     //check if username and corresponding password in database
     //if true successful login
     //else fail
+
+    const response = await fetch('/login/user', {
+        method: 'POST',
+        body: JSON.stringify({
+
+        })
+    });
+
+    if(!response.ok) {
+        console.log("Could not login.");
+    }
 }
