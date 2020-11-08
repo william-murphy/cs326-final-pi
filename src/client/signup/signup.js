@@ -6,10 +6,10 @@ function signup() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    //alert("attempting sign up");
+    alert("attempting sign up");
 
     //send data to database, make new account
-
+    
     const response = await fetch('/signup/user', {
         method: 'POST',
         body: JSON.stringify({
@@ -24,4 +24,5 @@ function signup() {
     if(!response.ok) {
         console.error("Could not create an account.");
     }
+    
 }

@@ -23,7 +23,7 @@ async function search() {
     }
 
     /*
-    for(let i = 0; i < searchData; i++) {
+    for(let i = 0; i < 3; i++) {
         addPerson(searchResults, "testing");
     }
     */
