@@ -8,15 +8,17 @@ async function search() {
     //find people by username
     //let url = "https://localhost:8080/people/search/" + searchInput;
     //const searchRequest = await fetch(url);
-
-    const searchRequest = await fetch('/people/search/' + searchInput);
+ 
+    let url = '/people/search/' + searchInput;
+    const searchRequest = await fetch(url);
     const searchData = searchRequest.ok? await searchRequest.json() : [];
-
+    const searchResults = document.getElementById('search-results');
+    
     while (searchResults.firstChild) {
         searchResults.removeChild(searchResults.firstChild);
     }
 
-    const searchResults = document.getElementById('search-results');
+    
 
     for(const item of searchData) {
         addPerson(searchResults, item.username);
