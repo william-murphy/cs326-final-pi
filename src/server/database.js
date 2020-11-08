@@ -54,7 +54,7 @@ export async function getSampleRecipes() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 2;"));
 }
 
-async function getInitialRecipes(input) {
+export async function getInitialRecipes(input) {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipeName = $1;", [input]));
 }
 
