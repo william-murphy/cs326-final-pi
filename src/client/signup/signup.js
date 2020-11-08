@@ -1,6 +1,6 @@
 document.getElementById('signup').addEventListener('click', signup);
 
-function signup() {
+async function signup() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const username = document.getElementById('username').value;
@@ -9,7 +9,7 @@ function signup() {
     alert("attempting sign up");
 
     //send data to database, make new account
-    
+
     const response = await fetch('/signup/user', {
         method: 'POST',
         body: JSON.stringify({

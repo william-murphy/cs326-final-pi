@@ -1,6 +1,6 @@
 document.getElementById('login').addEventListener('click', login);
 
-function login() {
+async function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
