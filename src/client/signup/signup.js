@@ -6,7 +6,7 @@ async function signup() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    alert("attempting sign up");
+    //alert("attempting sign up");
 
     //send data to database, make new account
 
