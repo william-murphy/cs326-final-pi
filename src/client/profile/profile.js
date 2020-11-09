@@ -1,3 +1,7 @@
+function deleteRecipe() {
+	
+}
+
 function renderImages(data, mode) {
 	if (mode) { //render my recipes
 		for (let i=0; i<data.myrecipes.length; i+=3) {
