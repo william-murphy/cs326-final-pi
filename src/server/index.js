@@ -1,6 +1,8 @@
 import {createServer} from 'http';
 import {parse} from 'url';
+import {join} from 'path';
 import * as database from "./database.js";
+import {writeFile, readFileSync, existsSync, fstat} from 'fs';
 
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
@@ -72,7 +74,26 @@ createServer(async (req, res) => {
         await database.signup(req.query.name, req.query.email, req.query.username, req.query.password, req.query.bio);
         res.send("OK");
     } else {
+        const filename = parsed.pathname === '/' ? "index.html" : parsed.pathname.replace('/', '');
+        const path = join("src/client/", filename);
+        console.log("trying to serve " + path + "...");
+        if (existsSync(path)) {
+            if (filename.endsWith("html")) {
+                res.writeHead(200, {"Content-Type" : "text/html"});
+            } else if (filename.endsWith("css")) {
+                res.writeHead(200, {"Content-Type" : "text/css"});
+            } else if (filename.endsWith("js")) {
+                res.writeHead(200, {"Content-Type" : "text/javascript"});
+            } else {
+                res.writeHead(200);
+            }
 
+            res.write(readFileSync(path));
+            res.end();
+        } else {
+            res.writeHead(404);
+            res.end();
+        }
     }
 
 }).listen(process.env.PORT || 8080);

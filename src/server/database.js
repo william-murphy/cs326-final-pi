@@ -1,4 +1,6 @@
-const pgp = require("pg-promise")({
+import * as _pgp from "pg-promise";
+
+const pgp = _pgp["default"]({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
     },
