@@ -21,9 +21,11 @@ async function login() {
 
     const loginRequest = await fetch('/login/user');
     const loginData = loginRequest.ok? await loginRequest.json() : [];
+    let storage = window.localStorage;
 
     if(loginData.length > 0) {
         console.log("logged in");
+        storage.setItem('user', JSON.stringify(loginData.username));
     }else {
         console.log("wrong username/password.")
     }
