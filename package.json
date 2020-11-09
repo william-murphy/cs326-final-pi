@@ -2,8 +2,8 @@
     "name": "scrabble",
     "type": "module",
     "scripts": {
-        "start": "node server/index.js",
-        "lint": "eslint client/ server/"
+        "start": "node src/server/index.js",
+        "lint": "eslint src/client/ server/"
     },
     "devDependencies": {
         "eslint": "^7.11.0",
