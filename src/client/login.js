@@ -18,8 +18,8 @@ async function login() {
         })
     });
     */
-
-    const loginRequest = await fetch('/login/user');
+    let url = '/login/user?username=' + username + '&password=' + password;
+    const loginRequest = await fetch(url);
     const loginData = loginRequest.ok? await loginRequest.json() : [];
     let storage = window.localStorage;
 
