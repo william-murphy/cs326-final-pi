@@ -5,7 +5,7 @@ document.getElementById("publish").addEventListener("click", async function() {
 	const recipeTitle = document.getElementById("title").value;
 	const recipeDescription = document.getElementById("description").value;
 
-	const response = await fetch("http://localhost:8080/post", {
+	const response = await fetch("http://localhost:8080/post/upload", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
@@ -22,5 +22,6 @@ document.getElementById("publish").addEventListener("click", async function() {
   }else {
 	  alert("Successfully uploaded new recipe!");
 	  //redirect to profile page
+	  window.location.href = "../profile/index.html";
   }
 })
