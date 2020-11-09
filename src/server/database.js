@@ -75,8 +75,8 @@ export async function saveRecipe(username, recipeName) {
     return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
 }
 
-export async function createRecipe(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2);", [username, recipeName]));
+export async function createRecipe(username, recipeName, recipeDescription) {
+    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3);", [username, recipeName, recipeDescription]));
 }
 
 //Profile
