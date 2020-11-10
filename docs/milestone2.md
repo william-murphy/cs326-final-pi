@@ -31,11 +31,11 @@
  - /post/upload : upload new recipe
 
 **Tables (for endpoints)**
-Users
+- Users
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/userstable.PNG" width="700" height="123">
-Recipes
+- Recipes
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/recipetable.PNG" width="700" height="111">
-Saved
+- Saved
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/savedtable.PNG" width="377" height="239">
 
 ## **CRUD**
