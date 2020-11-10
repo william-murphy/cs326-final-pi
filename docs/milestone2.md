@@ -31,12 +31,12 @@
  - /post/upload : upload new recipe
 
 **Tables (for endpoints)**
-- Users
+Users
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/userstable.PNG" width="700" height="123">
-- Recipes
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/recipetable.PNG" width="700" height="111">
-- Saved
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/savedtable.PNG" width="377" height="239">
+Recipes
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="111">
+Saved
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="377" height="239">
 
 ## **CRUD**
  **Create**
@@ -57,6 +57,11 @@
 - Extracts the *recipeID* and deletes the corresponding row from the table of concern in our database. For Example: Below we have displayed the saved recipes of a user. The user can delete a given recipe from their profile by clicking on the delete button. This will extract the recipeID of that recipe from the *Saved* (recipes) table (*username, recipeID*) in our database, by deleting the corresponding row (given the user and the recipeID) from the table.
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/delete-before.png" width="700" height="514">
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/delete-after.png" width="700" height="514">
+ 
+ ## **Breakdown**
+- Ji: 
+- Dhruvi: 
+- Will: 
 
 ## **Heroku Application**
 
