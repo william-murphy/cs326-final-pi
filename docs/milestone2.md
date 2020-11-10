@@ -2,12 +2,12 @@
 **Login/Sign up**
  - /login/user : logs in the user
  - /signup/user : sign up the user
- 
+
  **Feed**
  - /feed : loads recent recipes shared
  - /feed/load : load more recipes
  - /feed/save : save/like recipe for profile
- 
+
 **Recipe**
  - /recipe/search : populate page with search results
  - /recipe/load : load more results
@@ -17,7 +17,7 @@
  - /people/search : populate page with search results
  - /people/load : load more results
  - /people/follow : follow person
- 
+
 **Create**
  - /create : creates a new recipe and adds it to *my recipes* as well as recent recipes (shared to feed)
 
@@ -25,3 +25,7 @@
  - /profile : load default data (bio, *saved recipes, my recipes*)
  - /profile/edit : update user bio
  - /profile/delete : delete a recipe from profile
+ - /profile/unlike : unlike a recipe from profile
+
+ **Post**
+ - /post/upload : upload new recipe
