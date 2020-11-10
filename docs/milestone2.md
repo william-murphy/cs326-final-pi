@@ -36,7 +36,7 @@
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="514">
 
  **Read**
- - Retrieves the recipes from the database based on the user and dynamically renders them on the page, the like button has an id containing the id of the recipe in the database so each like button will be connected to each recipe. Selects a predetermined number of rows from recipes from the database and displays them dynamically.
+ - Retrieves the recipes from the database and dynamically renders them on the page, the like button has an id containing the id of the recipe in the database so each like button will be connected to each recipe. Selects a predetermined number of rows from recipes from the database and displays them dynamically.
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/feed.png" width="700" height="514">
 
  **Update**
