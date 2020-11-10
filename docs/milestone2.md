@@ -60,7 +60,7 @@
  
  ## **Breakdown**
 - Ji: Worked on database/index.js and login/sign up/people js files
-- Dhruvi: created the required tables in our postgreSQL database on heroku app, worked on feed + recipe .js/.html files, the milestone2 markdown, random work here and there while with team-mates during zoom meetings. 
+- Dhruvi: created the required tables in our postgreSQL database on heroku app, worked on feed + recipe .js/.html files, end-point structure, the milestone2 markdown, random work here and there while with team-mates during zoom meetings. 
 - Will: Profile page backend and added functionality, added page to upload recipes and did backend, wrote some endpoints as well as some functions for database.js, worked on milestone2 documents
 
 ## **Heroku Application**
