@@ -25,3 +25,8 @@
  - /profile : load default data (bio, *saved recipes, my recipes*)
  - /profile/edit : update user bio
  - /profile/delete : delete a recipe from profile
+
+## **CRUD**
+
+ **Create**
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="621">
