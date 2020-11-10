@@ -59,12 +59,17 @@ createServer(async (req, res) => {
         await database.updateProfile(req.query.username, req.query.bio);
         res.send("OK");
 
-    } else if(parsed.pathname === '/profile/delete') { //DELETE/POST?
+    } else if(parsed.pathname === '/profile/delete') { //DELETE
         //deleteProfileRecipe
-        await database.deleteProfileRecipe(req.query.username, req.query.recipeName);
+        await database.deleteProfileRecipe(req.query.recipeId);
         res.send("OK");
 
-    } else if(parsed.pathname === '/login/user') { //POST
+   } else if(parsed.pathname === '/profile/unlike') { //POST
+        await database.unlikeProfileRecipe1(req.query.recipeId);
+        await database.unlikeProfileRecipe2(req.query.username, req.query.recipeId);
+        res.send("OK");
+
+   } else if(parsed.pathname === '/login/user') { //POST
         //login
         await database.login(req.query.username, req.query.password);
         res.send("OK");
