@@ -34,9 +34,9 @@
 - Users
 <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/userstable.PNG" width="500" height="123">
 - Recipes
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/recipetable.PNG" width="500" height="111">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/recipetable.PNG" width="700" height="111">
 - Saved
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/savedtable.PNG" width="300" height="233">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/savedtable.PNG" width="377" height="239">
 
 ## **CRUD**
  **Create**
