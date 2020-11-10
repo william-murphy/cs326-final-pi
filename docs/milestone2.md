@@ -25,6 +25,10 @@
  - /profile : load default data (bio, *saved recipes, my recipes*)
  - /profile/edit : update user bio
  - /profile/delete : delete a recipe from profile
+ - /profile/unlike : unlike a recipe from profile
+ 
+ **Post**
+ - post/upload : upload a new recipe
 
 ## **CRUD**
 
