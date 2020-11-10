@@ -19,9 +19,9 @@ document.getElementById("publish").addEventListener("click", async function() {
      if (!response.ok) {
        console.log(response.error);
        return;
-  }else {
+  	}else {
 	  alert("Successfully uploaded new recipe!");
 	  //redirect to profile page
 	  window.location.href = "../profile/index.html";
-  }
-})
+  	}
+});

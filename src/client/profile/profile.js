@@ -1,5 +1,42 @@
-function deleteRecipe() {
-	
+async function unlikeRecipe(id) {
+	const response = await fetch("http://localhost:8080/profile/unlike", {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json;charset=utf-8'
+       },
+       body: JSON.stringify({
+		  username: username,
+		  recipeId: id
+	  })
+     });
+     if (!response.ok) {
+       console.log(response.error);
+       return;
+  	}else {
+	  alert("Successfully unliked recipe.");
+	  //Refresh page
+	  window.location.reload();
+  	}
+}
+
+async function removeRecipe(id) {
+	const response = await fetch("http://localhost:8080/profile/delete", {
+       method: 'DELETE',
+       headers: {
+         'Content-Type': 'application/json;charset=utf-8'
+       },
+       body: JSON.stringify({
+		  recipeId: id
+	  })
+     });
+     if (!response.ok) {
+       console.log(response.error);
+       return;
+  	}else {
+	  alert("Successfully deleted recipe.");
+	  //Refresh page
+	  window.location.reload();
+  	}
 }
 
 function renderImages(data, mode) {
@@ -13,20 +50,31 @@ function renderImages(data, mode) {
 				let innerDiv = document.createElement("DIV").classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
-				nameElement.innerHTML = data.myrecipes[i + j].title;
+				nameElement.innerHTML = data.myrecipes[i + j].recipeTitle;
 
-				const img = 0; //What to do here?
+				const img = createElement("img").classList.add("img-fluid"); //placeholder image
+				img.src = "../images/food.jpeg";
+				img.alt = "Food";
+				img.width = "250";
+				img.height = "250";
 
 				const descElement = document.createElement("h6");
 				descElement.innerHTML = "Recipe by " + data.myrecipes[i + j].username;
 
 				const numLikes = document.createElement("span");
-				numLikes.innerHTML = "❤️ " + data.myrecipes[i + j].likes;
+				numLikes.innerHTML = "❤️ " + data.myrecipes[i + j].recipeLikes;
+
+				const remove = document.createElement("button").classList.add("btn", "btn-outline-danger");
+				remove.innerHTML = "Delete";
+				remove.addEventListener("click", async function() {
+					await deleteRecipe(data.myrecipes[i + j].recipeId);
+				});
 
 				innerDiv.appendChild(nameElement);
 				innerDiv.appendChild(img);
 				innerDiv.appendChild(descElement);
 				innerDiv.appendChild(numLikes);
+				innerDiv.appendChild(remove);
 				parentDiv.appendChild(innerDiv);
 
 			}
@@ -41,20 +89,31 @@ function renderImages(data, mode) {
 				let innerDiv = document.createElement("DIV").classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
-				nameElement.innerHTML = data.likedrecipes[i + j].title;
+				nameElement.innerHTML = data.likedrecipes[i + j].recipeTitle;
 
-				const img = 0; //What to do here?
+				const img = createElement("img").classList.add("img-fluid"); //placeholder image
+				img.src = "../images/food.jpeg";
+				img.alt = "Food";
+				img.width = "250";
+				img.height = "250";
 
 				const descElement = document.createElement("h6");
 				descElement.innerHTML = "Recipe by " + data.likedrecipes[i + j].username;
 
 				const numLikes = document.createElement("span");
-				numLikes.innerHTML = "❤️ " + data.likedrecipes[i + j].likes;
+				numLikes.innerHTML = "❤️ " + data.likedrecipes[i + j].recipeLikes;
+
+				const unlike = document.createElement("button").classList.add("btn", "btn-outline-danger");
+				unlike.innerHTML = "Unlike";
+				unlike.addEventListener("click", async function() {
+					await unlikeRecipe(data.likedrecipes[i + j].recipeId);
+				});
 
 				innerDiv.appendChild(nameElement);
 				innerDiv.appendChild(img);
 				innerDiv.appendChild(descElement);
 				innerDiv.appendChild(numLikes);
+				innerDiv.appendChild(unlike);
 				parentDiv.appendChild(innerDiv);
 
 			}
@@ -72,14 +131,6 @@ window.addEventListener("load", async function() {
          return;
     }else {
 	    data = await response.json();
-	    /*
-	    document.getElementById("name").value = profileData.name;
-	    //document.getElementById("avatar")
-	    document.getElementById("bio").value = profileData.bio;
-	    */
-
-	    //populate pictures (assuming liked receipes and my recipes are each
-         //stored as an array of objects)
 	    renderImages(data, true);
     }
 });
