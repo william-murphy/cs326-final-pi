@@ -29,4 +29,5 @@
 ## **CRUD**
 
  **Create**
+ - Takes four inputs and creates a new user
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="514">
