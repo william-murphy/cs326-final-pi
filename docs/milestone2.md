@@ -33,7 +33,6 @@
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="514">
  
  **Update**
- -Extracts the field to update from the database and changes it to the new value. 
-     For example: A user can edit their bio on their profile page, this will find the user through their id in our database and updates the bio field for that user in our database.
- <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-before.PNG" width="700" height="514">
- <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-after.PNG" width="700" height="514">
+ - Extracts the field to update from the database and changes it to the new value. For example: A user can edit their bio on their profile page, this will find the user through their id in our database and updates the bio field for that user in our database.
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-before.png" width="700" height="514">
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-after.png" width="700" height="514">
