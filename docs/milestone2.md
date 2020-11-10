@@ -25,13 +25,15 @@
  - /profile : load default data (bio, *saved recipes, my recipes*)
  - /profile/edit : update user bio
  - /profile/delete : delete a recipe from profile
- - /profile/unlike : unlike a recipe from profile
- 
- **Post**
- - post/upload : upload a new recipe
 
 ## **CRUD**
 
  **Create**
- - Takes four inputs which creates a new user by adding corresponding row (*name, email, username, password, bio*) to *Users* table
+ - Takes four inputs and creates a new user
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="514">
+ 
+ **Update**
+ -Extracts the field to update from the database and changes it to the new value. 
+     For example: A user can edit their bio on their profile page, this will find the user through their id in our database and updates the bio field for that user in our database.
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-before.PNG" width="700" height="514">
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/UpdateBio-after.PNG" width="700" height="514">
