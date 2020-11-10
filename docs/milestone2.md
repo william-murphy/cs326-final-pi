@@ -29,5 +29,5 @@
 ## **CRUD**
 
  **Create**
- - Takes four inputs and creates a new user
+ - Takes four inputs which creates a new user by adding corresponding row (*name, email, username, password, bio*) to *Users* table
  <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/milestone2-images/signupform.PNG" width="700" height="514">
