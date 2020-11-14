@@ -10,15 +10,16 @@ async function search() {
     //const searchRequest = await fetch(url);
  
     let url = '/people/search?input=' + searchInput;
+
     const searchRequest = await fetch(url);
     const searchData = searchRequest.ok? await searchRequest.json() : [];
     const searchResults = document.getElementById('search-results');
-    
+
     while (searchResults.firstChild) {
         searchResults.removeChild(searchResults.firstChild);
     }
 
-    
+
 
     for(const item of searchData) {
         addPerson(searchResults, item.username);
@@ -29,7 +30,7 @@ async function search() {
         addPerson(searchResults, "testing");
     }
     */
-    
+
 }
 
 function addPerson(results, username) {

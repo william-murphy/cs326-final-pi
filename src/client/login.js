@@ -10,14 +10,23 @@ async function login() {
     //if true successful login
     //else fail
 
+    /*
     const response = await fetch('/login/user', {
         method: 'POST',
         body: JSON.stringify({
 
         })
     });
+    */
+    let url = '/login/user?username=' + username + '&password=' + password;
+    const loginRequest = await fetch(url);
+    const loginData = loginRequest.ok? await loginRequest.json() : [];
+    let storage = window.localStorage;
 
-    if(!response.ok) {
-        console.log("Could not login.");
+    if(loginData.length > 0) {
+        console.log("logged in");
+        storage.setItem('user', JSON.stringify(loginData.username));
+    }else {
+        console.log("wrong username/password.")
     }
 }

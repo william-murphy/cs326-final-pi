@@ -1,4 +1,6 @@
-const pgp = require("pg-promise")({
+import * as _pgp from "pg-promise";
+
+const pgp = _pgp["default"]({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
     },
@@ -31,7 +33,7 @@ async function connectAndRun(task) {
     }
 }
 
-//three tables: Users [name, email, username, password, bio], Recipes [username, recipeName], Saved [username, recipeName]
+//three tables: Users [name, email, username, password, bio], Recipes [recipeId, username, recipeName, recipeDescription, recipeLikes], Saved [username, recipeName]
 
 
 //Feed
@@ -89,8 +91,16 @@ export async function updateProfile(username, bio) {
     return await connectAndRun(db => db.none("UPDATE Users SET bio = $1 WHERE username = $2;", [bio, username]));
 }
 
-export async function deleteProfileRecipe(username, recipeName) {
-    return await connectAndRun(db => db.none("DELETE FROM Saved WHERE username = $1 AND recipeName = $2;", [username, recipeName]));
+export async function deleteProfileRecipe(recipeId) {
+    return await connectAndRun(db => db.none("DELETE FROM Saved WHERE recipeId = $1;", [recipeId]));
+}
+
+export async function unlikeProfileRecipe1(recipeId) {
+     return await connectAndRun(db => db.none("UPDATE recipeLikes SET recipeLikes = recipeLikes - 1 WHERE recipeId = $1;", [recipeId]));
+}
+
+export async function unlikeProfileRecipe2(username, recipeId) {
+     return await connectAndRun(db => db.none("DELETE FROM Saved WHERE username = $1 AND recipeId = $2", [username, recipeId]));
 }
 
 //Login/Sign up
