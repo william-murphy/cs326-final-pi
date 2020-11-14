@@ -9,7 +9,7 @@ async function search() {
     //let url = "https://localhost:8080/people/search/" + searchInput;
     //const searchRequest = await fetch(url);
  
-    let url = '/people/search/' + searchInput;
+    let url = '/people/search?input=' + searchInput;
     const searchRequest = await fetch(url);
     const searchData = searchRequest.ok? await searchRequest.json() : [];
     const searchResults = document.getElementById('search-results');
