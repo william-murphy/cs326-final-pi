@@ -8,8 +8,9 @@ async function search() {
     //find people by username
     //let url = "https://localhost:8080/people/search/" + searchInput;
     //const searchRequest = await fetch(url);
+ 
+    let url = '/people/search?input=' + searchInput;
 
-    let url = '/people/search/' + searchInput;
     const searchRequest = await fetch(url);
     const searchData = searchRequest.ok? await searchRequest.json() : [];
     const searchResults = document.getElementById('search-results');
