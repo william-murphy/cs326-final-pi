@@ -5,7 +5,7 @@ document.getElementById("publish").addEventListener("click", async function() {
 	const recipeTitle = document.getElementById("title").value;
 	const recipeDescription = document.getElementById("description").value;
 
-	const response = await fetch("http://localhost:8080/post/upload", {
+	const response = await fetch("/post/upload", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'

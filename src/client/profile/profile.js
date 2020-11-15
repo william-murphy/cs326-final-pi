@@ -1,5 +1,5 @@
 async function unlikeRecipe(id) {
-	const response = await fetch("http://localhost:8080/profile/unlike", {
+	const response = await fetch("/profile/unlike", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
@@ -20,7 +20,7 @@ async function unlikeRecipe(id) {
 }
 
 async function removeRecipe(id) {
-	const response = await fetch("http://localhost:8080/profile/delete", {
+	const response = await fetch("/profile/delete", {
        method: 'DELETE',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
@@ -124,7 +124,7 @@ function renderImages(data, mode) {
 //load my-recipes on page load
 window.addEventListener("load", async function() {
 	//const username = how do we get username?!?!
-	const url = "http://localhost:8080/profile?username=" + username;
+	const url = "/profile?username=" + username;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -140,7 +140,7 @@ document.getElementById("my").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "<b>My Recipes</b>";
 	document.getElementById("liked").innerHTML = "Liked Recipes";
 	document.getElementById("content").innerHTML = "";
-	const url = "http://localhost:8080/profile?username=" + username;
+	const url = "/profile?username=" + username;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -156,7 +156,7 @@ document.getElementById("liked").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "My Recipes";
 	document.getElementById("liked").innerHTML = "<b>Liked Recipes</b>";
 	document.getElementById("content").innerHTML = "";
-	const url = "http://localhost:8080/profile?username=" + username;
+	const url = "/profile?username=" + username;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -170,7 +170,7 @@ document.getElementById("liked").addEventListener("click", async function() {
 //edit profile
 document.getElementById("edit").addEventListener("click", async function() {
 	const newBio = document.getElementById("bio").value;
-	const response = await fetch("http://localhost:8080/profile/edit", {
+	const response = await fetch("/profile/edit", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
