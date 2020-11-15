@@ -33,7 +33,7 @@ async function connectAndRun(task) {
     }
 }
 
-//three tables: Users [name, email, username, password, bio], Recipes [recipeId, username, recipeName, recipeDescription, recipeLikes], Saved [username, recipeName]
+//three tables: Users [name, email, username, password, bio], Recipes [recipeId, username, recipeName, recipeDescription, recipeLikes], Saved [username, recipeId]
 
 
 //Feed
