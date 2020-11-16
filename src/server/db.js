@@ -28,7 +28,7 @@ async function connectAndRun(task) {
     }
 }
 
-//three tables: Users [username, name, email, password, bio], Recipe [recipeId, username, recipeName, decription, likes], Saved [recipeId, username]
+//three tables: Users [username, name, email, password, bio], Recipe [recipeid, username, recipename, description, likes], Saved [recipeid, username]
 
 
 //Feed
@@ -36,19 +36,15 @@ async function connectAndRun(task) {
 export async function getInitialFeed() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
 }
-/*
-async function loadFeed() {
 
-}
-*/
-export async function saveFromFeed(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
+export async function saveFromFeed(recipeID, username) {
+    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [recipeID, username]));
 }
 
 //Recipe
 
 export async function getSampleRecipes() {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 2;"));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
 }
 
 export async function getInitialRecipes(input) {
@@ -57,23 +53,22 @@ export async function getInitialRecipes(input) {
 
 //People
 
-export async function getInitialPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1;", [input]));
-}
-/*
-async function loadPeople() {
+// export async function getInitialPeople(input) {
+//     return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1;", [input]));
+// }
 
+export async function getInitialPeople(input) {
+    return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1 OR name = $1;", [input]));
 }
-*/
 
 //Create
 
-export async function saveRecipe(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
+export async function saveRecipe(recipeID, username) {
+    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [recipeID, username]));
 }
 
-export async function createRecipe(username, recipeName, recipeDescription) {
-    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipeName, recipeDescription, 0]));
+export async function createRecipe(username, recipeName, description) {
+    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipeName, description, 0]));
 }
 
 //Profile
@@ -91,7 +86,7 @@ export async function deleteProfileRecipe(recipeId) {
 }
 
 export async function unlikeProfileRecipe1(recipeId) {
-     return await connectAndRun(db => db.none("UPDATE recipeLikes SET recipeLikes = recipeLikes - 1 WHERE recipeId = $1;", [recipeId]));
+     return await connectAndRun(db => db.none("UPDATE likes SET likes = likes - 1 WHERE recipeId = $1;", [recipeId]));
 }
 
 export async function unlikeProfileRecipe2(username, recipeId) {
@@ -104,8 +99,8 @@ export async function login(username, password) {
     return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1 AND password = $2;", [username, password]));
 }
 
-export async function signup(name, email, username, password, bio) { //bio empty when sign up
-    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5);", [name, email, username, password, bio]));
+export async function signup(username, name, email, password, bio) { //bio empty when sign up
+    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5);", [username, name, email, password, bio]));
 }
 
 // EXPRESS SETUP
@@ -118,7 +113,7 @@ app.post("/login/user", async (req, res) => {
     req.on('data',data=>body+=data);
     req.on('end',()=>{
         const post_data = JSON.parse(body);
-        addWordScore(post_data.name, post_data.word, post_data.score);
+        login(post_data.username, post_data.password);
     });
     res.send("OK");
 });
@@ -128,14 +123,14 @@ app.post("/signup/user", async (req, res) => {
     req.on('data',data=>body+=data);
     req.on('end',()=>{
         const post_data = JSON.parse(body);
-        addWordScore(post_data.name, post_data.word, post_data.score);
+        signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
     });
     res.send("OK");
 });
 
 app.get("/feed", async (req, res) => {
-    const wordScore = await getHighestWord();
-    res.send(JSON.stringify(wordScore));
+    const getFeed = await getInitialFeed();
+    res.send(JSON.stringify(getFeed));
 });
 
 app.post("/feed/save", async (req, res) => {
