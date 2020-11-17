@@ -5,7 +5,7 @@ async function search() {
     //if true display on webpage
     //else fail
 
-    const feedRes = await fetch("/recipe/search");
+    const feedRes = await fetch("/recipe/search?input=" + recipe_name);
     const feedDat = await feedRes.json();
     if (!feedRes.ok) {
         console.log(feedRes.error);
