@@ -33,7 +33,7 @@ function renderRecipes(data) {
     img.classList.add("card-img-top", "embed-responsive-item");
     img.alt = "Card image cap";
     //img src?
-    img.src = "../images/ClassicGreenbeanCasserole.jpg";
+    //img.src = "../images/ClassicGreenbeanCasserole.jpg";
 
     let overlay = document.createElement("div");
     overlay.classList.add("card-img-overlay");
