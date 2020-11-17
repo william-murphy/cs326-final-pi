@@ -13,7 +13,7 @@ createServer(async (req, res) => {
         res.end(JSON.stringify(feed));
 
    } else if(parsed.pathname === '/feed/like') { //POST
-        await database.saveFromFeed(req.query.username, req.query.recipeName);
+        await database.likeRecipe(req.query.username, req.query.recipeName);
         res.send("OK");
 
     } else if(parsed.pathname === '/recipe') { //GET
@@ -43,7 +43,7 @@ createServer(async (req, res) => {
 
     } else if(parsed.pathname === '/post/upload') { //POST
 	    //createRecipe
-         await database.createRecipe(req.query.user, req.query.title, req.query.desc);
+         await database.createRecipe(req.query.username, req.query.recipe_name, req.query.recipe_desc);
          res.send("OK");
 
     } else if(parsed.pathname === '/profile') { //GET
@@ -58,12 +58,12 @@ createServer(async (req, res) => {
 
     } else if(parsed.pathname === '/profile/delete') { //DELETE
         //deleteProfileRecipe
-        await database.deleteProfileRecipe(req.query.recipeId);
+        await database.deleteProfileRecipe(req.query.recipe_id);
         res.send("OK");
 
    } else if(parsed.pathname === '/profile/unlike') { //POST
-        await database.unlikeProfileRecipe1(req.query.recipeId);
-        await database.unlikeProfileRecipe2(req.query.username, req.query.recipeId);
+        await database.unlikeProfileRecipe1(req.query.recipe_id);
+        await database.unlikeProfileRecipe2(req.query.username, req.query.recipe_id);
         res.send("OK");
 
    } else if(parsed.pathname === '/login/user') { //POST

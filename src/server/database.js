@@ -43,8 +43,8 @@ export async function getInitialFeed() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
 }
 
-export async function saveFromFeed(username, recipe_id) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipe_id]));
+export async function likeRecipe(username, recipe_name) {
+    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);", [username, recipeName]));
 }
 
 //Recipe
@@ -70,12 +70,8 @@ async function loadPeople() {
 
 //Create
 
-export async function saveRecipe(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
-}
-
-export async function createRecipe(username, recipeName, recipeDescription) {
-    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipeName, recipeDescription, 0]));
+export async function createRecipe(username, recipe_name, recipe_desc) {
+    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipe_name, recipe_desc, 0]));
 }
 
 //Profile
