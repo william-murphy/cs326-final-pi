@@ -39,15 +39,12 @@ async function connectAndRun(task) {
 //Feed
 
 export async function getInitialFeed() {
+     //needs to be changed to just retrieve ONE random recipe from database
     return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
 }
-/*
-async function loadFeed() {
 
-}
-*/
-export async function saveFromFeed(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
+export async function saveFromFeed(username, recipe_id) {
+    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipe_id]));
 }
 
 //Recipe

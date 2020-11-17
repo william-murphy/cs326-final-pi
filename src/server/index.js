@@ -12,10 +12,7 @@ createServer(async (req, res) => {
         const feed = await database.getInitialFeed();
         res.end(JSON.stringify(feed));
 
-    /*} else if(parsed.pathname === '/feed/load') { //GET*/
-        //get image data from database
-
-    } else if(parsed.pathname === '/feed/save') { //POST
+   } else if(parsed.pathname === '/feed/like') { //POST
         await database.saveFromFeed(req.query.username, req.query.recipeName);
         res.send("OK");
 
