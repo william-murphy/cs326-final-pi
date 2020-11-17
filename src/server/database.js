@@ -50,7 +50,7 @@ export async function likeRecipe(username, recipe_name) {
 //Recipe
 
 export async function getSampleRecipes() {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 2;"));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
 }
 
 export async function getInitialRecipes(input) {
