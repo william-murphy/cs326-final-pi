@@ -39,21 +39,18 @@ async function connectAndRun(task) {
 //Feed
 
 export async function getInitialFeed() {
+     //needs to be changed to just retrieve ONE random recipe from database
     return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
 }
-/*
-async function loadFeed() {
 
-}
-*/
-export async function saveFromFeed(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
+export async function likeRecipe(username, recipe_name) {
+    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);", [username, recipeName]));
 }
 
 //Recipe
 
 export async function getSampleRecipes() {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 2;"));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
 }
 
 export async function getInitialRecipes(input) {
@@ -73,12 +70,8 @@ async function loadPeople() {
 
 //Create
 
-export async function saveRecipe(username, recipeName) {
-    return await connectAndRun(db => db.none("INSERT INTO Saved Values ($1, $2);", [username, recipeName]));
-}
-
-export async function createRecipe(username, recipeName, recipeDescription) {
-    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipeName, recipeDescription, 0]));
+export async function createRecipe(username, recipe_name, recipe_desc) {
+    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4);", [username, recipe_name, recipe_desc, 0]));
 }
 
 //Profile
