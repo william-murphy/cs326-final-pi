@@ -80,15 +80,15 @@ export async function updateProfile(username, bio) {
 }
 
 export async function deleteProfileRecipe(recipe_id) {
-    return await connectAndRun(db => db.none("DELETE FROM Saved WHERE recipeId = $1;", [recipe_id]));
+    return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipeId = $1;", [recipe_id]));
 }
 
 export async function unlikeProfileRecipe1(recipe_id) {
-     return await connectAndRun(db => db.none("UPDATE Liked SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
+     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
 }
 
 export async function unlikeProfileRecipe2(username, recipe_id) {
-     return await connectAndRun(db => db.none("DELETE FROM Saved WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
+     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
 }
 
 //Login/Sign up
