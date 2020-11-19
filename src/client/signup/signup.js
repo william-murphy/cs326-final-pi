@@ -1,3 +1,6 @@
+//Implemented in passport.js
+
+/*
 document.getElementById('signup').addEventListener('click', signup);
 
 async function signup() {
@@ -26,3 +29,4 @@ async function signup() {
     }
     
 }
+*/
