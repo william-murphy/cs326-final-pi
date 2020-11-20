@@ -1,101 +1,128 @@
-import {createServer} from 'http';
-import {parse} from 'url';
-import {join} from 'path';
-import * as database from "./database.js";
-import {writeFile, readFileSync, existsSync, fstat} from 'fs';
+import pgPromise from 'pg-promise';
+const pgp = pgPromise({});
 
-createServer(async (req, res) => {
-    const parsed = parse(req.url, true);
+import * as _express from "express"
+const express = _express["default"];
 
-    if(parsed.pathname === '/feed') {//GET
-        //get image data from database
-        const feed = await database.getInitialFeed();
-        res.end(JSON.stringify(feed));
+const app = express();
 
-   } else if(parsed.pathname === '/feed/save') { //POST
-        await database.saveFromFeed(req.query.username, req.query.recipeName);
-        res.send("OK");
+app.use('/', express.static('./client'));
 
-    } else if(parsed.pathname === '/recipe') { //GET
-        //getSampleRecipes
-        const recipes = await database.getSampleRecipes();
-        res.end(JSON.stringify(recipes));
+// app.post("/login/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         login(post_data.username, post_data.password);
+//     });
+//     res.send("OK");
+// });
 
-    } else if(parsed.pathname === '/recipe/search') { //GET
-        //getInitialRecipes
-        const recipes = await database.getInitialRecipes(req.query.input);
-        res.end(JSON.stringify(recipes));
+// app.post("/signup/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
+//     });
+//     res.send("OK");
+// });
 
-    /*} else if(parsed.pathname === '/recipe/load') { //GET*/
+app.get("/feed", async (req, res) => { 
+    res.send(JSON.stringify(
+        await getInitialFeed()
+    ));
+});
 
-    } else if(parsed.pathname === '/recipe/save') { //POST
-        await database.saveRecipe(req.query.username, req.query.recipeName);
-        res.send("OK");
+app.post("/feed/save", async (req, res) => {
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
 
-    } else if(parsed.pathname === '/people/search') { //GET
-        //getInitialPeople
-        const people = await database.getInitialPeople(req.query.input);
-        res.end(JSON.stringify(people));
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        saveFromFeed(post_data.recipe_id, post_data.username);
+    });
+    res.send("OK");
+});
 
-    /*} else if(parsed.pathname === '/people/load') { //GET*/
 
-    /*} else if(parsed.pathname === '/people/follow') { //POST*/
+app.get("/recipe/search", async (req, res) => { //how to include input in function call?
+    res.send(JSON.stringify(
+        await client.db("scrabble").collection("wordScores").find().sort({ score: -1 }).limit(10).toArray()
+    ));
+    const recipe_search = await searchRecipes();
+    res.send(JSON.stringify(recipe_search));
+});
 
-    } else if(parsed.pathname === '/post/upload') { //POST
-	    //createRecipe
-         await database.createRecipe(req.query.username, req.query.recipe_name, req.query.recipe_desc);
-         res.send("OK");
+app.post("/recipe/save", async (req, res) => {
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
+    
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        saveRecipe(post_data.recipe_id, post_data.username);
+    });
+    res.send("OK");
+});
 
-    } else if(parsed.pathname === '/profile') { //GET
-        //getProfile
-        const profile = await database.getProfile(req.query.username);
-        res.end(JSON.stringify(profile));
+app.post("/post/upload", async (req, res) => {
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
+    
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        createRecipe(post_data.username, post_data.recipe_name, post_data.recipe_desc);
+    });
+    res.send("OK");
+});
 
-    } else if(parsed.pathname === '/profile/edit') { //PUT/POST?
-        //updateProfile
-        await database.updateProfile(req.query.username, req.query.bio);
-        res.send("OK");
+app.get("/people/search", async (req, res) => { //how to include input in function call?
+    res.send(JSON.stringify(
+        await client.db("scrabble").collection("wordScores").find().sort({ score: -1 }).limit(10).toArray()
+    ));
+    const user_search = await searchPeople(??);
+    res.send(JSON.stringify(user_search));
+});
 
-    } else if(parsed.pathname === '/profile/delete') { //DELETE
-        //deleteProfileRecipe
-        await database.deleteProfileRecipe(req.query.recipe_id);
-        res.send("OK");
+app.get("/profile", async (req, res) => { //how to include input in function call?
+    res.send(JSON.stringify(
+        await client.db("scrabble").collection("wordScores").find().sort({ score: -1 }).limit(10).toArray()
+    ));
+    const getUserProfile = await getProfile(??);
+    res.send(JSON.stringify(getUserProfile));
+});
 
-   } else if(parsed.pathname === '/profile/unlike') { //POST
-        await database.unlikeProfileRecipe1(req.query.recipe_id);
-        await database.unlikeProfileRecipe2(req.query.username, req.query.recipe_id);
-        res.send("OK");
+app.post("/profile/edit", async (req, res) => {  //how to do put requests in express
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
+    
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        updateProfile(post_data.username, post_data.bio);
+    });
+    res.send("OK");
+});
 
-   } else if(parsed.pathname === '/login/user') { //POST
-        //login
-        await database.login(req.query.username, req.query.password);
-        res.send("OK");
+app.post("/profile/delete", async (req, res) => {  //delete requests in express
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
+    
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        deleteProfileRecipe(post_data.name, post_data.score);
+    });
+    res.send("OK");
+});
 
-    } else if(parsed.pathname === '/signup/user') { //POST
-        //signup
-        await database.signup(req.query.name, req.query.email, req.query.username, req.query.password, req.query.bio);
-        res.send("OK");
-    } else {
-        const filename = parsed.pathname === '/' ? "index.html" : parsed.pathname.replace('/', '');
-        const path = join("src/client/", filename);
-        console.log("trying to serve " + path + "...");
-        if (existsSync(path)) {
-            if (filename.endsWith("html")) {
-                res.writeHead(200, {"Content-Type" : "text/html"});
-            } else if (filename.endsWith("css")) {
-                res.writeHead(200, {"Content-Type" : "text/css"});
-            } else if (filename.endsWith("js")) {
-                res.writeHead(200, {"Content-Type" : "text/javascript"});
-            } else {
-                res.writeHead(200);
-            }
+app.post("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
+    await client.db("scrabble").collection("gameScores").insertOne(req.body);
+    res.end();
+    
+    req.on('end',()=>{
+        const post_data = JSON.parse(body);
+        unlikeProfileRecipe(post_data.username, post_data.recipe_id)
+    });
+    res.send("OK");
+});
 
-            res.write(readFileSync(path));
-            res.end();
-        } else {
-            res.writeHead(404);
-            res.end();
-        }
-    }
-
-}).listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080);

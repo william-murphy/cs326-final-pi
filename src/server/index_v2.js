@@ -1,35 +1,8 @@
 import {createServer} from 'http';
 import {parse} from 'url';
 import {join} from 'path';
-import {writeFile, readFileSync, existsSync} from 'fs';
-import pgp from "pg-promise";
-
-// CREATE TABLE wordScores (name VARCHAR(255), word VARCHAR(255), score INT, PRIMARY KEY(name, word, score));
-// CREATE TABLE gameScores (name VARCHAR(255), score INT, PRIMARY KEY(name, score));
-
-// Local Postgres credentials
-const username = "postgres";
-const password = "admin";
-
-const url = process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
-const db = pgp()(url);
-
-async function connectAndRun(task) {
-    let connection = null;
-
-    try {
-        connection = await db.connect();
-        return await task(connection);
-    } catch (e) {
-        throw e;
-    } finally {
-        try {
-            connection.done();
-        } catch(ignored) {
-
-        }
-    }
-}
+import * as database from "./database.js";
+import {writeFile, readFileSync, existsSync, fstat} from 'fs';
 
 createServer(async (req, res) => {
     const parsed = parse(req.url, true);
