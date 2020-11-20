@@ -1,6 +1,6 @@
 **DATATABLES**
 
-CREATE TABLE USERS(
+- CREATE TABLE USERS(
  username VARCHAR ( 50 ) PRIMARY KEY,
  email VARCHAR ( 255 ) UNIQUE NOT NULL,
  salt VARCHAR (255) NOT NULL,
@@ -20,7 +20,7 @@ Users table
 | profile_pic  | String    | The imgur link to profile pic 	   |
 
 
-CREATE TABLE RECIPES (
+- CREATE TABLE RECIPES (
 	recipe_id serial PRIMARY KEY,
 	username VARCHAR ( 50 ) NOT NULL,
 	recipe_name VARCHAR (50) NOT NULL,
@@ -40,7 +40,7 @@ Recipes table
 | recipe_pic   | String     | The link to the image of the recipe       |
 
 
-CREATE TABLE LIKED (
+- CREATE TABLE LIKED (
 	recipe_id INT,
 	username VARCHAR ( 50 ),
 );
