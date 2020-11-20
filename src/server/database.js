@@ -1,6 +1,6 @@
 import * as _pgp from "pg-promise";
 //import * as secrets from "../../secrets.json";
-const secrets = "secrets.json";
+//const secrets = "secrets.json";
 import * as fs from "fs";
 
 const pgp = _pgp["default"]({
@@ -14,8 +14,9 @@ const pgp = _pgp["default"]({
 });
 
 const username = "postgres";
-let password = "admin";
+let password;
 if (!process.env.PASSWORD) {
+    const secrets = "secrets.json";
     password = JSON.parse(fs.readFileSync(secrets)).password;
 } else {
     password = process.env.PASSWORD;
