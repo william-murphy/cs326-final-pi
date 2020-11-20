@@ -52,6 +52,6 @@ Liked table
 | username     | string    | The username of user (unique identifier)  |  
  
  ## **Breakdown**
-- Ji: Worked on database/index.js and login/sign up/people js files
+- Ji: Worked on database/index.js, implementing login/signup to passport.js
 - Dhruvi: created the required tables in our postgreSQL database on heroku app, worked on Worked on database + index.js, Milestone3.md, other little things in collaboration during group meetings.
 - Will: Profile and Post pages, some database functions, image uploading
