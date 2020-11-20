@@ -1,3 +1,5 @@
+const user = window.localStorage.getItem("user");
+
 async function unlikeRecipe(id) {
 	const response = await fetch("/profile/unlike", {
        method: 'POST',
@@ -5,7 +7,7 @@ async function unlikeRecipe(id) {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  username: username,
+		  username: user,
 		  recipeId: id
 	  })
      });
@@ -26,7 +28,7 @@ async function removeRecipe(id) {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  recipeId: id
+		  recipe_id: id
 	  })
      });
      if (!response.ok) {
@@ -50,7 +52,7 @@ function renderImages(data, mode) {
 				let innerDiv = document.createElement("DIV").classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
-				nameElement.innerHTML = data.myrecipes[i + j].recipeTitle;
+				nameElement.innerHTML = data.myrecipes[i + j].recipe_name;
 
 				const img = createElement("img").classList.add("img-fluid"); //placeholder image
 				img.src = "../images/food.jpeg";
@@ -62,12 +64,12 @@ function renderImages(data, mode) {
 				descElement.innerHTML = "Recipe by " + data.myrecipes[i + j].username;
 
 				const numLikes = document.createElement("span");
-				numLikes.innerHTML = "❤️ " + data.myrecipes[i + j].recipeLikes;
+				numLikes.innerHTML = "❤️ " + data.myrecipes[i + j].recipe_likes;
 
 				const remove = document.createElement("button").classList.add("btn", "btn-outline-danger");
 				remove.innerHTML = "Delete";
 				remove.addEventListener("click", async function() {
-					await deleteRecipe(data.myrecipes[i + j].recipeId);
+					await deleteRecipe(data.myrecipes[i + j].recipe_id);
 				});
 
 				innerDiv.appendChild(nameElement);
@@ -89,7 +91,7 @@ function renderImages(data, mode) {
 				let innerDiv = document.createElement("DIV").classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
-				nameElement.innerHTML = data.likedrecipes[i + j].recipeTitle;
+				nameElement.innerHTML = data.likedrecipes[i + j].recipe_name;
 
 				const img = createElement("img").classList.add("img-fluid"); //placeholder image
 				img.src = "../images/food.jpeg";
@@ -124,7 +126,7 @@ function renderImages(data, mode) {
 //load my-recipes on page load
 window.addEventListener("load", async function() {
 	//const username = how do we get username?!?!
-	const url = "/profile?username=" + username;
+	const url = "/profile?username=" + user;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -140,7 +142,7 @@ document.getElementById("my").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "<b>My Recipes</b>";
 	document.getElementById("liked").innerHTML = "Liked Recipes";
 	document.getElementById("content").innerHTML = "";
-	const url = "/profile?username=" + username;
+	const url = "/profile?username=" + user;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -156,7 +158,7 @@ document.getElementById("liked").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "My Recipes";
 	document.getElementById("liked").innerHTML = "<b>Liked Recipes</b>";
 	document.getElementById("content").innerHTML = "";
-	const url = "/profile?username=" + username;
+	const url = "/profile?username=" + user;
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
@@ -175,7 +177,7 @@ document.getElementById("edit").addEventListener("click", async function() {
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
        },
-       body: JSON.stringify({username: username, bio: newBio})
+       body: JSON.stringify({username: user, bio: newBio})
      });
      if (!response.ok) {
        console.log(response.error);
