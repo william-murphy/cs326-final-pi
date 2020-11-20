@@ -42,7 +42,7 @@ Recipes table
 
 - CREATE TABLE LIKED (
 	recipe_id INT,
-	username VARCHAR ( 50 ),
+	username VARCHAR ( 50 )
 );
 
 Liked table
