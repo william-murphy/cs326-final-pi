@@ -32,8 +32,8 @@ function renderRecipes(data) {
     let img = document.createElement("img");
     img.classList.add("card-img-top", "embed-responsive-item");
     img.alt = "Card image cap";
-    //img src?
-    //img.src = "../images/ClassicGreenbeanCasserole.jpg";
+    //img src?  
+    img.src = "../images/ClassicGreenbeanCasserole.jpg";
 
     let overlay = document.createElement("div");
     overlay.classList.add("card-img-overlay");
@@ -44,12 +44,40 @@ function renderRecipes(data) {
     description.classList.add("card-text");
     description.innerHTML = data.description;
 
+    let button = document.createElement("button");
+    button.classList.add("btn", "btn-danger", "w-25", "d-block", "mx-auto");
+    button.innerHTML = "Save";
+    button.addEventListener("click", async function() {
+        await saveRecipe(data.recipe_id);
+    });
+
     embed.appendChild(img);
     overlay.appendChild(title);
     overlay.appendChild(description);
     card.appendChild(embed);
     card.appendChild(overlay);
     parent.appendChild(card);
+    parent.appendChild(button);
+}
+
+
+async function saveRecipe(id) {
+    const response = await fetch("/recipe/save", {
+        method: 'POST',
+        headers: {
+             'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+             username: username,
+             recipe_id: id
+        })
+   });
+   if (!response.ok) {
+        console.log(response.error);
+        return;
+   }else {
+        alert("Successfully saved recipe.");
+   }
 }
 
 window.addEventListener('load', async () => {
@@ -72,20 +100,6 @@ window.addEventListener('load', async () => {
         renderRecipes(recipes[key]);
     }
     */
-    
-    const response = await fetch("/recipe/save", {
-                    method: 'POST',
-                    body: JSON.stringify( { 
-                        "name": name, 
-                        "author": word, 
-                        "likes": currScore,
-                        "picture": picture
-                    })
-                });
-                if (!response.ok) {
-                    console.log(response.error);
-                    return;
-                }
 
     document.getElementById('searchRecipe').addEventListener('click', search);
 })
