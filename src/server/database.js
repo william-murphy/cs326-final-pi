@@ -16,7 +16,7 @@ const pgp = _pgp["default"]({
 const username = "postgres";
 let password;
 if (!process.env.PASSWORD) {
-    const secrets = "secrets.json";
+    const secrets = import('secrets.json');
     password = JSON.parse(fs.readFileSync(secrets)).password;
 } else {
     password = process.env.PASSWORD;
