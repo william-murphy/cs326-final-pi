@@ -13,11 +13,19 @@ const pgp = _pgp["default"]({
     }
 });
 
-const username = "postgres";
+let username;
 let password;
+
+if(!process.env.USERNAME) {
+    const secrets = "../../secrets.json";
+    username = JSON.parse(fs.readFileSync(secrets)).username;
+} else {
+    username = process.env.USERNAME;
+}
+
 if (!process.env.PASSWORD) {
     //const secrets = import('../../secrets.json');
-    const secrets = "secrets.json";
+    const secrets = "../../secrets.json";
     password = JSON.parse(fs.readFileSync(secrets)).password;
 } else {
     password = process.env.PASSWORD;
