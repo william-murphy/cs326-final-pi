@@ -28,15 +28,16 @@ async function connectAndRun(task) {
     }
 }
 
-//Users [username, email, password, bio, profile_pic], 
-//Recipes [recipeid, username, recipe_name, recipe_desc, recipe_likes, recipe_pic], 
-//Liked [recipe_id, username]
+//Users [username, email, salt, password, bio, profile_pic], 
+//Recipes [recipe_id, username, recipe_name, recipe_desc, recipe_pic],    //remove likes -> count in SQL table likes
+//Liked [recipe_id, username] 
 
+//Use join
 
 //Feed
 
 export async function getInitialFeed() {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes;"));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1"));
 }
 
 export async function saveFromFeed(recipe_id, username) {
@@ -66,7 +67,7 @@ export async function createRecipe(username, recipe_name, recipe_desc) {
 //People
 
 export async function searchPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input])); 
 }
 
 //Profile
@@ -83,22 +84,30 @@ export async function deleteProfileRecipe(recipe_id) {
     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipeId = $1;", [recipe_id]));
 }
 
-export async function unlikeProfileRecipe1(recipe_id) {
-     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
+// export async function unlikeProfileRecipe1(recipe_id) {
+//      return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
+// }
+
+export async function unlikeProfileRecipe(username, recipe_id) {
+     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
 }
 
-export async function unlikeProfileRecipe2(username, recipe_id) {
-     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
+export async function getLikes(recipe_id) {
+    return await connectAndRun(db => db.any("SELECT COUNT($1) AS recipe_likes FROM Recipes;", [recipe_id]));
+}
+
+export async function getRecipeData_fromLiked(username) {
+    return await connectAndRun(db => db.any("SELECT recipe_id, recipe_name FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
 }
 
 //Login/Sign up
 
 export async function login(username, password) {
-    return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1 AND password = $2;", [username, password]));
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1 AND password = $2;", [username, password]));
 }
 
-export async function signup(username, email, password, bio) { //bio empty when sign up
-    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4);", [username, email, password, bio]));
+export async function signup(username, email, salt, password, bio, profile_pic) { //bio empty when sign up
+    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, password, bio, profile_pic]));
 }
 
 // EXPRESS SETUP
@@ -143,7 +152,7 @@ app.post("/feed/save", async (req, res) => {
 
 
 app.get("/recipe/search", async (req, res) => { //how to include input in function call?
-    const recipe_search = await searchRecipes(??);
+    const recipe_search = await searchRecipes();
     res.send(JSON.stringify(recipe_search));
 });
 
@@ -202,7 +211,7 @@ app.put("/profile/unlike", async (req, res) => { //put request + use two functio
     req.on('data',data=>body+=data);
     req.on('end',()=>{
         const post_data = JSON.parse(body);
-        addGameScore(post_data.name, post_data.score);
+        unlikeProfileRecipe(post_data.username, post_data.recipe_id)
     });
     res.send("OK");
 });

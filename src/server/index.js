@@ -12,8 +12,8 @@ createServer(async (req, res) => {
         const feed = await database.getInitialFeed();
         res.end(JSON.stringify(feed));
 
-   } else if(parsed.pathname === '/feed/like') { //POST
-        await database.likeRecipe(req.query.username, req.query.recipeName);
+   } else if(parsed.pathname === '/feed/save') { //POST
+        await database.saveFromFeed(req.query.username, req.query.recipeName);
         res.send("OK");
 
     } else if(parsed.pathname === '/recipe') { //GET
