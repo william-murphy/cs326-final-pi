@@ -2,6 +2,8 @@ import * as _pgp from "pg-promise";
 //import * as secrets from "../../secrets.json";
 //const secrets = "secrets.json";
 import * as fs from "fs";
+import path from 'path';
+const __dirname = path.resolve();
 
 const pgp = _pgp["default"]({
     connect(client) {
@@ -17,16 +19,16 @@ let username;
 let password;
 
 if(!process.env.USERNAME) {
-    const secrets = "../../secrets.json";
-    username = JSON.parse(fs.readFileSync(secrets)).username;
+    //const secrets = "../../secrets.json";
+    username = JSON.parse(fs.readFileSync(path.resolve(__dirname, "secrets.json"))).username;
 } else {
     username = process.env.USERNAME;
 }
 
 if (!process.env.PASSWORD) {
     //const secrets = import('../../secrets.json');
-    const secrets = "../../secrets.json";
-    password = JSON.parse(fs.readFileSync(secrets)).password;
+    //const secrets = "../../secrets.json";
+    password = JSON.parse(fs.readFileSync(path.resolve(__dirname, "secrets.json"))).password;
 } else {
     password = process.env.PASSWORD;
 }    
