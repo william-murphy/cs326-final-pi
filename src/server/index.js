@@ -13,26 +13,6 @@ const __dirname = path.resolve();
 
 app.use(express.static(__dirname + '/src/client/'));
 
-// app.post("/login/user", async (req, res) => {
-//     let body='';
-//     req.on('data',data=>body+=data);
-//     req.on('end',()=>{
-//         const req = JSON.parse(body);
-//         login(post_data.username, post_data.password);
-//     });
-//     res.send("OK");
-// });
-
-// app.post("/signup/user", async (req, res) => {
-//     let body='';
-//     req.on('data',data=>body+=data);
-//     req.on('end',()=>{
-//         const post_data = JSON.parse(body);
-//         signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
-//     });
-//     res.send("OK");
-// });
-
 app.get("/feed", async (req, res) => { 
     res.send(JSON.stringify(
         await database.getInitialFeed()
@@ -110,3 +90,24 @@ app.post("/user", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080);
+
+
+// app.post("/login/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const req = JSON.parse(body);
+//         login(post_data.username, post_data.password);
+//     });
+//     res.send("OK");
+// });
+
+// app.post("/signup/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
+//     });
+//     res.send("OK");
+// });
