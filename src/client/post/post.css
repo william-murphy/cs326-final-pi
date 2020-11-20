@@ -15,3 +15,7 @@ body {
     padding: 70px;
     background-color: white;
 }
+
+button:hover {
+     color: red;
+}
