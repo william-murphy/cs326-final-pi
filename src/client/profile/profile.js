@@ -125,7 +125,10 @@ function renderImages(data, mode) {
 
 //load my-recipes on page load
 window.addEventListener("load", async function() {
-	//const username = how do we get username?!?!
+
+	//Retrieve user info from database
+	
+
 	const url = "/profile?username=" + user;
 	const response = await fetch(url);
      if (!response.ok) {

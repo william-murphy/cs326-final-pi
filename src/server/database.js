@@ -77,7 +77,11 @@ export async function createRecipe(username, recipe_name, recipe_desc) {
 //Profile
 
 export async function getProfile(username) {
-    return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username]));
+    return {
+         profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
+         recipes: await connectAndRun(db => db.one("SELECT * FROM Recipes WHERE username = $1;", [username])),
+         liked: await connectAndRun(db => db.one("SELECT * FROM Liked WHERE username = $1;", [username]))
+    };
 }
 
 export async function updateProfile(username, bio) {
