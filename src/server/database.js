@@ -53,8 +53,8 @@ export async function getSampleRecipes() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
 }
 
-export async function searchRecipes(name) {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name LIKE ''%' + $1 + '%'';", [name]));
+export async function searchRecipes(input) {
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name LIKE ''%' + $1 + '%'';", [input]));
 }
 
 export async function saveRecipe(recipe_id, username) {
@@ -69,8 +69,8 @@ export async function createRecipe(username, recipe_name, recipe_desc, recipe_pi
 
 //People
 
-export async function searchPeople(username) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [username])); 
+export async function searchPeople(input) {
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input])); 
 }
 
 //Profile
@@ -99,7 +99,7 @@ export async function unlikeProfileRecipe1(recipe_id) {
      return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
 }
 
-export async function unlikeProfileRecipe(username, recipe_id) {
+export async function unlikeProfileRecipe2(username, recipe_id) {
      return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
 }
 
