@@ -1,7 +1,8 @@
 'use strict';
 
 // For loading environment variables.
-require('dotenv').config();
+//require('dotenv').config();
+import {config} from 'dotenv';
 
 const express = require('express');                 // express routing
 const expressSession = require('express-session');  // for managing session state
@@ -78,7 +79,7 @@ let users = { 'emery' : [
 //let userMap = {};
 
 // Returns true iff the user exists.
-function findUser(username) {
+async function findUser(username) {
     /*
     if (!users[username]) {
 	return false;
@@ -88,23 +89,47 @@ function findUser(username) {
     */
    //find username from database
    //SELECT FROM users WHERE username=username;
+   const response = await fetch('/username?username=' + username);
+   if (!response.ok) {
+		console.log(response.error);
+		return false;
+   } else {
+	   data = await response.json();
+	   if (data.username === username) {
+		   return true;
+	   } else {
+		   return false;
+	   }
+   }
 }
 
 // TODO
 // Returns true iff the password is the one we have stored (in plaintext = bad but easy).
-function validatePassword(name, pwd) {
+async function validatePassword(name, pwd) {
     if (!findUser(name)) {
 	return false;
     }
 	// TODO CHECK PASSWORD
     //return mc.check(pwd, users[name][0], users[name][1]);
     //find username, hash & salt from database and check
-    //SELECT hash, salt FROM users WHERE username='name'
+	//SELECT hash, salt FROM users WHERE username='name'
+	const response = await fetch('/password?password=' + pwd);
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+   } else {
+	   data = await response.json();
+	   if (mc.check(pwd, data.salt, data.hash)) {
+		   return true;
+	   } else {
+		   return false;
+	   }
+   }
 }
 
 // Add a user to the "database".
 // TODO
-function addUser(name, email, username, pwd, bio) {
+async function addUser(username, email, pwd, bio, profile_pic) {
     if (findUser(name)) {
 	return false;
     }
@@ -113,8 +138,31 @@ function addUser(name, email, username, pwd, bio) {
     //add name, email, username, hash, salt, bio to database
     //const encrypted = mc.hash(pwd)
     //hash = encrypted[1]
-    //salt = encrypted[0]
-	return true;
+	//salt = encrypted[0]
+	const encrypted = mc.hash(pwd);
+	const salt = encrypted[0];
+	const hash = encrypted[1];
+	const response = await fetch("/user", {
+		method: 'POST',
+		headers: {
+			 'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify({
+			username: name,
+			email: email,
+			salt: salt,
+			hash: hash,
+			bio: bio,
+			profile_pic: profile_pic
+		})
+   });
+   if (!response.ok) {
+		console.log(response.error);
+		return false;
+   }else {
+		alert("Created user");
+		return true;
+   }
 }
 
 // Routes
@@ -138,13 +186,17 @@ app.get('/',
 // Handle post data from the login.html form.
 app.post('/login',
 	 passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/private',   // when we login, go to /private 
+	     'successRedirect' : '/feedPage',   // when we login, go to /private 
 	     'failureRedirect' : '/login'      // otherwise, back to login
 	 }));
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
 	(req, res) => res.sendFile('../client/index.html',
+				   { 'root' : __dirname }));
+
+app.get('/feedPage',
+	(req, res) => res.sendFile('../client/feed/index.html',
 				   { 'root' : __dirname }));
 
 // Handle logging out (takes us back to the login page).
@@ -160,12 +212,12 @@ app.get('/logout', (req, res) => {
 // Use res.redirect to change URLs.
 app.post('/register',
 	 (req, res) => {
-         const name = req.body['name'];
          const email = req.body['email'];
 	     const username = req.body['username'];
          const password = req.body['password'];
-         const bio = "";
-	     if (addUser(name, email, username, password, bio)) {
+		 const bio = "";
+		 const profile_pic = req.body['profile_pic'];
+	     if (addUser(username, email, salt, password, bio, profile_pic)) {
 		 res.redirect('/login');
 	     } else {
 		 res.redirect('/register');

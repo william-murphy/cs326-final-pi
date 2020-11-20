@@ -131,10 +131,15 @@ export async function getRecipeData_fromLiked(username) {
 
 //Login/Sign up
 
-export async function login(username, password) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1 AND password = $2;", [username, password]));
+export async function getUsername(username) {
+    return await connectAndRun(db => db.one("SELECT username FROM Users WHERE username = $1;", [username]));
 }
 
-export async function signup(username, email, salt, password, bio, profile_pic) { //bio empty when sign up
-    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, password, bio, profile_pic]));
+export async function getPassword(username) {
+    return await connectAndRun(db => db.one("SELECT salt, hash FROM Users WHERE username = $1;", [username]));
 }
+
+export async function signup(username, email, salt, hash, bio, profile_pic) { //bio empty when sign up
+    return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, hash, bio, profile_pic]));
+}
+

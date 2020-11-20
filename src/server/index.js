@@ -89,4 +89,24 @@ app.post("/profile/unlike", async (req, res) => { //put request + use two functi
     res.end();
 });
 
+//getting username
+app.get("/username", async (req, res) => {
+    res.send(JSON.stringify(
+        await database.getUsername(req.username)
+    ));
+});
+
+//getting password info
+app.get("/password", async (req, res) => {
+    res.send(JSON.stringify(
+        await database.getPassword(req.username)
+    ));
+});
+
+//creating user
+app.post("/user", async (req, res) => {
+    await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
+    res.end();
+});
+
 app.listen(process.env.PORT || 8080);
