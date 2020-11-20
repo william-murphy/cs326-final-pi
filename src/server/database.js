@@ -1,4 +1,5 @@
 import * as _pgp from "pg-promise";
+import * as secrets from "../../secrets.json";
 
 const pgp = _pgp["default"]({
     connect(client) {
@@ -11,7 +12,12 @@ const pgp = _pgp["default"]({
 });
 
 const username = "postgres";
-const password = "admin";
+let password;
+if (!process.env.PASSWORD) {
+    password = secrets.password;
+} else {
+    password = process.env.PASSWORD;
+}    
 
 const url = process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
 const db = pgp(url);
