@@ -13,9 +13,5 @@ body {
     border: 2px solid rgba(204, 204, 204, 0.5);
     margin-top: 5%;
     padding: 70px;
-    background-color: white;
-}
-
-button:hover {
-     color: red;
+    /*background-color: white;*/
 }
