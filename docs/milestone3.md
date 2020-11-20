@@ -54,4 +54,4 @@ Liked table
  ## **Breakdown**
 - Ji: Worked on database/index.js and login/sign up/people js files
 - Dhruvi: created the required tables in our postgreSQL database on heroku app, worked on Worked on database + index.js, Milestone3.md, other little things in collaboration during group meetings.
-- Will: Profile page backend and added functionality, added page to upload recipes and did backend, wrote some endpoints as well as some functions for database.js, worked on milestone2 documents
+- Will: Profile and Post pages, some database functions, image uploading
