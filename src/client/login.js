@@ -1,4 +1,6 @@
-document.getElementById('login').addEventListener('click', login);
+//Implemented in passport
+
+/*document.getElementById('login').addEventListener('click', login);
 
 async function login() {
     const username = document.getElementById('username').value;
@@ -18,6 +20,7 @@ async function login() {
         })
     });
     */
+/*
     let url = '/login/user?username=' + username + '&password=' + password;
     const loginRequest = await fetch(url);
     const loginData = loginRequest.ok? await loginRequest.json() : [];
@@ -30,3 +33,4 @@ async function login() {
         console.log("wrong username/password.")
     }
 }
+*/

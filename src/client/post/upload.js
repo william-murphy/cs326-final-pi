@@ -1,7 +1,8 @@
+const user = window.localStorage.getItem("user");
+
 document.getElementById("publish").addEventListener("click", async function() {
 
 	//store recipe data, TODO: image upload in NodeJS?
-	const userName = "willmurphy23"; //example dummy userName
 	const recipeTitle = document.getElementById("title").value;
 	const recipeDescription = document.getElementById("description").value;
 
@@ -11,9 +12,9 @@ document.getElementById("publish").addEventListener("click", async function() {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  user: userName,
-		  title: recipeTitle,
-		  desc: recipeDescription
+		  username: user,
+		  recipe_name: recipeTitle,
+		  recipe_desc: recipeDescription
 	  })
      });
      if (!response.ok) {
