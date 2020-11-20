@@ -110,110 +110,110 @@ export async function signup(username, email, salt, password, bio, profile_pic) 
     return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, password, bio, profile_pic]));
 }
 
-// EXPRESS SETUP
-const app = express();
+// // EXPRESS SETUP
+// const app = express();
 
-app.use('/', express.static('./client'));
+// app.use('/', express.static('./client'));
 
-app.post("/login/user", async (req, res) => {
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        login(post_data.username, post_data.password);
-    });
-    res.send("OK");
-});
+// app.post("/login/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         login(post_data.username, post_data.password);
+//     });
+//     res.send("OK");
+// });
 
-app.post("/signup/user", async (req, res) => {
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
-    });
-    res.send("OK");
-});
+// app.post("/signup/user", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
+//     });
+//     res.send("OK");
+// });
 
-app.get("/feed", async (req, res) => { 
-    const getFeed = await getInitialFeed();
-    res.send(JSON.stringify(getFeed));
-});
+// app.get("/feed", async (req, res) => { 
+//     const getFeed = await getInitialFeed();
+//     res.send(JSON.stringify(getFeed));
+// });
 
-app.post("/feed/save", async (req, res) => {
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        saveFromFeed(post_data.recipe_id, post_data.username);
-    });
-    res.send("OK");
-});
+// app.post("/feed/save", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         saveFromFeed(post_data.recipe_id, post_data.username);
+//     });
+//     res.send("OK");
+// });
 
 
-app.get("/recipe/search", async (req, res) => { //how to include input in function call?
-    const recipe_search = await searchRecipes();
-    res.send(JSON.stringify(recipe_search));
-});
+// app.get("/recipe/search", async (req, res) => { //how to include input in function call?
+//     const recipe_search = await searchRecipes();
+//     res.send(JSON.stringify(recipe_search));
+// });
 
-app.post("/recipe/save", async (req, res) => {
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        saveRecipe(post_data.recipe_id, post_data.username);
-    });
-    res.send("OK");
-});
+// app.post("/recipe/save", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         saveRecipe(post_data.recipe_id, post_data.username);
+//     });
+//     res.send("OK");
+// });
 
-app.post("/post/upload", async (req, res) => {
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        createRecipe(post_data.username, post_data.recipe_name, post_data.recipe_desc);
-    });
-    res.send("OK");
-});
+// app.post("/post/upload", async (req, res) => {
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         createRecipe(post_data.username, post_data.recipe_name, post_data.recipe_desc);
+//     });
+//     res.send("OK");
+// });
 
-app.get("/people/search", async (req, res) => { //how to include input in function call?
-    const user_search = await searchPeople(??);
-    res.send(JSON.stringify(user_search));
-});
+// app.get("/people/search", async (req, res) => { //how to include input in function call?
+//     const user_search = await searchPeople(??);
+//     res.send(JSON.stringify(user_search));
+// });
 
-app.get("/profile", async (req, res) => { //how to include input in function call?
-    const getUserProfile = await getProfile(??);
-    res.send(JSON.stringify(getUserProfile));
-});
+// app.get("/profile", async (req, res) => { //how to include input in function call?
+//     const getUserProfile = await getProfile(??);
+//     res.send(JSON.stringify(getUserProfile));
+// });
 
-app.put("/profile/edit", async (req, res) => {  //how to do put requests in express
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        updateProfile(post_data.username, post_data.bio);
-    });
-    res.send("OK");
-});
+// app.put("/profile/edit", async (req, res) => {  //how to do put requests in express
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         updateProfile(post_data.username, post_data.bio);
+//     });
+//     res.send("OK");
+// });
 
-app.delete("/profile/delete", async (req, res) => {  //delete requests in express
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        deleteProfileRecipe(post_data.name, post_data.score);
-    });
-    res.send("OK");
-});
+// app.delete("/profile/delete", async (req, res) => {  //delete requests in express
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         deleteProfileRecipe(post_data.name, post_data.score);
+//     });
+//     res.send("OK");
+// });
 
-app.put("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
-    let body='';
-    req.on('data',data=>body+=data);
-    req.on('end',()=>{
-        const post_data = JSON.parse(body);
-        unlikeProfileRecipe(post_data.username, post_data.recipe_id)
-    });
-    res.send("OK");
-});
+// app.put("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
+//     let body='';
+//     req.on('data',data=>body+=data);
+//     req.on('end',()=>{
+//         const post_data = JSON.parse(body);
+//         unlikeProfileRecipe(post_data.username, post_data.recipe_id)
+//     });
+//     res.send("OK");
+// });
 
-app.listen(process.env.PORT || 8080);
+// app.listen(process.env.PORT || 8080);
