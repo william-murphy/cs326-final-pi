@@ -2,13 +2,16 @@ import pgPromise from 'pg-promise';
 const pgp = pgPromise({});
 
 import * as _express from "express"
-const express = _express["default"];
 
 import * as database from "./database.js";
 
-const app = express();
+import path from 'path';
 
-app.use('/', express.static('./client'));
+const express = _express["default"];
+const app = express();
+const __dirname = path.resolve();
+
+app.use(express.static(__dirname + '/src/client/'));
 
 // app.post("/login/user", async (req, res) => {
 //     let body='';
