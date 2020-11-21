@@ -273,6 +273,9 @@ app.get('*', (req, res) => {
   res.send('Error');
 });
 
+/*
 app.listen(port, () => {
     console.log(`App now listening at http://localhost:${port}`);
 });
+
+*/
