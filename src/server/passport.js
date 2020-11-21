@@ -120,6 +120,7 @@ async function validatePassword(name, pwd) {
    } else {
 	   data = await response.json();
 	   if (mc.check(pwd, data.salt, data.hash)) {
+			storage.setItem('user', JSON.stringify(name));
 		   return true;
 	   } else {
 		   return false;
@@ -148,7 +149,7 @@ async function addUser(name, email, pwd, bio, profile_pic) {
 			 'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify({
-			username: name,
+			username: username,
 			email: email,
 			salt: salt,
 			hash: hash,
