@@ -148,7 +148,7 @@ async function addUser(username, email, pwd, bio, profile_pic) {
 			 'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify({
-			username: name,
+			username: username,
 			email: email,
 			salt: salt,
 			hash: hash,
