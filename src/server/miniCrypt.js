@@ -10,12 +10,12 @@
 
   If you'd like to learn more about the theory and maths behind cryptography, then take 466 next semester. Great professor.
  */
-const crypto = require('crypto');
+import { randomBytes, pbkdf2Sync } from 'crypto';
 /**
   @module miniCrypt
   @desc A tiny crypto lib for the 326 kids.
  */
-module.exports = (function() {
+export default (function() {
   /**
     @constructor
     @arg {number} its - The number of iterations to be performed; higher iterations means more security but slower speed.
@@ -39,8 +39,8 @@ module.exports = (function() {
     @desc Hash a user password.
    */
   MiniCrypt.prototype.hash = function(pw) {
-    const salt = crypto.randomBytes(this.saltL).toString('hex'), // get our new salt for this pw
-          hash = crypto.pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex'); // hash the pw
+    const salt = randomBytes(this.saltL).toString('hex'), // get our new salt for this pw
+          hash = pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex'); // hash the pw
     return [salt, hash]; // return the pair for safe storage
   };
 
@@ -54,7 +54,7 @@ module.exports = (function() {
     @desc Validate a user password.
    */
   MiniCrypt.prototype.check = function(pw, salt, hash) {
-    return crypto.pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex') === hash;
+    return pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex') === hash;
   };
 
   return MiniCrypt;

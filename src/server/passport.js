@@ -1,16 +1,16 @@
 'use strict';
 
 // For loading environment variables.
-//require('dotenv').config();
-import {config} from 'dotenv';
+require('dotenv').config();
+// import {config} from 'dotenv';
 
-const express = require('express');                 // express routing
-const expressSession = require('express-session');  // for managing session state
-const passport = require('passport');               // handles authentication
-const LocalStrategy = require('passport-local').Strategy; // username/password strategy
+import express, { json, urlencoded, static } from 'express';                 // express routing
+import expressSession from 'express-session';  // for managing session state
+import { use, initialize, session as _session, serializeUser, deserializeUser, authenticate } from 'passport';               // handles authentication
+import { Strategy as LocalStrategy } from 'passport-local'; // username/password strategy
 const app = express();
 const port = process.env.PORT || 3000;
-const minicrypt = require('./miniCrypt');
+import minicrypt from './miniCrypt';
 
 const mc = new minicrypt();
 
@@ -46,21 +46,21 @@ const strategy = new LocalStrategy(
 // App configuration
 
 app.use(expressSession(session));
-passport.use(strategy);
-app.use(passport.initialize());
-app.use(passport.session());
+use(strategy);
+app.use(initialize());
+app.use(_session());
 
 // Convert user object to a unique identifier.
-passport.serializeUser((user, done) => {
+serializeUser((user, done) => {
     done(null, user);
 });
 // Convert a unique identifier to a user object.
-passport.deserializeUser((uid, done) => {
+deserializeUser((uid, done) => {
     done(null, uid);
 });
 
-app.use(express.json()); // allow JSON inputs
-app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
+app.use(json()); // allow JSON inputs
+app.use(urlencoded({'extended' : true})); // allow URLencoded data
 
 /////
 
@@ -186,7 +186,7 @@ app.get('/',
 
 // Handle post data from the login.html form.
 app.post('/login',
-	 passport.authenticate('local' , {     // use username/password authentication
+	 authenticate('local' , {     // use username/password authentication
 	     'successRedirect' : '/feedPage',   // when we login, go to /private 
 	     'failureRedirect' : '/login'      // otherwise, back to login
 	 }));
@@ -253,7 +253,7 @@ app.get('/private/:userID/',
 	    }
 	});
 
-app.use(express.static('html'));
+app.use(static('html'));
 
 app.get('*', (req, res) => {
   res.send('Error');
