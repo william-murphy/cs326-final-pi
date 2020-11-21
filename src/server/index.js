@@ -13,7 +13,7 @@ const __dirname = path.resolve();
 
 app.use(express.static(__dirname + '/src/client/'));
 
-app.get("/feed", async (req, res) => { 
+app.get("/feed", async (req, res) => {
     res.send(JSON.stringify(
         await database.getInitialFeed()
     ));
@@ -37,7 +37,7 @@ app.post("/recipe/save", async (req, res) => {
 });
 
 app.post("/post/upload", async (req, res) => {
-    await database.createRecipe(req.username, req.recipe_name, req.recipe_desc);
+    await database.createRecipe(req.username, req.recipe_name, req.recipe_desc, req.recipe_pic);
     res.end();
 });
 

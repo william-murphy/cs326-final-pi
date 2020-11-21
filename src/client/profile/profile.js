@@ -1,4 +1,4 @@
-const user = window.localStorage.getItem("user");
+const user = window.localStorage.getItem("user") === null ? null : window.localStorage.getItem("user");
 
 async function unlikeRecipe(id) {
 	const response = await fetch("/profile/unlike", {
@@ -67,7 +67,7 @@ function renderImages(data, mode) {
 				nameElement.innerHTML = data.recipes[i + j].recipe_name;
 
 				const img = createElement("img").classList.add("img-fluid"); //placeholder image
-				img.src = "../images/food.jpeg";
+				img.src = data.recipes[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
 				img.height = "250";
@@ -106,7 +106,7 @@ function renderImages(data, mode) {
 				nameElement.innerHTML = data.liked[i + j].recipe_name;
 
 				const img = createElement("img").classList.add("img-fluid"); //placeholder image
-				img.src = "../images/food.jpeg";
+				img.src = data.liked[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
 				img.height = "250";
@@ -115,12 +115,12 @@ function renderImages(data, mode) {
 				descElement.innerHTML = "Recipe by " + data.liked[i + j].username;
 
 				const numLikes = document.createElement("span");
-				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipeLikes;
+				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipe_likes;
 
 				const unlike = document.createElement("button").classList.add("btn", "btn-outline-danger");
 				unlike.innerHTML = "Unlike";
 				unlike.addEventListener("click", async function() {
-					await unlikeRecipe(data.liked[i + j].recipeId);
+					await unlikeRecipe(data.liked[i + j].recipe_id);
 				});
 
 				innerDiv.appendChild(nameElement);
@@ -137,16 +137,20 @@ function renderImages(data, mode) {
 
 //load my-recipes on page load
 window.addEventListener("load", async function() {
-	const url = "/profile?username=" + user;
-	const response = await fetch(url);
-     if (!response.ok) {
-         console.log(response.error);
-         return;
-    }else {
-	    data = await response.json();
-	    renderImages(data, true);
-	    populateProfile(data);
-    }
+	if (user === null) {
+		window.location.href = "../index.html";
+	}else {
+		const url = "/profile?username=" + user;
+		const response = await fetch(url);
+	     if (!response.ok) {
+	         console.log(response.error);
+	         return;
+	    }else {
+		    data = await response.json();
+		    renderImages(data, true);
+		    populateProfile(data);
+	    }
+	}
 });
 
 //load my-recipes when button is clicked

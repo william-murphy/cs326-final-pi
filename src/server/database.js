@@ -31,7 +31,7 @@ if (!process.env.PASSWORD) {
     password = JSON.parse(fs.readFileSync(path.resolve(__dirname, "secrets.json"))).password;
 } else {
     password = process.env.PASSWORD;
-}    
+}
 
 const url = process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
 const db = pgp(url);
@@ -53,9 +53,9 @@ async function connectAndRun(task) {
     }
 }
 
-//Users [username, email, salt, password, bio, profile_pic], 
+//Users [username, email, salt, password, bio, profile_pic],
 //Recipes [recipe_id, username, recipe_name, recipe_desc, recipe_likes, recipe_pic],    //remove likes -> count in SQL table likes
-//Liked [recipe_id, username] 
+//Liked [recipe_id, username]
 
 //Feed
 
@@ -81,7 +81,7 @@ export async function saveRecipe(recipe_id, username) {
     return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);", [recipe_id, username]));
 }
 
-//Create 
+//Create
 
 export async function createRecipe(username, recipe_name, recipe_desc, recipe_pic) {
     return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5, $6);", [DEFAULT, username, recipe_name, recipe_desc, 0, recipe_pic]));
@@ -90,7 +90,7 @@ export async function createRecipe(username, recipe_name, recipe_desc, recipe_pi
 //People
 
 export async function searchPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input])); 
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input]));
 }
 
 //Profile
@@ -98,8 +98,8 @@ export async function searchPeople(input) {
 export async function getProfile(username) {
     return {
          profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
-         recipes: await connectAndRun(db => db.one("SELECT * FROM Recipes WHERE username = $1;", [username])),
-         liked: await connectAndRun(db => db.one("SELECT * FROM Liked WHERE username = $1;", [username]))
+         recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
+         liked: await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
     };
 }
 
@@ -128,7 +128,7 @@ export async function getLikes(recipe_id) {
 }
 
 export async function getRecipeData_fromLiked(username) {
-    return await connectAndRun(db => db.any("SELECT recipe_id, recipe_name FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
+    return await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
 }
 
 //Login/Sign up
@@ -144,4 +144,3 @@ export async function getPassword(username) {
 export async function signup(username, email, salt, hash, bio, profile_pic) { //bio empty when sign up
     return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, hash, bio, profile_pic]));
 }
-
