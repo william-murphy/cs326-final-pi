@@ -64,7 +64,7 @@ export async function getInitialFeed() {
 }
 
 export async function saveFromFeed(recipe_id, username) {
-    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);", [recipe_id, username]));
+    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1", [recipe_id, username]));
 }
 
 //Recipe

@@ -19,7 +19,7 @@ app.get("/feed", async (req, res) => {
     ));
 });
 
-app.post("/feed/save", async (req, res) => {
+app.post("/feed/like", async (req, res) => {
     await database.saveFromFeed(req.recipe_id, req.username);
     res.end();
 });
