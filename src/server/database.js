@@ -111,6 +111,10 @@ export async function updateProfile(username, bio) {
     return await connectAndRun(db => db.none("UPDATE Users SET bio = $1 WHERE username = $2;", [bio, username]));
 }
 
+export async function updatePic(username, profile_pic) {
+    return await connectAndRun(db => db.none("UPDATE Users SET profile_pic = $1 WHERE username = $2;", [profile_pic, username]));
+}
+
 export async function deleteProfileRecipe(recipe_id) {
     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipe_id = $1;", [recipe_id]));
 }

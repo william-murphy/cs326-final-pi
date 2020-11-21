@@ -200,5 +200,25 @@ document.getElementById("edit").addEventListener("click", async function() {
        return;
   	}else {
 	  alert("Profile updated successfully");
+	  window.location.reload(true);
+  	}
+});
+
+//edit profile
+document.getElementById("edit-avatar").addEventListener("click", async function() {
+	const newPic = document.getElementById("pic-link").value;
+	const response = await fetch("/profile/edit-pic", {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json;charset=utf-8'
+       },
+       body: JSON.stringify({username: user, profile_pic: newPic})
+     });
+     if (!response.ok) {
+       console.log(response.error);
+       return;
+  	}else {
+	  alert("Profile updated successfully");
+	  window.location.reload(true);
   	}
 });

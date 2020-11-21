@@ -58,6 +58,11 @@ app.post("/profile/edit", async (req, res) => {  //how to do put requests in exp
     res.end();
 });
 
+app.post("/profile/edit-pic", async (req, res) => {  //how to do put requests in express
+    await database.updatePic(req.username, req.profile_pic);
+    res.end();
+});
+
 app.post("/profile/delete", async (req, res) => {  //delete requests in express
     await database.deleteProfileRecipe(req.recipe_id);
     res.end();
