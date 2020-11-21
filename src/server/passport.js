@@ -204,7 +204,7 @@ app.get('/',
 // Handle post data from the login.html form.
 app.post('/login',
 		passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/feedPage',   // when we login, go to /private 
+	     'successRedirect' : '/feedPage',   // when we login, go to /private
 	     'failureRedirect' : '/login'      // otherwise, back to login
 	 }));
 
@@ -229,6 +229,7 @@ app.get('/logout', (req, res) => {
 // Use req.body to access data (as in, req.body['username']).
 // Use res.redirect to change URLs.
 app.post('/register',
+console.log("yello");
 	 (req, res) => {
          const email = req.body['email'];
 	     const username = req.body['username'];
