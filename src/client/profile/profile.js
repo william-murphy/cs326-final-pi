@@ -1,4 +1,4 @@
-const user = window.localStorage.getItem("user") === null ? null : window.localStorage.getItem("user");
+const user = window.localStorage.getItem("user");
 
 async function unlikeRecipe(id) {
 	const response = await fetch("/profile/unlike", {
