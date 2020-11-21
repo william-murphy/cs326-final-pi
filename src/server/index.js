@@ -71,8 +71,7 @@ app.post("/profile/delete", async (req, res) => {  //delete requests in express
 });
 
 app.post("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
-    await database.unlikeProfileRecipe1(req.recipe_id);
-    await database.unlikeProfileRecipe2(req.username, req.recipe_id);
+    await database.unlikeProfileRecipe(req.username, req.recipe_id);
     res.end();
 });
 
