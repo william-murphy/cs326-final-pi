@@ -18,6 +18,7 @@ const passport = require("./passport.js");
 const app = express();
 //const __dirname = path.resolve();
 
+__dirname = path.resolve();
 app.use(express.static(__dirname + '/src/client/'));
 
 app.get("/feed", async (req, res) => {
