@@ -29,6 +29,8 @@ const LocalStrategy = require('passport-local').Strategy; // username/password s
 const app = express();
 const minicrypt = require('./miniCrypt');
 
+const mc = new minicrypt();
+
 // Session configuration
 
 const session = {
