@@ -1,15 +1,22 @@
-import pgPromise from 'pg-promise';
-const pgp = pgPromise({});
+//import pgPromise from 'pg-promise';
+//const pgp = pgPromise({});
+//const pgp = require("pg-promise");
 
-import * as _express from "express"
+//import * as _express from "express"
+const express = require("express")
 
-import * as database from "./database.js";
+//import * as database from "./database.js";
+const database = require("./database.js");
 
-import path from 'path';
+//import path from 'path';
+const path = require("path");
 
-const express = _express["default"];
+//import * as passport from "./passport.js";
+const passport = require("./passport.js");
+
+//const express = _express["default"];
 const app = express();
-const __dirname = path.resolve();
+//const __dirname = path.resolve();
 
 app.use(express.static(__dirname + '/src/client/'));
 

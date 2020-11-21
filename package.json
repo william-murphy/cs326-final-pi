@@ -1,6 +1,5 @@
 {
     "name": "spighetti",
-    "type": "module",
     "scripts": {
         "start": "node src/server/index.js",
         "lint": "eslint src/client/ server/"
