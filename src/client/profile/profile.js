@@ -1,4 +1,7 @@
 const user = window.localStorage.getItem("user");
+if (user === null) {
+	window.location.href = "../index.html";
+}
 
 async function unlikeRecipe(id) {
 	const response = await fetch("/profile/unlike", {
@@ -137,20 +140,17 @@ function renderImages(data, mode) {
 
 //load my-recipes on page load
 window.addEventListener("load", async function() {
-	if (user === null) {
-		window.location.href = "../index.html";
-	}else {
-		const url = "/profile?username=" + user;
-		const response = await fetch(url);
-	     if (!response.ok) {
-	         console.log(response.error);
-	         return;
-	    }else {
-		    data = await response.json();
-		    renderImages(data, true);
-		    populateProfile(data);
-	    }
-	}
+	const url = "/profile?username=" + user;
+	const response = await fetch(url);
+     if (!response.ok) {
+         console.log(response.error);
+         return;
+    }else {
+	    data = await response.json();
+	    renderImages(data, true);
+	    populateProfile(data);
+    }
+
 });
 
 //load my-recipes when button is clicked
