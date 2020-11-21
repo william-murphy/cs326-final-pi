@@ -60,11 +60,11 @@ async function connectAndRun(task) {
 //Feed
 
 export async function getInitialFeed() {
-    return await connectAndRun(db => db.one("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1"));
+    return await connectAndRun(db => db.one("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1;"));
 }
 
 export async function saveFromFeed(recipe_id, username) {
-    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1", [recipe_id, username]));
+    return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1;", [recipe_id, username]));
 }
 
 //Recipe
@@ -115,12 +115,8 @@ export async function deleteProfileRecipe(recipe_id) {
     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipe_id = $1;", [recipe_id]));
 }
 
-export async function unlikeProfileRecipe1(recipe_id) {
-     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
-}
-
-export async function unlikeProfileRecipe2(username, recipe_id) {
-     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2", [username, recipe_id]));
+export async function unlikeProfileRecipe(username, recipe_id) {
+     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $2;DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
 }
 
 export async function getLikes(recipe_id) {
