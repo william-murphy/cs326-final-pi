@@ -219,10 +219,10 @@ app.post('/register',
 		 const bio = "";
 		 const profile_pic = "";
 		 const profile_pic = req.body['profile_pic'];
-	     if (addUser(username, email, salt, password, bio, profile_pic)) {
-		 res.redirect('/login');
+	     if (addUser(username, email, password, bio, profile_pic)) {
+		 	res.redirect('/login');
 	     } else {
-		 res.redirect('/register');
+		 	res.redirect('/register');
 	     }
 	 });
 
