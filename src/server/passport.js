@@ -120,7 +120,7 @@ async function validatePassword(name, pwd) {
    } else {
 	   data = await response.json();
 	   if (mc.check(pwd, data.salt, data.hash)) {
-			storage.setItem('user', JSON.stringify(loginData.name));
+			storage.setItem('user', JSON.stringify(name));
 		   return true;
 	   } else {
 		   return false;
