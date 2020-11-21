@@ -99,7 +99,7 @@ export async function getProfile(username) {
     return {
          profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
          recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
-         liked: await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
+         liked: await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]))
     };
 }
 
