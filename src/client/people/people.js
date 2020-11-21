@@ -1,3 +1,8 @@
+const user = window.localStorage.getItem("user");
+if (user === null) {
+	window.location.href = "../index.html";
+}
+
 document.getElementById('search').addEventListener('click', search);
 
 async function search() {
@@ -8,7 +13,7 @@ async function search() {
     //find people by username
     //let url = "https://localhost:8080/people/search/" + searchInput;
     //const searchRequest = await fetch(url);
- 
+
     let url = '/people/search?input=' + searchInput;
 
     const searchRequest = await fetch(url);

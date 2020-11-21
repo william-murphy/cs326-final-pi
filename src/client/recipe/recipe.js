@@ -1,3 +1,8 @@
+const user = window.localStorage.getItem("user");
+if (user === null) {
+	window.location.href = "../index.html";
+}
+
 async function search() {
     const recipe_name = document.getElementById("recipe").value;
 
@@ -32,7 +37,7 @@ function renderRecipes(data) {
     let img = document.createElement("img");
     img.classList.add("card-img-top", "embed-responsive-item");
     img.alt = "Card image cap";
-    //img src?  
+    //img src?
     img.src = data.recipe_pic;
 
     let overlay = document.createElement("div");
