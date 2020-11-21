@@ -230,6 +230,7 @@ app.get('/logout', (req, res) => {
 // Use res.redirect to change URLs.
 app.post('/register',
 	 (req, res) => {
+           console.log("yello");
          const email = req.body['email'];
 	     const username = req.body['username'];
          const password = req.body['password'];
@@ -244,7 +245,7 @@ app.post('/register',
 
 // Register URL
 app.get('/register',
-	(req, res) => res.sendFile('../client/signup/index.html',
+	(req, res) => res.sendFile('index.html',
 				   { 'root' : __dirname }));
 
 // Private data
@@ -274,10 +275,3 @@ app.get('/private/:userID/',
 app.get('*', (req, res) => {
   res.send('Error');
 });
-
-/*
-app.listen(port, () => {
-    console.log(`App now listening at http://localhost:${port}`);
-});
-
-*/
