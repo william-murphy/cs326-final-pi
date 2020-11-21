@@ -4,7 +4,7 @@ document.getElementById("publish").addEventListener("click", async function() {
 
 	if (user === null) {
 		console.log("test");
-		window.location.href = "../index.html";
+		window.location.href = "../../index.html";
 	}else {
 		//store recipe data, TODO: image upload in NodeJS?
 		const recipeTitle = document.getElementById("title").value;
