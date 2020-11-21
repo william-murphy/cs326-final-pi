@@ -1,11 +1,14 @@
-import * as _pgp from "pg-promise";
+//import * as _pgp from "pg-promise";
+//const pgp = require("pg-promise");
 //import * as secrets from "../../secrets.json";
 //const secrets = "secrets.json";
-import * as fs from "fs";
-import path from 'path';
-const __dirname = path.resolve();
+//import * as fs from "fs";
+const fs = require("fs");
+//import path from 'path';
+const path = require("path");
+//const __dirname = path.resolve();
 
-const pgp = _pgp["default"]({
+const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
     },
@@ -59,43 +62,43 @@ async function connectAndRun(task) {
 
 //Feed
 
-export async function getInitialFeed() {
+
+async function getInitialFeed() {
     return await connectAndRun(db => db.one("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1;"));
 }
 
-export async function saveFromFeed(recipe_id, username) {
+async function saveFromFeed(recipe_id, username) {
     return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1;", [recipe_id, username]));
 }
-
 //Recipe
 
-export async function getSampleRecipes() {
+async function getSampleRecipes() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
 }
 
-export async function searchRecipes(input) {
+async function searchRecipes(input) {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name LIKE ''%' + $1 + '%'';", [input]));
 }
 
-export async function saveRecipe(recipe_id, username) {
+async function saveRecipe(recipe_id, username) {
     return await connectAndRun(db => db.none("INSERT INTO Liked Values ($1, $2);", [recipe_id, username]));
 }
 
 //Create
 
-export async function createRecipe(username, recipe_name, recipe_desc, recipe_pic) {
+async function createRecipe(username, recipe_name, recipe_desc, recipe_pic) {
     return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5, $6);", [DEFAULT, username, recipe_name, recipe_desc, 0, recipe_pic]));
 }
 
 //People
 
-export async function searchPeople(input) {
+async function searchPeople(input) {
     return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input]));
 }
 
 //Profile
 
-export async function getProfile(username) {
+async function getProfile(username) {
     return {
          profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
          recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
@@ -107,23 +110,31 @@ export async function getProfile(username) {
 //     return await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username]));
 // }
 
-export async function updateProfile(username, bio) {
+async function updateProfile(username, bio) {
     return await connectAndRun(db => db.none("UPDATE Users SET bio = $1 WHERE username = $2;", [bio, username]));
 }
 
+<<<<<<< HEAD
 export async function updatePic(username, profile_pic) {
     return await connectAndRun(db => db.none("UPDATE Users SET profile_pic = $1 WHERE username = $2;", [profile_pic, username]));
 }
 
 export async function deleteProfileRecipe(recipe_id) {
+=======
+async function deleteProfileRecipe(recipe_id) {
+>>>>>>> ad91c78e4df5698e22a544cb9093b295ae0baa07
     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipe_id = $1;", [recipe_id]));
 }
 
-export async function unlikeProfileRecipe(username, recipe_id) {
-     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $2;DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
+async function unlikeProfileRecipe1(recipe_id) {
+     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $1;", [recipe_id]));
 }
 
-export async function getLikes(recipe_id) {
+async function unlikeProfileRecipe2(username, recipe_id) {
+     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
+}
+
+async function getLikes(recipe_id) {
     return await connectAndRun(db => db.any("SELECT COUNT($1) AS likes FROM Recipes;", [recipe_id]));
 }
 
@@ -133,14 +144,33 @@ export async function getLikes(recipe_id) {
 
 //Login/Sign up
 
-export async function getUsername(username) {
+async function getUsername(username) {
     return await connectAndRun(db => db.one("SELECT username FROM Users WHERE username = $1;", [username]));
 }
 
-export async function getPassword(username) {
+async function getPassword(username) {
     return await connectAndRun(db => db.one("SELECT salt, hash FROM Users WHERE username = $1;", [username]));
 }
 
-export async function signup(username, email, salt, hash, bio, profile_pic) { //bio empty when sign up
+async function signup(username, email, salt, hash, bio, profile_pic) { //bio empty when sign up
     return await connectAndRun(db => db.none("INSERT INTO Users VALUES ($1, $2, $3, $4, $5, $6);", [username, email, salt, hash, bio, profile_pic]));
 }
+
+module.exports = {
+    getInitialFeed,
+    saveFromFeed,
+    getSampleRecipes,
+    searchRecipes,
+    saveRecipe,
+    createRecipe,
+    searchPeople,
+    getProfile,
+    updateProfile,
+    deleteProfileRecipe,
+    unlikeProfileRecipe1,
+    unlikeProfileRecipe2,
+    getLikes,
+    getUsername,
+    getPassword,
+    signup
+};
