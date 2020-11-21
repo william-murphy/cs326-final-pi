@@ -129,7 +129,7 @@ async function validatePassword(name, pwd) {
 
 // Add a user to the "database".
 // TODO
-async function addUser(username, email, pwd, bio, profile_pic) {
+async function addUser(name, email, pwd, bio, profile_pic) {
     if (findUser(name)) {
 	return false;
     }
