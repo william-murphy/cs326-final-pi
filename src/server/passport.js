@@ -229,8 +229,8 @@ app.get('/logout', (req, res) => {
 // Use req.body to access data (as in, req.body['username']).
 // Use res.redirect to change URLs.
 app.post('/register',
-console.log("yello");
 	 (req, res) => {
+           console.log("yello");
          const email = req.body['email'];
 	     const username = req.body['username'];
          const password = req.body['password'];
