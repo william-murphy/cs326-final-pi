@@ -120,6 +120,7 @@ async function validatePassword(name, pwd) {
    } else {
 	   data = await response.json();
 	   if (mc.check(pwd, data.salt, data.hash)) {
+			storage.setItem('user', JSON.stringify(name));
 		   return true;
 	   } else {
 		   return false;
@@ -129,7 +130,7 @@ async function validatePassword(name, pwd) {
 
 // Add a user to the "database".
 // TODO
-async function addUser(username, email, pwd, bio, profile_pic) {
+async function addUser(name, email, pwd, bio, profile_pic) {
     if (findUser(name)) {
 	return false;
     }
@@ -216,11 +217,12 @@ app.post('/register',
 	     const username = req.body['username'];
          const password = req.body['password'];
 		 const bio = "";
+		 const profile_pic = "";
 		 const profile_pic = req.body['profile_pic'];
-	     if (addUser(username, email, salt, password, bio, profile_pic)) {
-		 res.redirect('/login');
+	     if (addUser(username, email, password, bio, profile_pic)) {
+		 	res.redirect('/login');
 	     } else {
-		 res.redirect('/register');
+		 	res.redirect('/register');
 	     }
 	 });
 
