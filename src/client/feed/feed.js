@@ -10,7 +10,7 @@ async function likeRecipe(id) {
                'Content-Type': 'application/json;charset=utf-8'
           },
           body: JSON.stringify({
-               username: username, //still need a way to save username
+               username: user, //still need a way to save username
                recipe_id: id
           })
      });
