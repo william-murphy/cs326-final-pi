@@ -18,7 +18,7 @@ async function likeRecipe(id) {
           console.log(response.error);
           return;
      }else {
-          alert("Successfully unliked recipe.");
+          alert("Successfully liked recipe.");
      }
 }
 
