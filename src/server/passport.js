@@ -217,6 +217,7 @@ app.post('/register',
 	     const username = req.body['username'];
          const password = req.body['password'];
 		 const bio = "";
+		 const profile_pic = "";
 		 const profile_pic = req.body['profile_pic'];
 	     if (addUser(username, email, salt, password, bio, profile_pic)) {
 		 res.redirect('/login');
