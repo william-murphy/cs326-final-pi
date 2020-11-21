@@ -99,7 +99,7 @@ export async function getProfile(username) {
     return {
          profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
          recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
-         liked: await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]))
+         liked: await connectAndRun(db => db.any("SELECT liked.recipe_id, recipes.username, recipe_name, recipe_desc, recipe_likes, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]))
     };
 }
 
@@ -127,9 +127,9 @@ export async function getLikes(recipe_id) {
     return await connectAndRun(db => db.any("SELECT COUNT($1) AS likes FROM Recipes;", [recipe_id]));
 }
 
-export async function getRecipeData_fromLiked(username) {
-    return await connectAndRun(db => db.any("SELECT recipe_id, username, recipe_name, recipe_desc, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
-}
+// export async function getRecipeData_fromLiked(username) {
+//     return await connectAndRun(db => db.any("SELECT liked.recipe_id, recipes.username, recipe_name, recipe_desc, recipe_likes, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
+// }
 
 //Login/Sign up
 
