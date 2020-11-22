@@ -1,10 +1,10 @@
 const express = require("express")
 
-const database = require("./database.js");
+const database = require("./database");
 
 const path = require("path");
 
-const passportFunctions = require("./passport.js");
+const passportFunctions = require("./passport");
 
 const app = express();
 
