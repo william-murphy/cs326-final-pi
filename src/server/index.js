@@ -1,29 +1,15 @@
-//import pgPromise from 'pg-promise';
-//const pgp = pgPromise({});
-//const pgp = require("pg-promise");
-
-//import * as _express from "express"
 const express = require("express")
 
-//import * as database from "./database.js";
 const database = require("./database.js");
 
-//import path from 'path';
 const path = require("path");
 
-//import * as passport from "./passport.js";
 const passportFunctions = require("./passport.js");
 
-//const express = _express["default"];
 const app = express();
 
 // for managing session state
 const expressSession = require('express-session');
-
-//const __dirname = path.resolve();
-
-//import body parser
-/*const bodyparser = require('body-parser');*/
 
 const passport = require('passport');
 
@@ -36,11 +22,6 @@ const session = {
 
 __dirname = path.resolve();
 app.use(express.static(__dirname + '/src/client/'));
-/*
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({
-  extended: true
-}));*/
 
 app.use(expressSession(session));
 app.use(passport.initialize());
@@ -183,24 +164,3 @@ app.get('/register',
 				   { 'root' : __dirname }));
 
 app.listen(process.env.PORT || 8080);
-
-
-// app.post("/login/user", async (req, res) => {
-//     let body='';
-//     req.on('data',data=>body+=data);
-//     req.on('end',()=>{
-//         const req = JSON.parse(body);
-//         login(post_data.username, post_data.password);
-//     });
-//     res.send("OK");
-// });
-
-// app.post("/signup/user", async (req, res) => {
-//     let body='';
-//     req.on('data',data=>body+=data);
-//     req.on('end',()=>{
-//         const post_data = JSON.parse(body);
-//         signup(post_data.username, post_data.name, post_data.email, post_data.password, post_data.bio);
-//     });
-//     res.send("OK");
-// });

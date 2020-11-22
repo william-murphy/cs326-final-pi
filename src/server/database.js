@@ -64,7 +64,7 @@ async function connectAndRun(task) {
 
 
 async function getInitialFeed() {
-    return await connectAndRun(db => db.one("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1;"));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1;"));
 }
 
 async function saveFromFeed(recipe_id, username) {
@@ -130,9 +130,9 @@ async function unlikeProfileRecipe2(username, recipe_id) {
      return await connectAndRun(db => db.none("DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
 }
 
-async function getLikes(recipe_id) {
+/*async function getLikes(recipe_id) {
     return await connectAndRun(db => db.any("SELECT COUNT($1) AS likes FROM Recipes;", [recipe_id]));
-}
+}*/
 
 // export async function getRecipeData_fromLiked(username) {
 //     return await connectAndRun(db => db.any("SELECT liked.recipe_id, recipes.username, recipe_name, recipe_desc, recipe_likes, recipe_pic FROM Liked JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id WHERE Liked.username = $1;", [username]));
@@ -141,11 +141,11 @@ async function getLikes(recipe_id) {
 //Login/Sign up
 
 async function getUsername(username) {
-    return await connectAndRun(db => db.one("SELECT username FROM Users WHERE username = $1;", [username]));
+    return await connectAndRun(db => db.any("SELECT username FROM Users WHERE username = $1;", [username]));
 }
 
 async function getPassword(username) {
-    return await connectAndRun(db => db.one("SELECT salt, hash FROM Users WHERE username = $1;", [username]));
+    return await connectAndRun(db => db.one("SELECT salt, password FROM Users WHERE username = $1;", [username]));
 }
 
 async function signup(username, email, salt, hash, bio, profile_pic) { //bio empty when sign up
