@@ -22,6 +22,7 @@ import minicrypt from './miniCrypt.js';
 const mc = new minicrypt();
 */
 
+const fetch = require('node-fetch');
 const express = require('express');                 // express routing
 const expressSession = require('express-session');  // for managing session state
 const passport = require('passport');               // handles authentication
