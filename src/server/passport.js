@@ -31,8 +31,7 @@ const strategy = new LocalStrategy(
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
-	const user_again = await validatePassword(user, password);
-	if (!user_again) {
+	if (!validatePassword(user, password)) {
 	    // invalid password
 	    // should disable logins after N messages
 	    // delay return to rate-limit brute-force attacks
