@@ -23,6 +23,8 @@ const session = {
 __dirname = path.resolve();
 app.use(express.static(__dirname + '/src/client/'));
 
+app.use(express.static('html'));
+
 app.use(expressSession(session));
 app.use(passport.initialize());
 app.use(passport.session());
