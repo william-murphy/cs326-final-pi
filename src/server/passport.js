@@ -25,7 +25,7 @@ const session = {
 const strategy = new LocalStrategy(
     async (username, password, done) => {
 	 const user = await findUser(username);
-	 console.log("strategy: " + user);
+	//  console.log("strategy: " + user);
 	if (!user) {
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
@@ -80,7 +80,7 @@ async function addUser(name, email, pwd, bio, profile_pic) {
 	const encrypted = mc.hash(pwd);
 	const salt = encrypted[0];
 	const hash = encrypted[1];
-	console.log("add_name: " + name);
+	// console.log("add_name: " + name);
 	await db.signup(name, email, salt, hash, bio, profile_pic);
     return true;
 }
