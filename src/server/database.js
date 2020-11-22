@@ -166,7 +166,6 @@ module.exports = {
     deleteProfileRecipe,
     unlikeProfileRecipe1,
     unlikeProfileRecipe2,
-    getLikes,
     getUsername,
     getPassword,
     signup
