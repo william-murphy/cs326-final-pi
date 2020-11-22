@@ -73,7 +73,7 @@ async function saveRecipe(id) {
              'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
-             username: username,
+             username: storage.getItem('user'),
              recipe_id: id
         })
    });
