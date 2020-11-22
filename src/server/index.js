@@ -125,6 +125,7 @@ app.get("/password", async (req, res) => {
 
 //creating user
 app.post("/user", async (req, res) => {
+    console.log(req.username);
     await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
     res.end();
 });

@@ -97,7 +97,7 @@ let users = { 'emery' : [
 
 // Returns true iff the user exists.
 async function findUser(username) {
-     /*
+    /*
     if (!users[username]) {
 	return false;
     } else {
