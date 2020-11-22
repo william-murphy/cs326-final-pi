@@ -26,7 +26,7 @@ const express = require('express');                 // express routing
 const expressSession = require('express-session');  // for managing session state
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
-const app = express();
+//const app = express();
 const minicrypt = require('./miniCrypt');
 
 const mc = new minicrypt();
@@ -62,10 +62,10 @@ const strategy = new LocalStrategy(
 
 // App configuration
 
-app.use(expressSession(session));
-passport.use(strategy);
+/*app.use(expressSession(session));
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());*/
+passport.use(strategy);
 
 // Convert user object to a unique identifier.
 passport.serializeUser((user, done) => {
@@ -75,10 +75,10 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((uid, done) => {
     done(null, uid);
 });
-
+/*
 app.use(express.json()); // allow JSON inputs
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
-
+*/
 /////
 
 // we use an in-memory "database"; this isn't persistent but is easy
@@ -248,6 +248,7 @@ app.get('/register',
 				   { 'root' : __dirname }));
 */
 // Private data
+/*
 app.get('/private',
 	checkLoggedIn, // If we are logged in (notice the comma!)...
 	(req, res) => {             // Go to the user's page.
@@ -273,7 +274,7 @@ app.get('/private/:userID/',
 
 app.get('*', (req, res) => {
   res.send('Error');
-});
+});*/
 
 module.exports = {
 	addUser,
@@ -284,5 +285,6 @@ module.exports = {
 app.listen(port, () => {
     console.log(`App now listening at http://localhost:${port}`);
 });
+
 
 */
