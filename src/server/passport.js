@@ -178,7 +178,7 @@ async function addUser(name, email, pwd, bio, profile_pic) {
 		console.log(response.error);
 		return false;
    }else {
-		alert("Created user");
+		console.log("Created user");
 		return true;
    }
 }
