@@ -57,8 +57,7 @@ passport.deserializeUser((uid, done) => {
 
 // Returns true iff the user exists.
 async function findUser(username) {
-	const data = await db.getUsername(username);
-    return data;
+    return db.getUsername(username);
 }
 
 // TODO
