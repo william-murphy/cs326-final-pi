@@ -72,13 +72,13 @@ async function validatePassword(name, pwd) {
 // Add a user to the "database".
 // TODO
 async function addUser(name, email, pwd, bio, profile_pic) {
-    if (findUser(name)) {
-	return false;
-    }
+     const user = await findUser(name);
+     if (user) {
+          return false;
+     }
 	const encrypted = mc.hash(pwd);
 	const salt = encrypted[0];
 	const hash = encrypted[1];
-     console.log(name);
 	await db.signup(name, email, salt, hash, bio, profile_pic);
      return true;
 }
