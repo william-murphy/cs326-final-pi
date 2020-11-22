@@ -194,7 +194,7 @@ function checkLoggedIn(req, res, next) {
 	res.redirect('/login');
     }
 }
-
+/*
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
@@ -246,7 +246,7 @@ app.post('/register',
 app.get('/register',
 	(req, res) => res.sendFile('../client/signup/index.html',
 				   { 'root' : __dirname }));
-
+*/
 // Private data
 app.get('/private',
 	checkLoggedIn, // If we are logged in (notice the comma!)...
@@ -274,6 +274,11 @@ app.get('/private/:userID/',
 app.get('*', (req, res) => {
   res.send('Error');
 });
+
+module.exports = {
+	addUser,
+	checkLoggedIn
+}
 
 /*
 app.listen(port, () => {

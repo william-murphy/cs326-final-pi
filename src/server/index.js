@@ -12,11 +12,13 @@ const database = require("./database.js");
 const path = require("path");
 
 //import * as passport from "./passport.js";
-const passport = require("./passport.js");
+const passportFunctions = require("./passport.js");
 
 //const express = _express["default"];
 const app = express();
 //const __dirname = path.resolve();
+
+const passport = require('passport'); 
 
 __dirname = path.resolve();
 app.use(express.static(__dirname + '/src/client/'));
@@ -100,6 +102,58 @@ app.post("/user", async (req, res) => {
     await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
     res.end();
 });
+
+app.get('/',
+    passportFunctions.checkLoggedIn,
+	(req, res) => {
+	    res.send("hello world");
+	});
+
+// Handle post data from the login.html form.
+app.post('/login',
+		passport.authenticate('local' , {     // use username/password authentication
+	     'successRedirect' : '/feedPage',   // when we login, go to /private
+	     'failureRedirect' : '/login'      // otherwise, back to login
+	 }));
+
+// Handle the URL /login (just output the login.html file).
+app.get('/login',
+	(req, res) => res.sendFile('../client/index.html',
+				   { 'root' : __dirname }));
+
+app.get('/feedPage',
+	(req, res) => res.sendFile('../client/feed/index.html',
+				   { 'root' : __dirname }));
+
+// Handle logging out (takes us back to the login page).
+app.get('/logout', (req, res) => {
+    req.logout(); // Logs us out!
+    res.redirect('/login'); // back to login
+});
+
+
+// Like login, but add a new user and password IFF one doesn't exist already.
+// If we successfully add a new user, go to /login, else, back to /register.
+// Use req.body to access data (as in, req.body['username']).
+// Use res.redirect to change URLs.
+app.post('/register',
+	 (req, res) => {
+         const email = req.body['email'];
+	     const username = req.body['username'];
+         const password = req.body['password'];
+		 const bio = "";
+		 const profile_pic = "";
+	     if (passportFunctions.addUser(username, email, password, bio, profile_pic)) {
+		 	res.redirect('/login');
+	     } else {
+		 	res.redirect('/register');
+	     }
+	 });
+
+// Register URL
+app.get('/register',
+	(req, res) => res.sendFile('../client/signup/index.html',
+				   { 'root' : __dirname }));
 
 app.listen(process.env.PORT || 8080);
 
