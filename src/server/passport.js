@@ -24,14 +24,13 @@ const session = {
 
 const strategy = new LocalStrategy(
     async (username, password, done) => {
-		console.log(username, password);
 	 const user = await findUser(username);
-	//  console.log("strategy: " + user);
+	 console.log("strategy: " + user);
 	if (!user) {
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
-	if (!validatePassword(user, password)) {
+	if (!validatePassword(username, password)) {
 	    // invalid password
 	    // should disable logins after N messages
 	    // delay return to rate-limit brute-force attacks
@@ -40,7 +39,7 @@ const strategy = new LocalStrategy(
 	}
 	// success!
 	// should create a user object here, associated with a unique identifier
-	return done(null, user);
+	return done(null, username);
     });
 
 
