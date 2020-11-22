@@ -171,7 +171,8 @@ app.post('/register',
           const bio = "";
           const profile_pic = "";
           if (passportFunctions.addUser(username, email, password, bio, profile_pic)) {
-               res.redirect('/login');
+               console.log("test1");
+               //res.redirect('/login');
           } else {
                res.redirect('/register');
           }
