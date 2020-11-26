@@ -7,7 +7,7 @@ const fs = require("fs");
 //import path from 'path';
 const path = require("path");
 //const __dirname = path.resolve();
-
+/*
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -16,7 +16,8 @@ const pgp = require("pg-promise")({
     disconnect(client) {
         console.log('Disconnected from database:', client.connectionParameters.database);
     }
-});
+});*/
+const pgp = require("pg-promise");
 
 let username;
 let password;
@@ -37,7 +38,7 @@ if (!process.env.PASSWORD) {
 }
 
 const url = process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
-const db = pgp(url);
+const db = pgp()(url);
 
 async function connectAndRun(task) {
     let connection = null;

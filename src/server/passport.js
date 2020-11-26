@@ -72,9 +72,8 @@ async function validatePassword(name, pwd) {
 // Add a user to the "database".
 // TODO
 async function addUser(name, email, pwd, bio, profile_pic) {
-	// console.log("addUsertest");
-	 const user = await findUser(name);
-     if (user) {
+	const user = await findUser(name);
+     if (user.length !== 0) {
           return false;
      }
 	const encrypted = mc.hash(pwd);

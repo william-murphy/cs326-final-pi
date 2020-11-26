@@ -10,7 +10,7 @@
 
   If you'd like to learn more about the theory and maths behind cryptography, then take 466 next semester. Great professor.
  */
-const crypto = require('crypto');
+const c = require('crypto');
 /**
   @module miniCrypt
   @desc A tiny crypto lib for the 326 kids.
@@ -39,8 +39,8 @@ module.exports = (function() {
     @desc Hash a user password.
    */
   MiniCrypt.prototype.hash = function(pw) {
-    const salt = randomBytes(this.saltL).toString('hex'), // get our new salt for this pw
-          hash = pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex'); // hash the pw
+    const salt = c.randomBytes(this.saltL).toString('hex'), // get our new salt for this pw
+          hash = c.pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex'); // hash the pw
     return [salt, hash]; // return the pair for safe storage
   };
 
@@ -54,7 +54,7 @@ module.exports = (function() {
     @desc Validate a user password.
    */
   MiniCrypt.prototype.check = function(pw, salt, hash) {
-    return pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest).toString('hex') === hash;
+    return c.timingSafeEqual(c.pbkdf2Sync(pw, salt, this.its, this.keyL, this.digest), Buffer.from(hash, 'hex'));
   };
 
   return MiniCrypt;

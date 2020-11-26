@@ -151,7 +151,6 @@ app.post('/register',
           const password = req.body['password'];
           const bio = "";
           const profile_pic = "";
-          console.log(email, username, password);
           if (await passportFunctions.addUser(username, email, password, bio, profile_pic)) {
                res.redirect('/login');
           } else {
