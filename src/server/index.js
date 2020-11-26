@@ -145,13 +145,14 @@ app.get('/logout', (req, res) => {
 // Use req.body to access data (as in, req.body['username']).
 // Use res.redirect to change URLs.
 app.post('/register',
-     (req, res) => {
+     async (req, res) => {
           const email = req.body['email'];
           const username = req.body['username'];
           const password = req.body['password'];
           const bio = "";
           const profile_pic = "";
-          if (passportFunctions.addUser(username, email, password, bio, profile_pic)) {
+          console.log(email, username, password);
+          if (await passportFunctions.addUser(username, email, password, bio, profile_pic)) {
                res.redirect('/login');
           } else {
                res.redirect('/register');

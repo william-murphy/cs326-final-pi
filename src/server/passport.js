@@ -24,12 +24,12 @@ const session = {
 
 const strategy = new LocalStrategy(
     async (username, password, done) => {
-	 const user = findUser(username);
+	 const user = await findUser(username);
 	if (!user) {
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
-	if (!validatePassword(username, password)) {
+	if (!(await validatePassword(username, password))) {
 	    // invalid password
 	    // should disable logins after N messages
 	    // delay return to rate-limit brute-force attacks
@@ -72,7 +72,7 @@ async function validatePassword(name, pwd) {
 // Add a user to the "database".
 // TODO
 async function addUser(name, email, pwd, bio, profile_pic) {
-	console.log("addUsertest")
+	// console.log("addUsertest");
 	 const user = await findUser(name);
      if (user) {
           return false;
