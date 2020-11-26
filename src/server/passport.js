@@ -79,7 +79,8 @@ async function addUser(name, email, pwd, bio, profile_pic) {
 	const encrypted = mc.hash(pwd);
 	const salt = encrypted[0];
 	const hash = encrypted[1];
-	// console.log("add_name: " + name);
+	console.log("salt: " + salt + "hash: " + hash);
+	console.log("add_name: " + name);
 	await db.signup(name, email, salt, hash, bio, profile_pic);
     return true;
 }
