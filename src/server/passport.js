@@ -97,6 +97,8 @@ function checkLoggedIn(req, res, next) {
 }
 
 module.exports = {
+	findUser,
+	validatePassword,
 	addUser,
 	checkLoggedIn
 }
