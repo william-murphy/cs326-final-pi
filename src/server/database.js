@@ -170,3 +170,5 @@ module.exports = {
     getPassword,
     signup
 };
+
+// signup("dnc", "dhruvi@email.com", "d437328q", "yu3ug237t2HHVA3", "Hi i am cool", "yo.goodwill.com").then(val=> console.log(val));
