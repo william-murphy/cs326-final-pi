@@ -5,7 +5,6 @@ async function unlikeRecipe(id) {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  username: user,
 		  recipeId: id
 	  })
      });
@@ -21,7 +20,7 @@ async function unlikeRecipe(id) {
 
 async function removeRecipe(id) {
 	const response = await fetch("/profile/delete", {
-       method: 'DELETE',
+       method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
        },
@@ -135,8 +134,8 @@ function renderImages(data, mode) {
 
 //load my-recipes on page load
 window.addEventListener("load", async function() {
-	const url = "/profile?username=" + user;
-	const response = await fetch(url);
+	const response = await fetch("/profile");
+	console.log(response);
      if (!response.ok) {
          console.log(response.error);
          return;
@@ -153,8 +152,8 @@ document.getElementById("my").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "<b>My Recipes</b>";
 	document.getElementById("liked").innerHTML = "Liked Recipes";
 	document.getElementById("content").innerHTML = "";
-	const url = "/profile?username=" + user;
-	const response = await fetch(url);
+
+	const response = await fetch("/profile");
      if (!response.ok) {
          console.log(response.error);
          return;
@@ -188,7 +187,9 @@ document.getElementById("edit").addEventListener("click", async function() {
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
        },
-       body: JSON.stringify({username: user, bio: newBio})
+       body: JSON.stringify({
+		  bio: newBio
+	  })
      });
      if (!response.ok) {
        console.log(response.error);
@@ -200,14 +201,16 @@ document.getElementById("edit").addEventListener("click", async function() {
 });
 
 //edit profile
-document.getElementById("edit-avatar").addEventListener("click", async function() {
+document.getElementById("edit-pic").addEventListener("click", async function() {
 	const newPic = document.getElementById("pic-link").value;
 	const response = await fetch("/profile/edit-pic", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
        },
-       body: JSON.stringify({username: user, profile_pic: newPic})
+       body: JSON.stringify({
+		  profile_pic: newPic
+	  })
      });
      if (!response.ok) {
        console.log(response.error);

@@ -80,7 +80,7 @@ app.post("/profile/edit-pic", async (req, res) => {  //how to do put requests in
 });
 
 app.post("/profile/delete", async (req, res) => {  //delete requests in express
-    await database.deleteProfileRecipe(req.body.recipe_id);
+    await database.deleteRecipe(req.body.recipe_id);
     res.end();
 });
 

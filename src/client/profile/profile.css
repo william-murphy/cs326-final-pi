@@ -15,10 +15,10 @@ body {
 	border: 2px solid rgba(204, 204, 204, 0.5);
 }
 
-#edit {
-	color: red;
+.my-button {
+	background-color: white;
 }
 
-#edit-avatar {
-	color: red;
+.my-button:hover {
+	background-color: red;
 }
