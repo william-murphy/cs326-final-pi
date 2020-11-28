@@ -53,6 +53,7 @@ app.post("/recipe/save", async (req, res) => {
 });
 
 app.post("/post/upload", passportFunctions.checkLoggedIn, async (req, res) => {
+     console.log("GOT TO THE ENDPOINT");
     await database.createRecipe(req.username, req.recipe_name, req.recipe_desc, req.recipe_pic);
     res.end();
 });
