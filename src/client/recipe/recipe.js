@@ -12,6 +12,8 @@ async function search() {
         return;
     }
 
+    console.log("got here 1");
+
     const parent = document.getElementById("recipe-cards");
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -68,7 +70,6 @@ async function saveRecipe(id) {
              'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
-             username: storage.getItem('user'),
              recipe_id: id
         })
    });
@@ -81,6 +82,8 @@ async function saveRecipe(id) {
 }
 
 window.addEventListener('load', async () => {
+    document.getElementById('searchRecipe').addEventListener('click', search);
+    /*
     const feedRes = await fetch("/recipe");
     const feedDat = await feedRes.json();
     if (!feedRes.ok) {
@@ -90,16 +93,13 @@ window.addEventListener('load', async () => {
 
     for (const item of feedDat) {
         renderRecipes(item);
-    }
+   }
 
     //EXAMPLE
-    /*
     let recipes = { 1:{title:"testing", description:"description"}};
 
     for (let key of Object.keys(recipes)) {
         renderRecipes(recipes[key]);
     }
     */
-
-    document.getElementById('searchRecipe').addEventListener('click', search);
-})
+});

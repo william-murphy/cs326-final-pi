@@ -37,7 +37,7 @@ app.get("/feed", passportFunctions.checkLoggedIn, async (req, res) => {
 });
 
 app.post("/feed/like", async (req, res) => {
-    await database.saveFromFeed(req.recipe_id, req.username);
+    await database.saveFromFeed(req.body.recipe_id, req.user);
     res.end();
 });
 
@@ -48,13 +48,12 @@ app.get("/recipe/search", passportFunctions.checkLoggedIn, async (req, res) => {
 });
 
 app.post("/recipe/save", async (req, res) => {
-    await database.saveRecipe(req.recipe_id, req.username);
+    await database.saveRecipe(req.body.recipe_id, req.user);
     res.end();
 });
 
 app.post("/post/upload", passportFunctions.checkLoggedIn, async (req, res) => {
-     console.log("GOT TO THE ENDPOINT");
-    await database.createRecipe(req.username, req.recipe_name, req.recipe_desc, req.recipe_pic);
+    await database.createRecipe(req.user, req.body.recipe_name, req.body.recipe_desc, req.body.recipe_pic);
     res.end();
 });
 
@@ -66,27 +65,27 @@ app.get("/people/search", passportFunctions.checkLoggedIn, async (req, res) => {
 
 app.get("/profile", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
-        await database.getProfile(req.username)
+        await database.getProfile(req.user)
     ));
 });
 
 app.post("/profile/edit", async (req, res) => {  //how to do put requests in express
-    await database.updateProfile(req.username, req.bio);
+    await database.updateProfile(req.user, req.body.bio);
     res.end();
 });
 
 app.post("/profile/edit-pic", async (req, res) => {  //how to do put requests in express
-    await database.updatePic(req.username, req.profile_pic);
+    await database.updatePic(req.user, req.body.profile_pic);
     res.end();
 });
 
 app.post("/profile/delete", async (req, res) => {  //delete requests in express
-    await database.deleteProfileRecipe(req.recipe_id);
+    await database.deleteProfileRecipe(req.body.recipe_id);
     res.end();
 });
 
 app.post("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
-    await database.unlikeProfileRecipe(req.username, req.recipe_id);
+    await database.unlikeProfileRecipe(req.user, req.body.recipe_id);
     res.end();
 });
 
@@ -106,7 +105,6 @@ app.get("/password", async (req, res) => {
 
 //creating user
 app.post("/user", async (req, res) => {
-    console.log(req.username);
     await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
     res.end();
 });

@@ -5,15 +5,13 @@ document.getElementById("publish").addEventListener("click", async function() {
 	const recipeDescription = document.getElementById("description").value;
 	const recipeImage = document.getElementById("image").value;
 
-	console.log("IT GOT TO THE FIRST PART");
-
 	const response = await fetch("/post/upload", {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  username: user,
+		  /*username: user,*/
 		  recipe_name: recipeTitle,
 		  recipe_desc: recipeDescription,
 		  recipe_pic: recipeImage

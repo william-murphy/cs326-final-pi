@@ -73,12 +73,12 @@ async function saveFromFeed(recipe_id, username) {
 }
 //Recipe
 
-async function getSampleRecipes() {
+/*async function getSampleRecipes() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 3;"));
-}
+}*/
 
 async function searchRecipes(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name LIKE ''%' + $1 + '%'';", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name = $1;", [input]));
 }
 
 async function saveRecipe(recipe_id, username) {
@@ -88,13 +88,13 @@ async function saveRecipe(recipe_id, username) {
 //Create
 
 async function createRecipe(username, recipe_name, recipe_desc, recipe_pic) {
-    return await connectAndRun(db => db.none("INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5, $6);", [DEFAULT, username, recipe_name, recipe_desc, 0, recipe_pic]));
+    return await connectAndRun(db => db.none("INSERT INTO Recipes (username, recipe_name, recipe_desc, recipe_likes, recipe_pic) VALUES ($1, $2, $3, $4, $5);", [username, recipe_name, recipe_desc, 0, recipe_pic]));
 }
 
 //People
 
 async function searchPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username LIKE ''%' + $1 + '%'' ;", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1;", [input]));
 }
 
 //Profile
@@ -156,7 +156,7 @@ async function signup(username, email, salt, hash, bio, profile_pic) { //bio emp
 module.exports = {
     getInitialFeed,
     saveFromFeed,
-    getSampleRecipes,
+    /*getSampleRecipes,*/
     searchRecipes,
     saveRecipe,
     createRecipe,
@@ -173,3 +173,4 @@ module.exports = {
 };
 
 // signup("dnc", "dhruvi@email.com", "d437328q", "yu3ug237t2HHVA3", "Hi i am cool", "yo.goodwill.com").then(val=> console.log(val));
+//searchRecipes("will").then(val=> console.log(val));
