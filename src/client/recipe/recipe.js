@@ -5,14 +5,12 @@ async function search() {
     //if true display on webpage
     //else fail
 
-    const feedRes = await fetch("/recipe/search?input=" + recipe_name);
+    const feedRes = await fetch("/recipe/search/" + recipe_name);
     const feedDat = await feedRes.json();
     if (!feedRes.ok) {
         console.log(feedRes.error);
         return;
     }
-
-    console.log("got here 1");
 
     const parent = document.getElementById("recipe-cards");
     while (parent.firstChild) {
@@ -41,10 +39,10 @@ function renderRecipes(data) {
     overlay.classList.add("card-img-overlay");
     let title = document.createElement("h3");
     title.classList.add("card-title");
-    title.innerHTML = data.title;
+    title.innerHTML = data.recipe_name;
     let description = document.createElement("p");
     description.classList.add("card-text");
-    description.innerHTML = data.description;
+    description.innerHTML = data.recipe_desc;
 
     let button = document.createElement("button");
     button.classList.add("btn", "btn-danger", "w-25", "d-block", "mx-auto");
@@ -81,9 +79,10 @@ async function saveRecipe(id) {
    }
 }
 
+document.getElementById('searchRecipe').addEventListener('click', search);
+
+/*
 window.addEventListener('load', async () => {
-    document.getElementById('searchRecipe').addEventListener('click', search);
-    /*
     const feedRes = await fetch("/recipe");
     const feedDat = await feedRes.json();
     if (!feedRes.ok) {
@@ -101,5 +100,5 @@ window.addEventListener('load', async () => {
     for (let key of Object.keys(recipes)) {
         renderRecipes(recipes[key]);
     }
-    */
 });
+*/

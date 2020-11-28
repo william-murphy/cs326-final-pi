@@ -1,18 +1,13 @@
-document.getElementById('search').addEventListener('click', search);
-
 async function search() {
-    const searchInput = document.getElementById('search-input').value;
+    const input = document.getElementById('search-input').value;
 
-    //alert("searching");
+    const feedRes = await fetch("/people/search/" + input);
+    const feedDat = await feedRes.json();
+    if (!feedRes.ok) {
+        console.log(feedRes.error);
+        return;
+    }
 
-    //find people by username
-    //let url = "https://localhost:8080/people/search/" + searchInput;
-    //const searchRequest = await fetch(url);
-
-    let url = '/people/search?input=' + searchInput;
-
-    const searchRequest = await fetch(url);
-    const searchData = searchRequest.ok? await searchRequest.json() : [];
     const searchResults = document.getElementById('search-results');
 
     while (searchResults.firstChild) {
@@ -21,8 +16,8 @@ async function search() {
 
 
 
-    for(const item of searchData) {
-        addPerson(searchResults, item.username);
+    for(const item of feedDat) {
+        addPerson(searchResults, item.username, item.bio);
     }
 
     /*
@@ -33,7 +28,7 @@ async function search() {
 
 }
 
-function addPerson(results, username) {
+function addPerson(results, username, bio) {
     let card = document.createElement("div");
     card.classList.add("card", "w-50", "text-center", "mx-auto", "mt-5");
 
@@ -49,7 +44,7 @@ function addPerson(results, username) {
 
     let cardText = document.createElement("p");
     cardText.classList.add("card-text");
-    cardText.innerHTML = "Bio Placeholder";
+    cardText.innerHTML = bio;
 
     /*
     let link = document.createElement("a");
@@ -64,6 +59,8 @@ function addPerson(results, username) {
     card.appendChild(cardBody);
     results.appendChild(card);
 }
+
+document.getElementById('search').addEventListener('click', search);
 
 /*
 document.getElementById('compatibility').addEventListener('click', searchByCompatibility);

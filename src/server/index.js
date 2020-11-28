@@ -41,9 +41,9 @@ app.post("/feed/like", async (req, res) => {
     res.end();
 });
 
-app.get("/recipe/search", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
+app.get("/recipe/search/:input", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
-        await database.searchRecipes(req.input)
+        await database.searchRecipes(req.params.input)
     ));
 });
 
@@ -57,9 +57,9 @@ app.post("/post/upload", passportFunctions.checkLoggedIn, async (req, res) => {
     res.end();
 });
 
-app.get("/people/search", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
+app.get("/people/search/:input", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
-        await database.searchPeople(req.input)
+        await database.searchPeople(req.params.input)
     ));
 });
 

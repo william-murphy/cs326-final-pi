@@ -19,11 +19,12 @@ async function likeRecipe(id) {
 
 async function getNewRecipe() {
      const response = await fetch("/feed");
+     const data = await response.json();
      if (!response.ok) {
          console.log(response.error);
          return;
     }else {
-         data = await response.json();
+         console.log(data);
          renderImages(data);
     }
 }
@@ -70,14 +71,17 @@ function renderImages(data) {
 }
 
 window.addEventListener('load', async () => {
-
+     console.log("0");
      const response = await fetch("/feed");
+     console.log(response);
+     const data = await response.json();
+     console.log("1");
      if (!response.ok) {
+          console.log("2");
          console.log(response.error);
          return;
-    }else {
-         data = await response.json();
+     }else {
+         console.log(data);
          renderImages(data);
-    }
-
+     }
 });
