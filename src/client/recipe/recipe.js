@@ -1,8 +1,3 @@
-const user = window.localStorage.getItem("user");
-if (user === null) {
-	window.location.href = "../index.html";
-}
-
 async function search() {
     const recipe_name = document.getElementById("recipe").value;
 

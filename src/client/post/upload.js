@@ -1,8 +1,3 @@
-const user = window.localStorage.getItem("user");
-if (user === null) {
-	window.location.href = "../index.html";
-}
-
 document.getElementById("publish").addEventListener("click", async function() {
 
 	//store recipe data, TODO: image upload in NodeJS?

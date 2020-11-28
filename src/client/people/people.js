@@ -1,8 +1,3 @@
-const user = window.localStorage.getItem("user");
-if (user === null) {
-	window.location.href = "../index.html";
-}
-
 document.getElementById('search').addEventListener('click', search);
 
 async function search() {

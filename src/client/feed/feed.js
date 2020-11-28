@@ -1,8 +1,3 @@
-const user = window.localStorage.getItem("user");
-if (user === null) {
-	window.location.href = "../index.html";
-}
-
 async function likeRecipe(id) {
      const response = await fetch("/feed/like", {
           method: 'POST',
