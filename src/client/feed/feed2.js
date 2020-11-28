@@ -1,6 +1,9 @@
+
+
 //testing
 const data = { 1:{recipe_id:"1", username:"testing1", recipe_desc:"spaghetti1", recipe_name:"spaghetti1", recipe_pic:"https://www.cscassets.com/recipes/wide_cknew/wide_25335.jpg"},
 2:{recipe_id:"2", username:"testing2", recipe_desc:"spaghetti2", recipe_name:"spaghetti2", recipe_pic:"https://www.cscassets.com/recipes/wide_cknew/wide_25335.jpg"}};
+let loadedFeed = false;
 
 function renderImages(data) {
     const parent = document.getElementById("recipe-cards");
@@ -65,6 +68,12 @@ function renderImages(data) {
 }
 
 async function getNewRecipe() {
+    
+    if (!loadedFeed) {
+        document.getElementById('load-feed').remove();
+        loadedFeed = true;
+    }
+    
     //testing
     /*
     let key = Object.keys(data)[Math.floor(Math.random()*Object.keys(data).length)];
@@ -85,9 +94,14 @@ async function getNewRecipe() {
         renderRecipes(item);
     }
     
+    
 
 }
 
+document.getElementById("load-feed").addEventListener("click", getNewRecipe);
+
+/*
 window.addEventListener('load', async () => {
    getNewRecipe();
 });
+*/
