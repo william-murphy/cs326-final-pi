@@ -30,7 +30,7 @@ app.use(passport.session());
 app.use(express.json()); // allow JSON inputs
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 
-app.get("/feed", async (req, res) => {
+app.get("/feed", passportFunctions.checkLoggedIn, async (req, res) => {
     res.send(JSON.stringify(
         await database.getInitialFeed()
     ));
@@ -41,8 +41,7 @@ app.post("/feed/like", async (req, res) => {
     res.end();
 });
 
-
-app.get("/recipe/search", async (req, res) => { //how to include input in function call?
+app.get("/recipe/search", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
         await database.searchRecipes(req.input)
     ));
@@ -53,18 +52,18 @@ app.post("/recipe/save", async (req, res) => {
     res.end();
 });
 
-app.post("/post/upload", async (req, res) => {
+app.post("/post/upload", passportFunctions.checkLoggedIn, async (req, res) => {
     await database.createRecipe(req.username, req.recipe_name, req.recipe_desc, req.recipe_pic);
     res.end();
 });
 
-app.get("/people/search", async (req, res) => { //how to include input in function call?
+app.get("/people/search", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
         await database.searchPeople(req.input)
     ));
 });
 
-app.get("/profile", async (req, res) => { //how to include input in function call?
+app.get("/profile", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
         await database.getProfile(req.username)
     ));
@@ -130,8 +129,9 @@ app.get('/login',
 				   { 'root' : __dirname }));
 
 app.get('/feedPage',
+    passportFunctions.checkLoggedIn,
 	(req, res) => res.sendFile('/src/client/feed/index.html',
-				   { 'root' : __dirname }));
+                   { 'root' : __dirname }));
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
