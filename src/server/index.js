@@ -63,7 +63,7 @@ app.get("/people/search/:input", passportFunctions.checkLoggedIn, async (req, re
     ));
 });
 
-app.get("/profile", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
+app.get("/getProfile", passportFunctions.checkLoggedIn, async (req, res) => { //how to include input in function call?
     res.send(JSON.stringify(
         await database.getProfile(req.user)
     ));

@@ -134,7 +134,7 @@ function renderImages(data, mode) {
 
 //load my-recipes on page load
 window.addEventListener("load", async function() {
-	const response = await fetch("/profile");
+	const response = await fetch("/getProfile");
 	console.log(response);
      if (!response.ok) {
          console.log(response.error);
