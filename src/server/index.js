@@ -89,32 +89,6 @@ app.post("/profile/unlike", passportFunctions.checkLoggedIn, async (req, res) =>
     res.end();
 });
 
-//getting username
-app.get("/username", async (req, res) => {
-    res.send(JSON.stringify(
-        await database.getUsername(req.username)
-    ));
-});
-
-//getting password info
-app.get("/password", async (req, res) => {
-    res.send(JSON.stringify(
-        await database.getPassword(req.username)
-    ));
-});
-
-//creating user
-app.post("/user", async (req, res) => {
-    await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
-    res.end();
-});
-
-app.get('/',
-    passportFunctions.checkLoggedIn,
-	(req, res) => {
-	    res.send("hello world");
-	});
-
 // Handle post data from the login.html form.
 app.post('/login',
 		passport.authenticate('local' , {     // use username/password authentication
@@ -125,11 +99,6 @@ app.post('/login',
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
 	(req, res) => res.sendFile('/src/client/index.html',
-                   { 'root' : __dirname }));
-                   
-app.get('/feedPage',
-    passportFunctions.checkLoggedIn,
-	(req, res) => res.sendFile('/src/client/feed/index.html',
                    { 'root' : __dirname }));
 
 // Handle logging out (takes us back to the login page).
