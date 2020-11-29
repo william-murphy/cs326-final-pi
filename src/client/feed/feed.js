@@ -5,7 +5,6 @@ async function likeRecipe(id) {
                'Content-Type': 'application/json;charset=utf-8'
           },
           body: JSON.stringify({
-               username: user, //still need a way to save username
                recipe_id: id
           })
      });
@@ -18,70 +17,90 @@ async function likeRecipe(id) {
 }
 
 async function getNewRecipe() {
+     document.getElementById('recipe-cards').innerHTML = "";
      const response = await fetch("/getFeed");
      const data = await response.json();
      if (!response.ok) {
          console.log(response.error);
          return;
     }else {
-         console.log(data);
          renderImages(data);
     }
 }
 
 function renderImages(data) {
-     //Get parent element that holds the recipe and clear everything in it
-     const parent = document.getElementsByClassName("card")[0];
-     parent.innerHTML = "";
-
-     //Fill in the parent div with the recipe data
-     //recipe image
-     const img = document.createElement("img").classList.add("card-img-top");
-     img.alt="Current Recipe";
-     //first card body
-     const innerDivOne = document.createElement("div").classList.add("card-body");
-     const h5 = document.createElement("h5").classList.add("card-title");
-     const name = document.createTextNode(data.recipe_name);
-     const likeButton = document.createElement("button").classList.add("btn", "btn-outline-*", "float-right");
-     likeButton.type = "button";
-     likeButton.appendChild(document.createElement("i").classList.add("far", "fa-heart", "fa-2x"));
-     likeButton.addEventListener("click", async function() {
-          await likeRecipe(data.recipe_id);
+     console.log(data);
+     const parent = document.getElementById("recipe-cards");
+ 
+     let card = document.createElement("div");
+     card.classList.add("card", "mb-3");
+ 
+     let img = document.createElement("img");
+     img.classList.add("card-img-top");
+     img.src = data[0].recipe_pic;
+ 
+     let cardBody = document.createElement("div");
+     cardBody.classList.add("card-body");
+ 
+     let title = document.createElement("h5");
+     title.classList.add("card-title");
+ 
+     let link = document.createElement("a");
+     link.classList.add("card-link");
+     link.innerHTML = data[0].recipe_name;
+ 
+     let button = document.createElement("button");
+     button.classList.add("btn", "btn-outline-*", "float-right");
+     button.addEventListener("click", async function() {
+         await likeRecipe(data[0].recipe_id);
      });
-     h5.appendChild(name);
-     h5.appendChild(likeButton);
-     const h6 = document.createElement("h6").classList.add("card-subtitle", "mb-2", "text-muted");
-     h6.innerHTML = data.recipe_desc;
-     innerDivOne.appendChild(h5);
-     innerDivOne.appendChild(h6);
-     //second card body
-     const innerDivTwo = document.createElement("div").classList.add("card-body");
-     const author = document.createTextNode(data.username);
-     const nextButton = document.createElement("button").classList.add("btn", "btn-outline-danger", "float-right");
+ 
+     let span = document.createElement("span");
+     let icon = document.createElement("i");
+     icon.classList.add("far", "fa-heart", "fa-2x")
+ 
+     let subtitle = document.createElement("h6");
+     subtitle.classList.add("card-subtitle", "mb-2", "text-muted");
+     subtitle.innerHTML = data[0].recipe_desc;
+ 
+     let cardBody2 = document.createElement("div");
+     cardBody2.classList.add("card-body");
+ 
+     let userLink = document.createElement("a");
+     userLink.classList.add("card-link");
+     userLink.innerHTML = data[0].username;
+ 
+     let nextButton = document.createElement("button");
+     nextButton.classList.add("btn", "btn-outline-danger", "float-right");
      nextButton.innerHTML = "Next";
-     nextButton.addEventListener("click", async function() {
-          await getNewRecipe();
+ 
+     nextButton.addEventListener("click", async function () {
+         await getNewRecipe();
      });
-     innerDivTwo.append(author);
-     innerDivTwo.append(nextButton);
-     //append to parent
-     parent.appendChild(img);
-     parent.appendChild(innerDivOne);
-     parent.appendChild(innerDivTwo);
-}
+ 
+     span.appendChild(icon);
+     button.appendChild(span);
+     title.appendChild(link);
+     title.appendChild(button);
+     cardBody.appendChild(title);
+     cardBody.appendChild(subtitle);
+     cardBody2.appendChild(userLink);
+     cardBody2.appendChild(nextButton);
+ 
+     card.appendChild(img);
+     card.appendChild(cardBody);
+
+     card.appendChild(cardBody2);
+     parent.appendChild(card);
+ }
 
 window.addEventListener('load', async () => {
-     console.log("0");
      const response = await fetch("/getFeed");
-     console.log(response);
      const data = await response.json();
-     console.log("1");
      if (!response.ok) {
-          console.log("2");
          console.log(response.error);
          return;
      }else {
-         console.log(data);
          renderImages(data);
      }
 });

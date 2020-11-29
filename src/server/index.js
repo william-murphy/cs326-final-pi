@@ -74,17 +74,17 @@ app.post("/profile/edit", async (req, res) => {  //how to do put requests in exp
     res.end();
 });
 
-app.post("/profile/edit-pic", async (req, res) => {  //how to do put requests in express
+app.post("/profile/edit-pic", async (req, res) => { 
     await database.updatePic(req.user, req.body.profile_pic);
     res.end();
 });
 
-app.post("/profile/delete", async (req, res) => {  //delete requests in express
+app.post("/profile/delete", async (req, res) => {  
     await database.deleteRecipe(req.body.recipe_id);
     res.end();
 });
 
-app.post("/profile/unlike", async (req, res) => { //put request + use two functions (both put and delete?)
+app.post("/profile/unlike", async (req, res) => { 
     await database.unlikeProfileRecipe(req.user, req.body.recipe_id);
     res.end();
 });
@@ -118,7 +118,7 @@ app.get('/',
 // Handle post data from the login.html form.
 app.post('/login',
 		passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/feedPage',   // when we login, go to /private
+	     'successRedirect' : '/feed',   // when we login, go to /private
 	     'failureRedirect' : '/login'      // otherwise, back to login
 	 }));
 

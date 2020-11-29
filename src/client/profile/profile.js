@@ -5,7 +5,7 @@ async function unlikeRecipe(id) {
          'Content-Type': 'application/json;charset=utf-8'
        },
        body: JSON.stringify({
-		  recipeId: id
+		  recipe_id: id
 	  })
      });
      if (!response.ok) {
@@ -52,18 +52,25 @@ function populateProfile(data) {
 
 function renderImages(data, mode) {
 	if (mode) { //render my recipes
+		const k = data.recipes.length<3 ? data.recipes.length : 3;
+		console.log(k);
 		for (let i=0; i<data.recipes.length; i+=3) {
 			let group = document.createElement("DIV");
 			group.classList.add("row");
-			for (let j=0; j<3; j++) {
+			for (let j=0; j<k; j++) {
 
-				let parentDiv = document.createElement("DIV").classList.add("m-4", "card");
-				let innerDiv = document.createElement("DIV").classList.add("card-body");
+				console.log(data.recipes[i + j]);
+
+				let parentDiv = document.createElement("DIV");
+				parentDiv.classList.add("m-4", "card");
+				let innerDiv = document.createElement("DIV");
+				innerDiv.classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
 				nameElement.innerHTML = data.recipes[i + j].recipe_name;
 
-				const img = createElement("img").classList.add("img-fluid"); //placeholder image
+				const img = document.createElement("img"); //placeholder image
+				img.classList.add("img-fluid");
 				img.src = data.recipes[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
@@ -75,10 +82,11 @@ function renderImages(data, mode) {
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.recipes[i + j].recipe_likes;
 
-				const remove = document.createElement("button").classList.add("btn", "btn-outline-danger");
+				const remove = document.createElement("button");
+				remove.classList.add("btn", "btn-outline-danger", "float-right");
 				remove.innerHTML = "Delete";
 				remove.addEventListener("click", async function() {
-					await deleteRecipe(data.recipes[i + j].recipe_id);
+					await removeRecipe(data.recipes[i + j].recipe_id);
 				});
 
 				innerDiv.appendChild(nameElement);
@@ -88,21 +96,29 @@ function renderImages(data, mode) {
 				innerDiv.appendChild(remove);
 				parentDiv.appendChild(innerDiv);
 
+				group.appendChild(parentDiv);
 			}
+			document.getElementById('content').appendChild(group);
 		}
 	}else { //render liked recipes
+		const k = data.liked.length<3 ? data.liked.length : 3;
 		for (let i=0; i<data.liked.length; i+=3) {
 			let group = document.createElement("DIV");
 			group.classList.add("row");
-			for (let j=0; j<3; j++) {
+			for (let j=0; j<k; j++) {
 
-				let parentDiv = document.createElement("DIV").classList.add("m-4", "card");
-				let innerDiv = document.createElement("DIV").classList.add("card-body");
+				console.log(data.liked[i + j]);
+
+				let parentDiv = document.createElement("DIV");
+				parentDiv.classList.add("m-4", "card");
+				let innerDiv = document.createElement("DIV");
+				innerDiv.classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
 				nameElement.innerHTML = data.liked[i + j].recipe_name;
 
-				const img = createElement("img").classList.add("img-fluid"); //placeholder image
+				const img = document.createElement("img"); //placeholder image
+				img.classList.add("img-fluid");
 				img.src = data.liked[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
@@ -114,7 +130,8 @@ function renderImages(data, mode) {
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipe_likes;
 
-				const unlike = document.createElement("button").classList.add("btn", "btn-outline-danger");
+				const unlike = document.createElement("button");
+				unlike.classList.add("btn", "btn-outline-danger", "float-right");
 				unlike.innerHTML = "Unlike";
 				unlike.addEventListener("click", async function() {
 					await unlikeRecipe(data.liked[i + j].recipe_id);
@@ -127,7 +144,9 @@ function renderImages(data, mode) {
 				innerDiv.appendChild(unlike);
 				parentDiv.appendChild(innerDiv);
 
+				group.appendChild(parentDiv);
 			}
+			document.getElementById('content').appendChild(group);
 		}
 	}
 }
@@ -135,12 +154,12 @@ function renderImages(data, mode) {
 //load my-recipes on page load
 window.addEventListener("load", async function() {
 	const response = await fetch("/getProfile");
-	console.log(response);
      if (!response.ok) {
          console.log(response.error);
          return;
     }else {
-	    data = await response.json();
+		const data = await response.json();
+		console.log(data);
 	    renderImages(data, true);
 	    populateProfile(data);
     }
@@ -153,12 +172,12 @@ document.getElementById("my").addEventListener("click", async function() {
 	document.getElementById("liked").innerHTML = "Liked Recipes";
 	document.getElementById("content").innerHTML = "";
 
-	const response = await fetch("/profile");
+	const response = await fetch("/getProfile");
      if (!response.ok) {
          console.log(response.error);
          return;
     }else {
-	    data = await response.json();
+		const data = await response.json();
 	    renderImages(data, true);
     }
 });
@@ -168,13 +187,13 @@ document.getElementById("liked").addEventListener("click", async function() {
 	document.getElementById("my").innerHTML = "My Recipes";
 	document.getElementById("liked").innerHTML = "<b>Liked Recipes</b>";
 	document.getElementById("content").innerHTML = "";
-	const url = "/profile?username=" + user;
+	const url = "/getProfile";
 	const response = await fetch(url);
      if (!response.ok) {
          console.log(response.error);
          return;
     }else {
-	    data = await response.json();
+	    const data = await response.json();
 	    renderImages(data, false);
     }
 });
