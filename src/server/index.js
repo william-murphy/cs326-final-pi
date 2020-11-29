@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 
 const database = require("./database");
 
@@ -92,9 +92,9 @@ app.post("/profile/unlike", passportFunctions.checkLoggedIn, async (req, res) =>
 // Handle post data from the login.html form.
 app.post('/login',
 		passport.authenticate('local' , {     // use username/password authentication
-	     'successRedirect' : '/feed',   // when we login, go to /private
-	     'failureRedirect' : '/login'      // otherwise, back to login
-	 }));
+            'successRedirect' : '/feed',   // when we login, go to /private
+            'failureRedirect' : '/login'      // otherwise, back to login
+}));
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
@@ -129,6 +129,6 @@ app.post('/register',
 // Register URL
 app.get('/register',
 	(req, res) => res.sendFile('/src/client/signup/index.html',
-				   { 'root' : __dirname }));
+                { 'root' : __dirname }));
 
 app.listen(process.env.PORT || 8080);

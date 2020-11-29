@@ -1,41 +1,41 @@
 async function unlikeRecipe(id) {
 	const response = await fetch("/profile/unlike", {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json;charset=utf-8'
-       },
-       body: JSON.stringify({
-		  recipe_id: id
-	  })
-     });
-     if (!response.ok) {
-       console.log(response.error);
-       return;
-  	}else {
-	  alert("Successfully unliked recipe.");
-	  //Refresh page
-	  window.location.reload();
-  	}
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify({
+			recipe_id: id
+		})
+	});
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
+		alert("Successfully unliked recipe.");
+		//Refresh page
+		window.location.reload();
+	}
 }
 
 async function removeRecipe(id) {
 	const response = await fetch("/profile/delete", {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json;charset=utf-8'
-       },
-       body: JSON.stringify({
-		  recipe_id: id
-	  })
-     });
-     if (!response.ok) {
-       console.log(response.error);
-       return;
-  	}else {
-	  alert("Successfully deleted recipe.");
-	  //Refresh page
-	  window.location.reload();
-  	}
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify({
+			recipe_id: id
+		})
+	});
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
+		alert("Successfully deleted recipe.");
+		//Refresh page
+		window.location.reload();
+	}
 }
 
 function populateProfile(data) {
@@ -54,7 +54,7 @@ function renderImages(data, mode) {
 	if (mode) { //render my recipes
 		const k = data.recipes.length<3 ? data.recipes.length : 3;
 		for (let i=0; i<data.recipes.length; i+=3) {
-			let group = document.createElement("DIV");
+			const group = document.createElement("DIV");
 			group.classList.add("row");
 			for (let j=0; j<k; j++) {
 
@@ -62,9 +62,9 @@ function renderImages(data, mode) {
 					break;
 				}
 
-				let parentDiv = document.createElement("DIV");
+				const parentDiv = document.createElement("DIV");
 				parentDiv.classList.add("m-4", "card");
-				let innerDiv = document.createElement("DIV");
+				const innerDiv = document.createElement("DIV");
 				innerDiv.classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
@@ -107,7 +107,7 @@ function renderImages(data, mode) {
 	}else { //render liked recipes
 		const k = data.liked.length<3 ? data.liked.length : 3;
 		for (let i=0; i<data.liked.length; i+=3) {
-			let group = document.createElement("DIV");
+			const group = document.createElement("DIV");
 			group.classList.add("row");
 			for (let j=0; j<k; j++) {
 
@@ -115,9 +115,9 @@ function renderImages(data, mode) {
 					break;
 				}
 
-				let parentDiv = document.createElement("DIV");
+				const parentDiv = document.createElement("DIV");
 				parentDiv.classList.add("m-4", "card");
-				let innerDiv = document.createElement("DIV");
+				const innerDiv = document.createElement("DIV");
 				innerDiv.classList.add("card-body");
 
 				const nameElement = document.createElement("h5");
@@ -163,15 +163,14 @@ function renderImages(data, mode) {
 //load my-recipes on page load
 window.addEventListener("load", async function() {
 	const response = await fetch("/getProfile");
-     if (!response.ok) {
-         console.log(response.error);
-         return;
-    }else {
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
 		const data = await response.json();
-	    renderImages(data, true);
-	    populateProfile(data);
-    }
-
+		renderImages(data, true);
+		populateProfile(data);
+	}
 });
 
 //load my-recipes when button is clicked
@@ -181,13 +180,13 @@ document.getElementById("my").addEventListener("click", async function() {
 	document.getElementById("content").innerHTML = "";
 
 	const response = await fetch("/getProfile");
-     if (!response.ok) {
-         console.log(response.error);
-         return;
-    }else {
+		if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
 		const data = await response.json();
-	    renderImages(data, true);
-    }
+		renderImages(data, true);
+	}
 });
 
 //load saved recipes when button is clicked
@@ -197,12 +196,12 @@ document.getElementById("liked").addEventListener("click", async function() {
 	document.getElementById("content").innerHTML = "";
 	const url = "/getProfile";
 	const response = await fetch(url);
-     if (!response.ok) {
-         console.log(response.error);
-         return;
+    if (!response.ok) {
+		console.log(response.error);
+		return;
     }else {
-	    const data = await response.json();
-	    renderImages(data, false);
+		const data = await response.json();
+		renderImages(data, false);
     }
 });
 
@@ -210,40 +209,42 @@ document.getElementById("liked").addEventListener("click", async function() {
 document.getElementById("edit").addEventListener("click", async function() {
 	const newBio = document.getElementById("bio").value;
 	const response = await fetch("/profile/edit", {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json;charset=utf-8'
-       },
-       body: JSON.stringify({
-		  bio: newBio
-	  })
-     });
-     if (!response.ok) {
-       console.log(response.error);
-       return;
-  	}else {
-	  alert("Profile updated successfully");
-	  window.location.reload(true);
-  	}
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify({
+			bio: newBio
+		})
+	});
+
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
+		alert("Profile updated successfully");
+		window.location.reload(true);
+	}
 });
 
 //edit profile
 document.getElementById("edit-pic").addEventListener("click", async function() {
 	const newPic = document.getElementById("pic-link").value;
 	const response = await fetch("/profile/edit-pic", {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json;charset=utf-8'
-       },
-       body: JSON.stringify({
-		  profile_pic: newPic
-	  })
-     });
-     if (!response.ok) {
-       console.log(response.error);
-       return;
-  	}else {
-	  alert("Profile updated successfully");
-	  window.location.reload(true);
-  	}
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify({
+			profile_pic: newPic
+		})
+	});
+
+	if (!response.ok) {
+		console.log(response.error);
+		return;
+	}else {
+		alert("Profile updated successfully");
+		window.location.reload(true);
+	}
 });

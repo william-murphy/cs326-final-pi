@@ -3,43 +3,42 @@
 // For loading environment variables.
 require('dotenv').config();
 
-const express = require('express');                 // express routing
-const expressSession = require('express-session');  // for managing session state
+// const express = require('express');                 // express routing
+// const expressSession = require('express-session');  // for managing session state
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
-//const app = express();
 const minicrypt = require('./miniCrypt');
 const db = require('./database');
 const mc = new minicrypt();
 
 // Session configuration
 
-const session = {
-    secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
-    resave : false,
-    saveUninitialized: false
-};
+// const session = {
+//     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
+//     resave : false,
+//     saveUninitialized: false
+// };
 
 // Passport configuration
 
 const strategy = new LocalStrategy(
     async (username, password, done) => {
-	 const user = await findUser(username);
-	if (user.length === 0) {
-	    // no such user
-	    return done(null, false, { 'message' : 'Wrong username' });
-	}
-	if (!(await validatePassword(username, password))) {
-	    // invalid password
-	    // should disable logins after N messages
-	    // delay return to rate-limit brute-force attacks
-	    await new Promise((r) => setTimeout(r, 2000)); // two second delay
-	    return done(null, false, { 'message' : 'Wrong password' });
-	}
-	// success!
-	// should create a user object here, associated with a unique identifier
-	return done(null, username);
-    });
+		const user = await findUser(username);
+		if (user.length === 0) {
+			// no such user
+			return done(null, false, { 'message' : 'Wrong username' });
+		}
+		if (!(await validatePassword(username, password))) {
+			// invalid password
+			// should disable logins after N messages
+			// delay return to rate-limit brute-force attacks
+			await new Promise((r) => setTimeout(r, 2000)); // two second delay
+			return done(null, false, { 'message' : 'Wrong password' });
+		}
+		// success!
+		// should create a user object here, associated with a unique identifier
+		return done(null, username);
+	});
 
 
 // App configuration
@@ -102,4 +101,4 @@ module.exports = {
 	validatePassword,
 	addUser,
 	checkLoggedIn
-}
+};

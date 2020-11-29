@@ -24,27 +24,27 @@ async function search() {
 
 function renderRecipes(data) {
     const parent = document.getElementById("recipe-cards");
-    let card = document.createElement("div");
+    const card = document.createElement("div");
     card.classList.add("card", "bg-dark", "text-black", "grid-item");
 
-    let embed = document.createElement("div");
+    const embed = document.createElement("div");
     embed.classList.add("embed-responsive", "embed-responsive-16by9");
-    let img = document.createElement("img");
+    const img = document.createElement("img");
     img.classList.add("card-img-top", "embed-responsive-item");
     img.alt = "Card image cap";
     //img src?
     img.src = data.recipe_pic;
 
-    let overlay = document.createElement("div");
+    const overlay = document.createElement("div");
     overlay.classList.add("card-img-overlay");
-    let title = document.createElement("h3");
+    const title = document.createElement("h3");
     title.classList.add("card-title");
     title.innerHTML = data.recipe_name;
-    let description = document.createElement("p");
+    const description = document.createElement("p");
     description.classList.add("card-text");
     description.innerHTML = data.recipe_desc;
 
-    let button = document.createElement("button");
+    const button = document.createElement("button");
     button.classList.add("btn", "btn-danger", "w-25", "d-block", "mx-auto");
     button.innerHTML = "Save";
     button.addEventListener("click", async function() {

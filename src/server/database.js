@@ -19,8 +19,8 @@ const pgp = require("pg-promise")({
 });*/
 const pgp = require("pg-promise");
 
-let username;
-let password;
+// let username;
+// let password;
 
 // if(!process.env.USERNAME) {
 //     //const secrets = "../../secrets.json";
@@ -52,7 +52,7 @@ async function connectAndRun(task) {
         try {
             connection.done();
         } catch(ignored) {
-
+            
         }
     }
 }
