@@ -16,8 +16,9 @@ const session = {
 };
 
 const path = require("path");
-__dirname = path.resolve();
+__dirname =  path.resolve();
 
+// app.use(express.static(path.resolve(__dirname, '../client/')));
 app.use(express.static(__dirname + '/src/client/'));
 
 app.use(expressSession(session));
@@ -126,6 +127,6 @@ app.post('/register',
 // Register URL
 app.get('/register',
 	(req, res) => res.sendFile('/src/client/signup/index.html',
-                { 'root' : __dirname }));
+                    { 'root' : __dirname }));
 
 app.listen(process.env.PORT || 8080);
