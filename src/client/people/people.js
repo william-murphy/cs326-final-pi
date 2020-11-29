@@ -14,17 +14,9 @@ async function search() {
         searchResults.removeChild(searchResults.firstChild);
     }
 
-
-
     for(const item of feedDat) {
         addPerson(searchResults, item);
     }
-
-    /*
-    for(let i = 0; i < 3; i++) {
-        addPerson(searchResults, "testing");
-    }
-    */
 
 }
 
@@ -59,17 +51,3 @@ function addPerson(searchResults, data) {
 }
 
 document.getElementById('search').addEventListener('click', search);
-
-/*
-document.getElementById('compatibility').addEventListener('click', searchByCompatibility);
-
-function searchByCompatibility() {
-    alert("searching by compatibility");
-
-    //find similar food tastes as user
-    //highest % with food recipe titles
-}
-*/
-
-//NOTE: div for holding search results
-//document.getElementById('search-results')

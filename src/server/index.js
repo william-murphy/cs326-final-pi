@@ -1,9 +1,5 @@
 const express = require("express");
-
 const database = require("./database");
-
-const path = require("path");
-
 const passportFunctions = require("./passport");
 
 const app = express();
@@ -19,8 +15,9 @@ const session = {
     saveUninitialized: false
 };
 
+// const path = require("path");
+// __dirname = path.resolve();
 
-__dirname = path.resolve();
 app.use(express.static(__dirname + '/src/client/'));
 
 app.use(expressSession(session));

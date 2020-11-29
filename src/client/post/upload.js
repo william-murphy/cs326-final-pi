@@ -1,6 +1,6 @@
 document.getElementById("publish").addEventListener("click", async function() {
 
-	//store recipe data, TODO: image upload in NodeJS?
+	//store recipe data
 	const recipeTitle = document.getElementById("title").value;
 	const recipeDescription = document.getElementById("description").value;
 	const recipeImage = document.getElementById("image").value;

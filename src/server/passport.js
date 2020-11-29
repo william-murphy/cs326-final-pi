@@ -3,21 +3,11 @@
 // For loading environment variables.
 require('dotenv').config();
 
-// const express = require('express');                 // express routing
-// const expressSession = require('express-session');  // for managing session state
 const passport = require('passport');               // handles authentication
 const LocalStrategy = require('passport-local').Strategy; // username/password strategy
 const minicrypt = require('./miniCrypt');
 const db = require('./database');
 const mc = new minicrypt();
-
-// Session configuration
-
-// const session = {
-//     secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
-//     resave : false,
-//     saveUninitialized: false
-// };
 
 // Passport configuration
 
@@ -69,7 +59,6 @@ async function validatePassword(name, pwd) {
 }
 
 // Add a user to the "database".
-// TODO
 async function addUser(name, email, pwd, bio, profile_pic) {
 	const user = await findUser(name);
      if (user.length !== 0) {
@@ -78,8 +67,6 @@ async function addUser(name, email, pwd, bio, profile_pic) {
 	const encrypted = mc.hash(pwd);
 	const salt = encrypted[0];
 	const hash = encrypted[1];
-	// console.log("salt: " + salt + "hash: " + hash);
-	// console.log("add_name: " + name);
 	await db.signup(name, email, salt, hash, bio, profile_pic);
     return true;
 }

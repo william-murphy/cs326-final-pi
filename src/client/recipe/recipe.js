@@ -32,7 +32,6 @@ function renderRecipes(data) {
     const img = document.createElement("img");
     img.classList.add("card-img-top", "embed-responsive-item");
     img.alt = "Card image cap";
-    //img src?
     img.src = data.recipe_pic;
 
     const overlay = document.createElement("div");
@@ -80,25 +79,3 @@ async function saveRecipe(id) {
 }
 
 document.getElementById('searchRecipe').addEventListener('click', search);
-
-/*
-window.addEventListener('load', async () => {
-    const feedRes = await fetch("/recipe");
-    const feedDat = await feedRes.json();
-    if (!feedRes.ok) {
-        console.log(feedRes.error);
-        return;
-    }
-
-    for (const item of feedDat) {
-        renderRecipes(item);
-   }
-
-    //EXAMPLE
-    let recipes = { 1:{title:"testing", description:"description"}};
-
-    for (let key of Object.keys(recipes)) {
-        renderRecipes(recipes[key]);
-    }
-});
-*/
