@@ -36,7 +36,7 @@ app.get("/getFeed", passportFunctions.checkLoggedIn, async (req, res) => {
     ));
 });
 
-app.post("/feed/like", async (req, res) => {
+app.post("/feed/like", passportFunctions.checkLoggedIn, async (req, res) => {
     await database.saveFromFeed(req.body.recipe_id, req.user);
     res.end();
 });
@@ -47,7 +47,7 @@ app.get("/recipe/search/:input", passportFunctions.checkLoggedIn, async (req, re
     ));
 });
 
-app.post("/recipe/save", async (req, res) => {
+app.post("/recipe/save", passportFunctions.checkLoggedIn, async (req, res) => {
     await database.saveRecipe(req.body.recipe_id, req.user);
     res.end();
 });
@@ -69,51 +69,25 @@ app.get("/getProfile", passportFunctions.checkLoggedIn, async (req, res) => { //
     ));
 });
 
-app.post("/profile/edit", async (req, res) => {  //how to do put requests in express
+app.post("/profile/edit", passportFunctions.checkLoggedIn, async (req, res) => {  //how to do put requests in express
     await database.updateProfile(req.user, req.body.bio);
     res.end();
 });
 
-app.post("/profile/edit-pic", async (req, res) => { 
+app.post("/profile/edit-pic", passportFunctions.checkLoggedIn, async (req, res) => { 
     await database.updatePic(req.user, req.body.profile_pic);
     res.end();
 });
 
-app.post("/profile/delete", async (req, res) => {  
+app.post("/profile/delete", passportFunctions.checkLoggedIn, async (req, res) => {  
     await database.deleteRecipe(req.body.recipe_id);
     res.end();
 });
 
-app.post("/profile/unlike", async (req, res) => { 
+app.post("/profile/unlike", passportFunctions.checkLoggedIn, async (req, res) => { 
     await database.unlikeProfileRecipe(req.user, req.body.recipe_id);
     res.end();
 });
-
-//getting username
-app.get("/username", async (req, res) => {
-    res.send(JSON.stringify(
-        await database.getUsername(req.username)
-    ));
-});
-
-//getting password info
-app.get("/password", async (req, res) => {
-    res.send(JSON.stringify(
-        await database.getPassword(req.username)
-    ));
-});
-
-//creating user
-app.post("/user", async (req, res) => {
-    await database.signup(req.username, req.email, req.salt, req.hash, req.bio, req.profile_pic);
-    res.end();
-});
-
-app.get('/',
-    passportFunctions.checkLoggedIn,
-	(req, res) => {
-	    res.send("hello world");
-	});
 
 // Handle post data from the login.html form.
 app.post('/login',
@@ -125,11 +99,6 @@ app.post('/login',
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
 	(req, res) => res.sendFile('/src/client/index.html',
-				   { 'root' : __dirname }));
-
-app.get('/feedPage',
-    passportFunctions.checkLoggedIn,
-	(req, res) => res.sendFile('/src/client/feed/index.html',
                    { 'root' : __dirname }));
 
 // Handle logging out (takes us back to the login page).

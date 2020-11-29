@@ -53,13 +53,14 @@ function populateProfile(data) {
 function renderImages(data, mode) {
 	if (mode) { //render my recipes
 		const k = data.recipes.length<3 ? data.recipes.length : 3;
-		console.log(k);
 		for (let i=0; i<data.recipes.length; i+=3) {
 			let group = document.createElement("DIV");
 			group.classList.add("row");
 			for (let j=0; j<k; j++) {
 
-				console.log(data.recipes[i + j]);
+				if (data.recipes[i + j] === undefined) {
+					break;
+				}
 
 				let parentDiv = document.createElement("DIV");
 				parentDiv.classList.add("m-4", "card");
@@ -70,14 +71,16 @@ function renderImages(data, mode) {
 				nameElement.innerHTML = data.recipes[i + j].recipe_name;
 
 				const img = document.createElement("img"); //placeholder image
-				img.classList.add("img-fluid");
 				img.src = data.recipes[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
 				img.height = "250";
 
-				const descElement = document.createElement("h6");
-				descElement.innerHTML = "Recipe by " + data.recipes[i + j].username;
+				const author = document.createElement("h6");
+				author.innerHTML = "Recipe by " + data.recipes[i + j].username;
+
+				const desc = document.createElement("p");
+				desc.innerHTML = data.recipes[i + j].recipe_desc;
 
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.recipes[i + j].recipe_likes;
@@ -91,7 +94,8 @@ function renderImages(data, mode) {
 
 				innerDiv.appendChild(nameElement);
 				innerDiv.appendChild(img);
-				innerDiv.appendChild(descElement);
+				innerDiv.appendChild(author);
+				innerDiv.appendChild(desc);
 				innerDiv.appendChild(numLikes);
 				innerDiv.appendChild(remove);
 				parentDiv.appendChild(innerDiv);
@@ -107,7 +111,9 @@ function renderImages(data, mode) {
 			group.classList.add("row");
 			for (let j=0; j<k; j++) {
 
-				console.log(data.liked[i + j]);
+				if (data.recipes[i + j] === undefined) {
+					break;
+				}
 
 				let parentDiv = document.createElement("DIV");
 				parentDiv.classList.add("m-4", "card");
@@ -118,14 +124,16 @@ function renderImages(data, mode) {
 				nameElement.innerHTML = data.liked[i + j].recipe_name;
 
 				const img = document.createElement("img"); //placeholder image
-				img.classList.add("img-fluid");
 				img.src = data.liked[i + j].recipe_pic;
 				img.alt = "Food";
 				img.width = "250";
 				img.height = "250";
 
-				const descElement = document.createElement("h6");
-				descElement.innerHTML = "Recipe by " + data.liked[i + j].username;
+				const author = document.createElement("h6");
+				author.innerHTML = "Recipe by " + data.liked[i + j].username;
+
+				const desc = document.createElement("p");
+				desc.innerHTML = data.liked[i + j].recipe_desc;
 
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipe_likes;
@@ -139,7 +147,8 @@ function renderImages(data, mode) {
 
 				innerDiv.appendChild(nameElement);
 				innerDiv.appendChild(img);
-				innerDiv.appendChild(descElement);
+				innerDiv.appendChild(author);
+				innerDiv.appendChild(desc);
 				innerDiv.appendChild(numLikes);
 				innerDiv.appendChild(unlike);
 				parentDiv.appendChild(innerDiv);
@@ -159,7 +168,6 @@ window.addEventListener("load", async function() {
          return;
     }else {
 		const data = await response.json();
-		console.log(data);
 	    renderImages(data, true);
 	    populateProfile(data);
     }

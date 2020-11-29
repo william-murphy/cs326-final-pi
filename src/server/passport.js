@@ -25,7 +25,7 @@ const session = {
 const strategy = new LocalStrategy(
     async (username, password, done) => {
 	 const user = await findUser(username);
-	if (!user) {
+	if (user.length === 0) {
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}

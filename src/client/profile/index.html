@@ -19,17 +19,20 @@
         <a class="p-4 text-dark" href="../post/index.html">Post</a>
       </nav>
       <a class="btn btn-outline-danger" href="../profile/index.html">Profile</a>
+      <form action="/logout" method="get">
+        <button class="btn btn-outline-dark ml-3">Logout</a>
+      </form>
     </div>
     <div class="container">
       <div class="d-flex flex-row px-5 m-5">
         <div class="d-flex flex-column float-left p-2 px-md-3 mb-3">
+          <h3 id="name" class="text-center px-4 p-2"></h3>
           <img id="avatar" class="align-center rounded-circle m-2" src="" width="225" height="225" alt=""/>
           <input id="pic-link" class="align-center m-2" placeholder="new image link"/>
           <button id="edit-pic" class="align-right btn btn-outline-danger my-button m-2 p-2">Edit Avatar</button>
-          <h3 id="name" class="text-center px-4 p-2"></h3>
         </div>
         <div class="d-flex flex-column float-left p-4 px-md-3 mb-3">
-          <textarea id="bio" class="form-text text-muted p-2" rows="8" cols="70"></textarea>
+          <textarea id="bio" class="form-text text-muted p-2 mt-5" rows="8" cols="70"></textarea>
           <br />
           <button id="edit" class="align-right btn btn-outline-danger my-button w-25 p-2">Edit Bio</button>
         </div>
@@ -39,7 +42,7 @@
          <h4 class="px-5"><a id="liked" class="text-dark" href="#">Liked Recipes</a></h4>
       </div>
 
-      <div id="content" class="col px-5 recipes"></div>
+      <div id="content" class="col px-5 recipes mb-4"></div>
     </div>
   </body>
 </html>
