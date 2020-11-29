@@ -18,7 +18,7 @@ async function likeRecipe(id) {
 }
 
 async function getNewRecipe() {
-     const response = await fetch("/feed");
+     const response = await fetch("/getFeed");
      const data = await response.json();
      if (!response.ok) {
          console.log(response.error);
@@ -72,7 +72,7 @@ function renderImages(data) {
 
 window.addEventListener('load', async () => {
      console.log("0");
-     const response = await fetch("/feed");
+     const response = await fetch("/getFeed");
      console.log(response);
      const data = await response.json();
      console.log("1");

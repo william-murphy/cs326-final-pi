@@ -30,7 +30,7 @@ app.use(passport.session());
 app.use(express.json()); // allow JSON inputs
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 
-app.get("/feed", passportFunctions.checkLoggedIn, async (req, res) => {
+app.get("/getFeed", passportFunctions.checkLoggedIn, async (req, res) => {
     res.send(JSON.stringify(
         await database.getInitialFeed()
     ));

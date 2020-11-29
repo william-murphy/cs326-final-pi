@@ -22,22 +22,23 @@ const pgp = require("pg-promise");
 let username;
 let password;
 
-if(!process.env.USERNAME) {
-    //const secrets = "../../secrets.json";
-    username = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).username;
-} else {
-    username = process.env.USERNAME;
-}
+// if(!process.env.USERNAME) {
+//     //const secrets = "../../secrets.json";
+//     username = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).username;
+// } else {
+//     username = process.env.USERNAME;
+// }
 
-if (!process.env.PASSWORD) {
-    //const secrets = import('../../secrets.json');
-    //const secrets = "../../secrets.json";
-    password = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).password;
-} else {
-    password = process.env.PASSWORD;
-}
+// if (!process.env.PASSWORD) {
+//     //const secrets = import('../../secrets.json');
+//     //const secrets = "../../secrets.json";
+//     password = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).password;
+// } else {
+//     password = process.env.PASSWORD;
+// }
 
-const url = process.env.DATABASE_URL || `postgres://${username}:${password}@localhost/`;
+const url = process.env.DATABASE_URL || JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).DATABASE_URL;
+console.log(url);
 const db = pgp()(url);
 
 async function connectAndRun(task) {
