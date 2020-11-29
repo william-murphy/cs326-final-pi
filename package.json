@@ -2,7 +2,7 @@
     "name": "spighetti",
     "scripts": {
         "start": "node src/server/index.js",
-        "lint": "eslint src/client/ server/"
+        "lint": "eslint src/client/ src/server/"
     },
     "devDependencies": {
         "eslint": "^7.11.0",
