@@ -29,20 +29,20 @@ async function search() {
 }
 
 function addPerson(results, username, bio) {
-    let card = document.createElement("div");
+    const card = document.createElement("div");
     card.classList.add("card", "w-50", "text-center", "mx-auto", "mt-5");
 
-    let cardHeader = document.createElement("h5");
+    const cardHeader = document.createElement("h5");
     cardHeader.classList.add("card-header");
     cardHeader.innerHTML = username;
 
-    let cardBody = document.createElement("div");
+    const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
 
-    let cardTitle = document.createElement("h5");
+    const cardTitle = document.createElement("h5");
     cardTitle.innerHTML = "Bio";
 
-    let cardText = document.createElement("p");
+    const cardText = document.createElement("p");
     cardText.classList.add("card-text");
     cardText.innerHTML = bio;
 
