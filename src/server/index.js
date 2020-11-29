@@ -36,7 +36,7 @@ app.get("/getFeed", passportFunctions.checkLoggedIn, async (req, res) => {
     ));
 });
 
-app.post("/feed/like", async (req, res) => {
+app.post("/feed/like", passportFunctions.checkLoggedIn, async (req, res) => {
     await database.saveFromFeed(req.body.recipe_id, req.user);
     res.end();
 });
@@ -47,7 +47,7 @@ app.get("/recipe/search/:input", passportFunctions.checkLoggedIn, async (req, re
     ));
 });
 
-app.post("/recipe/save", async (req, res) => {
+app.post("/recipe/save", passportFunctions.checkLoggedIn, async (req, res) => {
     await database.saveRecipe(req.body.recipe_id, req.user);
     res.end();
 });
@@ -69,22 +69,22 @@ app.get("/getProfile", passportFunctions.checkLoggedIn, async (req, res) => { //
     ));
 });
 
-app.post("/profile/edit", async (req, res) => {  //how to do put requests in express
+app.post("/profile/edit", passportFunctions.checkLoggedIn, async (req, res) => {  //how to do put requests in express
     await database.updateProfile(req.user, req.body.bio);
     res.end();
 });
 
-app.post("/profile/edit-pic", async (req, res) => { 
+app.post("/profile/edit-pic", passportFunctions.checkLoggedIn, async (req, res) => { 
     await database.updatePic(req.user, req.body.profile_pic);
     res.end();
 });
 
-app.post("/profile/delete", async (req, res) => {  
+app.post("/profile/delete", passportFunctions.checkLoggedIn, async (req, res) => {  
     await database.deleteRecipe(req.body.recipe_id);
     res.end();
 });
 
-app.post("/profile/unlike", async (req, res) => { 
+app.post("/profile/unlike", passportFunctions.checkLoggedIn, async (req, res) => { 
     await database.unlikeProfileRecipe(req.user, req.body.recipe_id);
     res.end();
 });
