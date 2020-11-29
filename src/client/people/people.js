@@ -17,7 +17,7 @@ async function search() {
 
 
     for(const item of feedDat) {
-        addPerson(searchResults, item.username, item.bio);
+        addPerson(searchResults, item);
     }
 
     /*
@@ -28,36 +28,34 @@ async function search() {
 
 }
 
-function addPerson(results, username, bio) {
+function addPerson(searchResults, data) {
     const card = document.createElement("div");
-    card.classList.add("card", "w-50", "text-center", "mx-auto", "mt-5");
+    card.classList.add("card", "mx-auto", "mt-3");
+    card.style.width = "18rem";
 
-    const cardHeader = document.createElement("h5");
-    cardHeader.classList.add("card-header");
-    cardHeader.innerHTML = username;
+    const img = document.createElement("img");
+    img.src = data.profile_pic;
+    img.alt = "profile pic";
+    img.style.height = "auto";
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
 
-    const cardTitle = document.createElement("h5");
-    cardTitle.innerHTML = "Bio";
+    const h5 = document.createElement("h5");
+    h5.classList.add("card-title");
+    h5.innerHTML = data.username;
 
-    const cardText = document.createElement("p");
-    cardText.classList.add("card-text");
-    cardText.innerHTML = bio;
+    const p = document.createElement("p");
+    p.classList.add("card-text");
+    p.innerHTML = data.bio;
 
-    /*
-    let link = document.createElement("a");
-    link.classList.add("btn", "btn-primary", "text-white");
-    link.innerHTML = "Follow";
-    */
-
-    cardBody.appendChild(cardTitle);
-    cardBody.appendChild(cardText);
-    //cardBody.appendChild(link);
-    card.appendChild(cardHeader);
+    cardBody.appendChild(h5);
+    cardBody.appendChild(p);
+    
+    card.appendChild(img);
     card.appendChild(cardBody);
-    results.appendChild(card);
+
+    searchResults.appendChild(card);
 }
 
 document.getElementById('search').addEventListener('click', search);
