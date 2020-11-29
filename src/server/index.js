@@ -15,8 +15,8 @@ const session = {
     saveUninitialized: false
 };
 
-// const path = require("path");
-// __dirname = path.resolve();
+const path = require("path");
+__dirname = path.resolve();
 
 app.use(express.static(__dirname + '/src/client/'));
 
