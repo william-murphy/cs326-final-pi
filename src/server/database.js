@@ -38,7 +38,6 @@ let password;
 // }
 
 const url = process.env.DATABASE_URL || JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).DATABASE_URL;
-console.log(url);
 const db = pgp()(url);
 
 async function connectAndRun(task) {
