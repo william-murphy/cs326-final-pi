@@ -125,8 +125,8 @@ app.post('/login',
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
 	(req, res) => res.sendFile('/src/client/index.html',
-				   { 'root' : __dirname }));
-
+                   { 'root' : __dirname }));
+                   
 app.get('/feedPage',
     passportFunctions.checkLoggedIn,
 	(req, res) => res.sendFile('/src/client/feed/index.html',
