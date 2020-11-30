@@ -85,10 +85,11 @@ function renderImages(data, mode) {
 				desc.appendChild(descText);
 
 				const numLikes = document.createElement("span");
+				numLikes.classList.add("m-2");
 				numLikes.innerHTML = "❤️ " + data.recipes[i + j].recipe_likes;
 
 				const remove = document.createElement("button");
-				remove.classList.add("btn", "btn-outline-danger", "float-right");
+				remove.classList.add("btn", "btn-outline-danger", "float-right", "m-2");
 				remove.innerHTML = "Delete";
 				remove.addEventListener("click", async function() {
 					await removeRecipe(data.recipes[i + j].recipe_id);
@@ -140,10 +141,11 @@ function renderImages(data, mode) {
 				desc.appendChild(descText);
 
 				const numLikes = document.createElement("span");
+				numLikes.classList.add("m-2");
 				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipe_likes;
 
 				const unlike = document.createElement("button");
-				unlike.classList.add("btn", "btn-outline-danger", "float-right");
+				unlike.classList.add("btn", "btn-outline-danger", "float-right", "m-2");
 				unlike.innerHTML = "Unlike";
 				unlike.addEventListener("click", async function() {
 					await unlikeRecipe(data.liked[i + j].recipe_id);
