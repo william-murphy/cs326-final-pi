@@ -123,7 +123,7 @@ Liked table
   - Milestone 1: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
   - Milestone 2: Worked on feed + recipe .js/.html files, end-point structure, the milestone2 markdown
   - Milestone 3: created the datatables, worked on Worked on database + index.js, Milestone3.md
-  - final: debugging, final.md
+  - final: debugging, modified SQL queries to increase functionality, final.md
 
 - Ji
   - Milestone 1: Worked on wireframes & HTML/CSS for login/sign up and people pages.
@@ -141,4 +141,4 @@ Liked table
 
  A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
 
- **Heroku Application**: https://spighetti.herokuapp.com/
+ **Heroku Application Link**: https://spighetti.herokuapp.com/
