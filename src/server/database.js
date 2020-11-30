@@ -12,7 +12,9 @@ async function connectAndRun(task) {
         connection = await db.connect();
         return await task(connection);
     } finally {
-        connection.done();
+        if(connection){
+            connection.done();
+        }
     }
 }
 
