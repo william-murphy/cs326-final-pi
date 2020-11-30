@@ -37,12 +37,11 @@ function renderRecipes(data) {
     const overlay = document.createElement("div");
     overlay.classList.add("card-img-overlay");
     const title = document.createElement("h3");
-    title.classList.add("card-title", "rgba-red-strong");
+    title.classList.add("card-title", "text-highlight");
     title.innerHTML = data.recipe_name;
-    //title.style.backgroundColor = "rgba(255, 0, 0, 0.7);";
 
     const description = document.createElement("p");
-    description.classList.add("card-text");
+    description.classList.add("card-text", "text-highlight");
     description.innerHTML = data.recipe_desc;
 
     const button = document.createElement("button");
