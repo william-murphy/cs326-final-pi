@@ -35,7 +35,7 @@ async function searchRecipes(input) {
 
 async function saveRecipe(recipe_id, username) {
     return await connectAndRun(db => db.none("INSERT INTO Liked (recipe_id, username) SELECT $1, $2 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1); \
-    UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1;", [recipe_id, username]));
+                                            UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) AND recipe_id = $1;", [recipe_id, username]));
 }
 
 //Create
@@ -54,11 +54,11 @@ async function searchPeople(input) {
 
 async function getProfile(username) {
     return {
-         profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
-         recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
-         liked: await connectAndRun(db => db.any("SELECT liked.recipe_id, recipes.username, recipe_name, recipe_desc, recipe_likes, recipe_pic FROM Liked \
-         JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id \
-         WHERE Liked.username = $1;", [username]))
+        profile: await connectAndRun(db => db.one("SELECT * FROM Users WHERE username = $1;", [username])),
+        recipes: await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE username = $1;", [username])),
+        liked: await connectAndRun(db => db.any("SELECT liked.recipe_id, recipes.username, recipe_name, recipe_desc, recipe_likes, recipe_pic FROM Liked \
+                                                JOIN Recipes ON Liked.recipe_id = Recipes.recipe_id \
+                                                WHERE Liked.username = $1;", [username]))
     };
 }
 
@@ -72,12 +72,12 @@ async function updatePic(username, profile_pic) {
 
 async function deleteRecipe(recipe_id) {
     return await connectAndRun(db => db.none("DELETE FROM Liked WHERE recipe_id = $1; \
-    DELETE FROM Recipes WHERE recipe_id = $1;", [recipe_id]));
+                                            DELETE FROM Recipes WHERE recipe_id = $1;", [recipe_id]));
 }
 
 async function unlikeProfileRecipe(username, recipe_id) {
-     return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $2; \
-     DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
+    return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = recipe_likes - 1 WHERE recipe_id = $2; \
+                                            DELETE FROM Liked WHERE username = $1 AND recipe_id = $2;", [username, recipe_id]));
 }
 
 //Login/Sign up
