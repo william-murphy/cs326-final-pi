@@ -81,7 +81,8 @@ function renderImages(data, mode) {
 
 				const desc = document.createElement("div");
 				desc.classList.add("overflow-auto");
-				desc.innerHTML = data.recipes[i + j].recipe_desc;
+				const descText = document.createTextNode(data.recipes[i + j].recipe_desc);
+				desc.appendChild(descText);
 
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.recipes[i + j].recipe_likes;
@@ -135,7 +136,8 @@ function renderImages(data, mode) {
 
 				const desc = document.createElement("div");
 				desc.classList.add("overflow-auto");
-				desc.innerHTML = data.liked[i + j].recipe_desc;
+				const descText = document.createTextNode(data.liked[i + j].recipe_desc);
+				desc.appendChild(descText);
 
 				const numLikes = document.createElement("span");
 				numLikes.innerHTML = "❤️ " + data.liked[i + j].recipe_likes;
