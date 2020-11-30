@@ -25,8 +25,8 @@ async function getInitialFeed() {
 }
 
 async function saveFromFeed(recipe_id, username) {
-    return await connectAndRun(db => db.none("INSERT INTO Liked (recipe_id, username) SELECT $1, $2 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1); \
-                                            UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) AND recipe_id = $1;", [recipe_id, username]));
+    return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = case when NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) THEN recipe_likes + 1 ELSE recipe_likes END WHERE recipe_id = $1; \
+    INSERT INTO Liked (recipe_id, username) SELECT $1, $2 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1);", [recipe_id, username]));
 }
 
 async function searchRecipes(input) {
@@ -34,20 +34,9 @@ async function searchRecipes(input) {
 }
 
 async function saveRecipe(recipe_id, username) {
-    return await connectAndRun(db => db.none("INSERT INTO Liked (recipe_id, username) SELECT $1, $2 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1); \
-    ", [recipe_id, username]));
+    return await connectAndRun(db => db.none("UPDATE Recipes SET recipe_likes = case when NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) THEN recipe_likes + 1 ELSE recipe_likes END WHERE recipe_id = $1; \
+    INSERT INTO Liked (recipe_id, username) SELECT $1, $2 WHERE NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1);", [recipe_id, username]));
 }
-
-// DO $$ BEGIN IF NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) THEN UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1; END $$ ;
-//         THEN
-//             UPDATE recipes 
-//             SET lock = NULL
-//             WHERE lock IS NOT NULL ;
-//         END IF ;
-//     END
-//    $$ ;
-
-// DO $$ BEGIN IF NOT EXISTS (SELECT * FROM Liked WHERE username = $2 AND recipe_id = $1) THEN UPDATE Recipes SET recipe_likes = recipe_likes + 1 WHERE recipe_id = $1; END$$;
 
 //Create
 
@@ -122,4 +111,5 @@ module.exports = {
     signup
 };
 
-saveRecipe(6 ,"dhruvinc").then(val=> console.log(val));
+saveRecipe(5 ,"dhruvinc").then(val=> console.log(val));
+// update(6,"genglin").then(val=> console.log(val));
