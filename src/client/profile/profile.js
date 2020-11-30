@@ -79,7 +79,8 @@ function renderImages(data, mode) {
 				const author = document.createElement("h6");
 				author.innerHTML = "Recipe by " + data.recipes[i + j].username;
 
-				const desc = document.createElement("p");
+				const desc = document.createElement("div");
+				desc.classList.add("overflow-auto");
 				desc.innerHTML = data.recipes[i + j].recipe_desc;
 
 				const numLikes = document.createElement("span");
@@ -132,7 +133,8 @@ function renderImages(data, mode) {
 				const author = document.createElement("h6");
 				author.innerHTML = "Recipe by " + data.liked[i + j].username;
 
-				const desc = document.createElement("p");
+				const desc = document.createElement("div");
+				desc.classList.add("overflow-auto");
 				desc.innerHTML = data.liked[i + j].recipe_desc;
 
 				const numLikes = document.createElement("span");
