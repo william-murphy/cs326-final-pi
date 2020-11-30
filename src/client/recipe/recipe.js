@@ -45,7 +45,7 @@ function renderRecipes(data) {
 
     const button = document.createElement("button");
     button.classList.add("btn", "btn-danger", "w-25", "d-block", "mx-auto");
-    button.innerHTML = "Save";
+    button.innerHTML = 	 "Like" + '&#128155;';
     button.addEventListener("click", async function() {
         await saveRecipe(data.recipe_id);
     });
