@@ -70,13 +70,13 @@ async function saveRecipe(id) {
         body: JSON.stringify({
              recipe_id: id
         })
-   });
-   if (!response.ok) {
+    });
+    if (!response.ok) {
         console.log(response.error);
         return;
-   }else {
-        alert("Successfully saved recipe.");
-   }
+    }else {
+        alert("Successfully liked recipe.");
+    }
 }
 
 document.getElementById('searchRecipe').addEventListener('click', search);
