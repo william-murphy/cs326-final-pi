@@ -80,7 +80,7 @@ function renderImages(data, mode) {
 				author.innerHTML = "Recipe by " + data.recipes[i + j].username;
 
 				const desc = document.createElement("div");
-				desc.classList.add("overflow-auto");
+				desc.classList.add("scroll");
 				const descText = document.createTextNode(data.recipes[i + j].recipe_desc);
 				desc.appendChild(descText);
 
@@ -135,7 +135,7 @@ function renderImages(data, mode) {
 				author.innerHTML = "Recipe by " + data.liked[i + j].username;
 
 				const desc = document.createElement("div");
-				desc.classList.add("overflow-auto");
+				desc.classList.add("scroll");
 				const descText = document.createTextNode(data.liked[i + j].recipe_desc);
 				desc.appendChild(descText);
 
