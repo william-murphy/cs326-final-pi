@@ -119,20 +119,20 @@ Liked table
 
 **Division of Labor:** 
 
--Milestone 1:
-Dhruvi: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
-Ji: Worked on wireframes & HTML/CSS for login/sign up and people pages.
-Will: Worked on wireframes & HTML/CSS for profile page.
+- Dhruvi
+  - Milestone 1: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
+  - Milestone 2: Worked on feed + recipe .js/.html files, end-point structure, the milestone2 markdown
+  - Milestone 3: created the datatables, worked on Worked on database + index.js, Milestone3.md
 
--Milestone 2:
-Dhruvi: Worked on feed + recipe .js/.html files, end-point structure, the milestone2 markdown
-Ji: Worked on database/index.js and login/sign up/people js files
-Will: Profile page backend and added functionality, added page to upload recipes and did backend, wrote some endpoints as well as some functions for database.js, worked on milestone2 documents
+- Ji
+  - Milestone 1: Worked on wireframes & HTML/CSS for login/sign up and people pages.
+  - Milestone 2: Worked on database/index.js and login/sign up/people js files
+  - Milestone 3: Worked on database/index.js, implementing login/signup to passport.js
 
--Milestone 3:
-Dhruvi: created the datatables, worked on Worked on database + index.js, Milestone3.md
-Ji: Worked on database/index.js, implementing login/signup to passport.js
-Will: Profile and Post pages, some database functions, image uploading
+- Will
+  - Milestone 1: Worked on wireframes & HTML/CSS for profile page.
+  - Milestone 2: Profile page backend and added functionality, added page to upload recipes and did backend, wrote some endpoints as well as some functions for database.js, worked on milestone2 documents
+  - Milestone 3: Profile and Post pages, some database functions, image uploading
 
 **Conclusion:**
 
