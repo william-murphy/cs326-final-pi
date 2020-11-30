@@ -16,10 +16,8 @@ const session = {
 };
 
 const path = require("path");
-__dirname =  path.resolve();
 
-// app.use(express.static(path.resolve(__dirname, '../client/')));
-app.use(express.static(__dirname + '/src/client/'));
+app.use(express.static(path.resolve() + '/src/client/'));
 
 app.use(expressSession(session));
 app.use(passport.initialize());
@@ -97,7 +95,7 @@ app.post('/login',
 // Handle the URL /login (just output the login.html file).
 app.get('/login',
 	(req, res) => res.sendFile('/src/client/index.html',
-                   { 'root' : __dirname }));
+                   { 'root' : path.resolve() }));
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
@@ -127,6 +125,6 @@ app.post('/register',
 // Register URL
 app.get('/register',
 	(req, res) => res.sendFile('/src/client/signup/index.html',
-                    { 'root' : __dirname }));
+                    { 'root' :path.resolve() }));
 
 app.listen(process.env.PORT || 8080);
