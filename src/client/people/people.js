@@ -28,7 +28,7 @@ function addPerson(searchResults, data) {
     const img = document.createElement("img");
     img.src = data.profile_pic;
     img.alt = "profile pic";
-    img.style.height = "auto";
+    img.style.height = "20rem";
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
