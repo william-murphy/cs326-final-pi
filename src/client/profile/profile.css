@@ -12,7 +12,10 @@ body {
 }
 
 .scroll {
-	overflow: scroll;
+	width: auto;
+	height: 100px;
+	overflow-y: scroll;
+	position: relative;
 }
 
 #avatar {
