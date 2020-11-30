@@ -1,6 +1,9 @@
 const express = require("express");
 const database = require("./database");
 const passportFunctions = require("./passport");
+const fs = require("fs");
+const path = require("path");
+
 
 const app = express();
 
@@ -16,7 +19,7 @@ const session = {
     saveUninitialized: false
 };
 
-const path = require("path");
+
 
 app.use(express.static(path.resolve() + '/src/client/'));
 
