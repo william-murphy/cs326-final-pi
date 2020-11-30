@@ -33,7 +33,7 @@ async function saveFromFeed(recipe_id, username) {
 }
 
 async function searchRecipes(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE recipe_name = $1;", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Recipes WHERE LOWER(recipe_name) LIKE LOWER('%' || $1 || '%') OR LOWER(username) LIKE LOWER('%' || $1 || '%')", [input]));
 }
 
 async function saveRecipe(recipe_id, username) {
@@ -49,7 +49,7 @@ async function createRecipe(username, recipe_name, recipe_desc, recipe_pic) {
 //People
 
 async function searchPeople(input) {
-    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE username = $1;", [input]));
+    return await connectAndRun(db => db.any("SELECT * FROM Users WHERE LOWER(username) LIKE LOWER('%' || $1 || '%');", [input]));
 }
 
 //Profile

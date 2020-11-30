@@ -123,17 +123,22 @@ Liked table
   - Milestone 1: Worked on wireframes & HTML/CSS for feed and recipe lookup pages.
   - Milestone 2: Worked on feed + recipe .js/.html files, end-point structure, the milestone2 markdown
   - Milestone 3: created the datatables, worked on Worked on database + index.js, Milestone3.md
+  - final: debugging, final.md
 
 - Ji
   - Milestone 1: Worked on wireframes & HTML/CSS for login/sign up and people pages.
   - Milestone 2: Worked on database/index.js and login/sign up/people js files
   - Milestone 3: Worked on database/index.js, implementing login/signup to passport.js
+  - final: debugging
 
 - Will
   - Milestone 1: Worked on wireframes & HTML/CSS for profile page.
   - Milestone 2: Profile page backend and added functionality, added page to upload recipes and did backend, wrote some endpoints as well as some functions for database.js, worked on milestone2 documents
   - Milestone 3: Profile and Post pages, some database functions, image uploading
+  - final: debugging
 
 **Conclusion:**
 
  A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
+
+ **Heroku Application**: https://spighetti.herokuapp.com/
