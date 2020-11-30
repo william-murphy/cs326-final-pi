@@ -26,7 +26,7 @@
 
  - Recipes: The user can search for recipes and save it to their profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipe.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipes.JPG" width="700" height="404">
 
  - People: This page allows the user to find people by username.
 
