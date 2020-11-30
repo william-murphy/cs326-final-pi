@@ -10,7 +10,8 @@ const expressSession = require('express-session');
 const passport = require('passport');
 
 const session = {
-    secret : process.env.SECRET || 'SECRET', // set this encryption key in Heroku config (never in GitHub)!
+    // set this encryption key in Heroku config (never in GitHub)!
+    secret : process.env.SECRET || JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../secrets.json"))).SECRET,
     resave : false,
     saveUninitialized: false
 };
