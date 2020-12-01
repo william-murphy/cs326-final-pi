@@ -18,7 +18,7 @@ async function connectAndRun(task) {
     }
 }
 
-//Feed 
+//Feed
 
 async function getInitialFeed() {
     return await connectAndRun(db => db.any("SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1;"));

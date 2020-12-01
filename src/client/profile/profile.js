@@ -114,7 +114,7 @@ function renderImages(data, mode) {
 			group.classList.add("row");
 			for (let j=0; j<k; j++) {
 
-				if (data.recipes[i + j] === undefined) {
+				if (data.liked[i + j] === undefined) {
 					break;
 				}
 
