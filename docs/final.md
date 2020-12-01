@@ -16,31 +16,31 @@
 
  - Login/Signup: When the user first goes on the website, it will take the user to the login page. Before interacting further, the user should login with their account or sign up for a new account.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/login.JPG" width="700" height="310">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/login.JPG" width="700" height="404">
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/signup.JPG" width="700" height="258">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/signup.JPG" width="700" height="404">
 
  - Feed: This page is the application's feed page where the user can see the most recent recipes shared by users. They can interact with the recipe posts by saving it to their profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/feed.JPG" width="700" height="319">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/feed.JPG" width="700" height="621">
 
  - Recipes: The user can search for recipes and save it to their profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipes.JPG" width="700" height="269">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipes.JPG" width="700" height="404">
 
  - People: This page allows the user to find people by username.
 
- <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/people.JPG" width="700" height="278">
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/people.JPG" width="700" height="404">
 
  - Post: This page allows the user to post a recipe of their own along with a picture. This will show up on the 'My recipe' section of user's profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/post.JPG" width="700" height="329">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/post.JPG" width="700" height="404">
 
  - Profile: This is the profile page where the user can edit their avatar as well as their bio. They can also see recipes saved from searching for recipes or liked from the feed page on the Liked Recipes tab. There is also another tab, My Recipes, where the user can see the recipes they created themselves.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-my-recipes.JPG" width="700" height="327">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-my-recipes.JPG" width="700" height="404">
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-liked.JPG" width="700" height="312">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-liked.JPG" width="700" height="404">
 
  - Logout: Lets the user log out from the application.
 
@@ -141,6 +141,6 @@ When logging into the application, the application will take the password that t
 
 **Conclusion:**
 
- A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
+ Our team's experience working on this project was an emotional rollercoaster filled with highs and lows, victories and failures, and breakthroughs and setbacks. There were many times that we thought all hope was lost, only to have a 2 a.m. programming epiphany that would give us hope of a brighter tomorrow. Despite the numerous frustrating defeats our team faced, we perservered, and eventually had an application resembling the vision we dreamed when we first started this journey. Along the way we learned many valuable lessons, including but not limited to an increased understanding of the github workflow, the magic of database queries, front-end design, enhanced skills in javascript as well as back-end functionality in Node. It seems like such a long time ago when we were first starting this project, how young and naive we seemed. If we could ride the wrinkles of time to go back and bestow wisdom upon ourselves before we started this project, we would have told ourselves to meet more consistently, ask for help from the TAs earlier on in the process, as well as bugfix sooner and more often during the development process.
 
  **Heroku Application Link**: https://spighetti.herokuapp.com/
