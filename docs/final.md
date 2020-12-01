@@ -117,6 +117,8 @@ Liked table
 
 **Authentication/Authorization:** A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
 
+When logging into the application, the application will take the password that the user entered and decrypt the hash and salt together based on the user to check if it matches the password. If it is successful, it redirects the user to the next route. If not, it goes back to the login page. Users can only interact with the data loaded in the UI in the application only if they are logged in. With the logout feature, the application will remove the user from the session and if the user wants to use the application, they will have to login to authenticate again.
+
 **Division of Labor:** 
 
 - Dhruvi
