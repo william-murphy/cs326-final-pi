@@ -144,3 +144,13 @@ When logging into the application, the application will take the password that t
  Our team's experience working on this project was an emotional rollercoaster filled with highs and lows, victories and failures, and breakthroughs and setbacks. There were many times that we thought all hope was lost, only to have a 2 a.m. programming epiphany that would give us hope of a brighter tomorrow. Despite the numerous frustrating defeats our team faced, we perservered, and eventually had an application resembling the vision we dreamed when we first started this journey. Along the way we learned many valuable lessons, including but not limited to an increased understanding of the github workflow, the magic of database queries, front-end design, enhanced skills in javascript as well as back-end functionality in Node. It seems like such a long time ago when we were first starting this project, how young and naive we seemed. If we could ride the wrinkles of time to go back and bestow wisdom upon ourselves before we started this project, we would have told ourselves to meet more consistently, ask for help from the TAs earlier on in the process, as well as bugfix sooner and more often during the development process.
 
  **Heroku Application Link**: https://spighetti.herokuapp.com/
+
+**Rubric**
+
+| Feature   | 4 | 3 | 2 | 1 |
+| ----- | ------| --------| ---------| ----|
+| Feed    |  |  |  |  |
+| Recipe  |  |  |  |  |
+| People  |  |  |  |  |
+| Post    |  |  |  |  |
+| Profile |  |  |  |  |
