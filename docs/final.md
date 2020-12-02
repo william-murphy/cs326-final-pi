@@ -147,19 +147,23 @@ When logging into the application, the application will take the password that t
 
 ## **Rubric**
 **Authentication**
-The user is able to successfully sign up for an account and login. Logging out also removes the current user information and redirects to login.
+- The user is able to successfully sign up for an account and login
+- Logging out removes the current user session and redirects to login
 
 **Feed**
-The feed page shows a random recipe from the database everytime the user loads a recipe. The user can like a recipe which will show on their profile.
+- The feed page shows a random recipe from the database everytime the user loads a recipe
+- The user can like a recipe which will show on their profile
 
 **Recipe**
-In the recipe page, when searching for a recipe, the user can use keywords in that relate to usernames as well as recipes and can find all possible recipes based on keyword. The user can like a recipe which will show on their profile.
+- In the recipe page, when searching for a recipe, the user can use keywords in that relate to usernames as well as recipes and can find all possible recipes based on keyword
+- The user can like a recipe which will show on their profile
 
 **People**
-In the people page, when searching for people, the user can use a keyword and results that are similar will show a list of people with similar usernames.
+- In the people page, when searching for people, the user can use a keyword and results that are similar will show a list of people with similar usernames
 
 **Post**
-The post page allows the user to create a new recipe, with recipe name, image, and description. A unique ID is associated with each new recipe.
+- The post page allows the user to create a new recipe, with recipe name, image, and description and an unique ID is associated with each new recipe
 
 **Profile**
-The profile page allows the user to edit their profile picture and bio. It also shows their created recipes "My Recipes" and liked recipes "Liked Recipes".
+- The profile page allows the user to edit their profile picture and bio
+- It shows their created recipes "My Recipes" and liked recipes "Liked Recipes"
