@@ -147,22 +147,26 @@ When logging into the application, the application will take the password that t
 
 ## **Rubric**
 **Authentication**
-- The user is able to successfully sign up for an account and login
+- The user is able to successfully sign up for an account, setting a username, email, and password
+- The user is able to login with an existing username and the corresponding password
 - Logging out removes the current user session and redirects to login
 
 **Feed**
 - The feed page shows a random recipe from the database everytime the user loads a recipe
+- Each random recipe displays the recipe creator image, name, and description
 - The user can like a recipe which will show on their profile
 
 **Recipe**
 - In the recipe page, when searching for a recipe, the user can use keywords in that relate to usernames as well as recipes and can find all possible recipes based on keyword
+- Each recipe displays the recipe name and description
 - The user can like a recipe which will show on their profile
 
 **People**
 - In the people page, when searching for people, the user can use a keyword and results that are similar will show a list of people with similar usernames
+- Each person displays their profile picture, name, and bio
 
 **Post**
-- The post page allows the user to create a new recipe, with recipe name, image, and description and an unique ID is associated with each new recipe
+- The post page allows the user to create a new recipe, with recipe name, image, and description
 
 **Profile**
 - The profile page allows the user to edit their profile picture and bio
