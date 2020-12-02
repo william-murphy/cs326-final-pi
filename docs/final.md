@@ -145,7 +145,7 @@ When logging into the application, the application will take the password that t
 
  **Heroku Application Link**: https://spighetti.herokuapp.com/
 
-**Rubric**
+## **Rubric**
 
 | Feature   | 4 | 3 | 2 | 1 |
 | ----- | ------| --------| ---------| ----|
