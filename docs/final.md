@@ -149,6 +149,7 @@ When logging into the application, the application will take the password that t
 
 | Feature   | 4 | 3 | 2 | 1 |
 | ----- | ------| --------| ---------| ----|
+| Authentication |  |  |  |  |
 | Feed    |  |  |  |  |
 | Recipe  |  |  |  |  |
 | People  |  |  |  |  |
