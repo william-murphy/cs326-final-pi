@@ -16,31 +16,31 @@
 
  - Login/Signup: When the user first goes on the website, it will take the user to the login page. Before interacting further, the user should login with their account or sign up for a new account.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/login.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/login.JPG" width="700" height="310">
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/signup.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/signup.JPG" width="700" height="258">
 
  - Feed: This page is the application's feed page where the user can see the most recent recipes shared by users. They can interact with the recipe posts by saving it to their profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/feed.JPG" width="700" height="621">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/feed.JPG" width="700" height="319">
 
  - Recipes: The user can search for recipes and save it to their profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipes.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/recipes.JPG" width="700" height="269">
 
  - People: This page allows the user to find people by username.
 
- <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/people.JPG" width="700" height="404">
+ <img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/people.JPG" width="700" height="278">
 
  - Post: This page allows the user to post a recipe of their own along with a picture. This will show up on the 'My recipe' section of user's profile.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/post.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/post.JPG" width="700" height="329">
 
  - Profile: This is the profile page where the user can edit their avatar as well as their bio. They can also see recipes saved from searching for recipes or liked from the feed page on the Liked Recipes tab. There is also another tab, My Recipes, where the user can see the recipes they created themselves.
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-my-recipes.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-my-recipes.JPG" width="700" height="327">
 
-<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-liked.JPG" width="700" height="404">
+<img src="https://github.com/william-murphy/cs326-final-pi/blob/main/docs/final-images/profile-liked.JPG" width="700" height="312">
 
  - Logout: Lets the user log out from the application.
 
@@ -149,9 +149,9 @@ When logging into the application, the application will take the password that t
 
 | Feature   | 4 | 3 | 2 | 1 |
 | ----- | ------| --------| ---------| ----|
-| Authentication |  |  |  |  |
-| Feed    |  |  |  |  |
-| Recipe  |  |  |  |  |
-| People  |  |  |  |  |
-| Post    |  |  |  |  |
-| Profile |  |  |  |  |
+| Authentication | The user is able to successfully sign up for an account and login. Logging out also removes the current user information and redirects to login.  |  |  |  |
+| Feed    | The feed page shows a random recipe from the database everytime the user loads a recipe. The user can like a recipe which will show on their profile. |  |  |  |
+| Recipe  | In the recipe page, when searching for a recipe, the user can use keywords in that relate to usernames as well as recipes and can find all possible recipes based on keyword. The user can like a recipe which will show on their profile. |  |  |  |
+| People  | In the people page, when searching for people, the user can use a keyword and results that are similar will show a list of people with similar usernames. |  |  |  |
+| Post    | The post page allows the user to create a new recipe, with recipe name, image, and description. A unique ID is associated with each new recipe. |  |  |  |
+| Profile | The profile page allows the user to edit their profile picture and bio. It also shows their created recipes "My Recipes" and liked recipes "Liked Recipes". |  |  |  |
