@@ -114,24 +114,37 @@ Liked table
 | username     | string    | The username of user (unique identifier)  |
 
 **URL Routes/Mappings:** A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
-- GET /
- - takes the user to the login page
+GET /
+- takes the user to the login page
 
-- GET /login
+GET /login
+- takes the user to the login page
 
-- GET /signup
+GET /signup
+- takes the user to the signup page
 
-- GET /feed
+GET /feed
+- takes the user to the feed page
+- can only be interacted with logged in users
 
-- GET /recipe
+GET /recipe
+- takes the user to the recipe page
+- can only be interacted with logged in users
 
-- GET /post 
+GET /post 
+- takes the user to the post page
+- can only be interacted with logged in users
 
-- GET /people
+GET /people
+- takes the user to the people page
+- can only be interacted with logged in users
 
-- GET /profile
+GET /profile
+- takes the user to the profile page
+- can only be interacted with logged in users
 
-- GET /logout
+GET /logout
+- logs the user out and takes them to the login page
 
 **Authentication/Authorization:** A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
 
