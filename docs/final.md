@@ -114,7 +114,7 @@ Liked table
 | username     | string    | The username of user (unique identifier)  |
 
 **URL Routes/Mappings:** A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
-<br />GET /
+<br /><br />GET /
 - takes the user to the login page
 
 GET /login
