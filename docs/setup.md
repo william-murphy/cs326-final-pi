@@ -8,7 +8,7 @@ CREATE TABLE USERS(
 <br />&nbsp;&nbsp;&nbsp;profile_pic TEXT
 <br />);
 
-<br /><br />CREATE TABLE RECIPES (
+<br />CREATE TABLE RECIPES (
 <br />&nbsp;&nbsp;&nbsp;recipe_id serial PRIMARY KEY,
 <br />&nbsp;&nbsp;&nbsp;username VARCHAR ( 50 ) NOT NULL,
 <br />&nbsp;&nbsp;&nbsp;recipe_name VARCHAR (50) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE USERS(
 <br />&nbsp;&nbsp;&nbsp;recipe_pic TEXT
 <br />);
 
-<br /><br />CREATE TABLE LIKED (
+<br />CREATE TABLE LIKED (
 <br />&nbsp;&nbsp;&nbsp;recipe_id INT,
 <br />&nbsp;&nbsp;&nbsp;username VARCHAR ( 50 )
 <br />);
