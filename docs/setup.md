@@ -22,9 +22,13 @@ CREATE TABLE LIKED (
 <br />&nbsp;&nbsp;&nbsp;username VARCHAR ( 50 )
 <br />);
 
+## **Linting**
+- npm run lint
+
 ## **Setup**
 - git clone https://github.com/william-murphy/cs326-final-pi.git
 - npm install
 
 ## **Running Application**
-- npm run start
+- npm run start (locally on localhost:8080)
+- heroku app: https://spighetti.herokuapp.com/
